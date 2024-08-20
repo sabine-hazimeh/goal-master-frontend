@@ -4,7 +4,6 @@
     background-color: rgba(10, 69, 112, 0.6);
     border-radius: 20px;
     display: flex;
-    /* padding: 30px 0; */
 }
 .Auth-left{
     width: 50%;
@@ -63,4 +62,23 @@
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 1.5rem;
+}
+.button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+.Auth-submit{
+    margin-top: 3rem;
+    background-color: #0A4570;
+    color: white;
+    padding: 5px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 1.25rem;
+}
+.Auth-submit:hover{
+    background-color: rgba(10, 69, 112, 0.6);
 }

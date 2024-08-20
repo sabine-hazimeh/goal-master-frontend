@@ -21,15 +21,17 @@ const Auth = () => {
               <input
                 className="Auth-input"
                 type="text"
-                placeholder="Enter Email"
+                placeholder="Enter your Email here"
               />
               <label className="Auth-label">Password</label>
               <input
                 className="Auth-input"
                 type="text"
-                placeholder="Enter Password"
+                placeholder="Enter your Password here"
               />
-              <button className="Auth-submit">Submit</button>
+              <div class="button-container">
+              <button className="Auth-submit">Log in</button>
+              </div>
             </div>
           </div>
         </div>
