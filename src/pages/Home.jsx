@@ -36,7 +36,7 @@ const Home = () => {
         </div>
         <div className="scan_left">
           <p className="intro-title">
-            Feel Understood with Our Emotion Recognition
+            Feel Understood <br /> with Our Emotion <br /> Recognition
           </p>
           <p className="intro-text">
             Facial Emotion Recognition is a cutting-edge technology that uses
