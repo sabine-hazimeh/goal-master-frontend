@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Scan from "../images/face-scan.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBullseye, faBookOpen, faBrain } from '@fortawesome/free-solid-svg-icons';
-
+import Footer from "../components/Footer";
 const Home = () => {
   return (
     <>
@@ -78,6 +78,7 @@ const Home = () => {
           </div>
         
       </div>
+      <Footer />
     </>
   );
 };
