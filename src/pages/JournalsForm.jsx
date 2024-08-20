@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/JournalsForm.css";
 import Header from "../components/Header";
 import woman from "../images/planning-woman.png";
+import FilledButton from "../components/FilledButton";
 const JournalsForm = () => {
   return (
     <>
@@ -41,6 +42,11 @@ const JournalsForm = () => {
               className="journals-input"
               type="text"
               placeholder="Enter Description"
+            />
+            <FilledButton
+              text="Submit"
+              onClick={() => {}}
+              className="journals-button"
             />
           </form>
         </div>
