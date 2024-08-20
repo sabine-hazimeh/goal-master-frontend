@@ -72,3 +72,23 @@
   padding: 20px;
   color: #C41B40;
 }
+.features{
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  justify-content: space-between;
+  padding: 10px 70px;
+}
+.feature{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+}
+.feature_icon{
+    font-size: 26px;
+    color: #C41B40;
+}

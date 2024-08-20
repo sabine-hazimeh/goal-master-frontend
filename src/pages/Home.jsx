@@ -5,12 +5,8 @@ import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import Header from "../components/Header";
 import Scan from "../images/face-scan.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBullseye,
-  faBookOpen,
-  faBrain,
-} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBullseye, faBookOpen, faBrain } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   return (
@@ -54,32 +50,33 @@ const Home = () => {
           </p>
           <FilledButton text="Try it now!" onClick={() => {}} />
         </div>
-      </div>
-      <div className="Features_container">
-        <p className="features_title">Why Goal Master?</p>
-        <div className="features">
-          <div className="feature">
-            <FontAwesomeIcon icon={faBullseye} className="feature_icon" />
-            <p>
-              Set and achieve your unique goals with personalized
-              recommendations.
-            </p>
-          </div>
-          <div className="feature">
-            <FontAwesomeIcon icon={faBookOpen} className="feature_icon" />
-            <p>
-              Capture your thoughts and experiences daily to reflect and grow
-              over time.
-            </p>
-          </div>
-          <div className="feature">
-            <FontAwesomeIcon icon={faBrain} className="feature_icon" />
-            <p>
-              AI-driven insights to stay motivated and track your progress
-              effectively.
-            </p>
-          </div>
         </div>
+        <div className="Features_container">
+          <p className="features_title">Why Goal Master?</p>
+          <div className="features">
+            <div className="feature">
+              <FontAwesomeIcon icon={faBullseye} className="feature_icon" />
+              <p>
+                Set and achieve your unique goals with personalized
+                recommendations.
+              </p>
+            </div>
+            <div className="feature">
+              <FontAwesomeIcon icon={faBookOpen} className="feature_icon" />
+              <p>
+                Capture your thoughts and experiences daily to reflect and grow
+                over time.
+              </p>
+            </div>
+            <div className="feature">
+              <FontAwesomeIcon icon={faBrain} className="feature_icon" />
+              <p>
+                AI-driven insights to stay motivated and track your progress
+                effectively.
+              </p>
+            </div>
+          </div>
+        
       </div>
     </>
   );
