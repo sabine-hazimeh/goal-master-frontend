@@ -4,6 +4,7 @@ import "./styles/Home.css";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import Header from "../components/Header";
+import Scan from "../images/scan.png";
 const Home = () => {
   return (
     <>
@@ -28,6 +29,14 @@ const Home = () => {
         <div className="intro-right">
           <img src={GoalImage} className="intro-img"></img>
         </div>
+      </div>
+      <div className="face_scan">
+        <div className="scan_right">
+            <img src={Scan} className="scan_img"></img>
+        </div>
+        <div className="scan_left"></div>
+
+
       </div>
     </>
   );
