@@ -82,3 +82,8 @@
 .Auth-submit:hover{
     background-color: rgba(10, 69, 112, 0.6);
 }
+.Auth-button.active {
+    color: #0A4570;
+    border-bottom: 4px solid #0A4570;
+    font-weight: bold;
+  }

@@ -3,6 +3,7 @@ import "./styles/Auth.css";
 import Header from "../components/Header";
 import woman from "../images/working-woman.png";
 const Auth = () => {
+  const [activeForm, setActiveForm] = React.useState("login");
   return (
     <>
       <Header />
