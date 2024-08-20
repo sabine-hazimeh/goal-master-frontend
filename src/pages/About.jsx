@@ -17,7 +17,7 @@ const About = () => {
             Welcome to <b>GoalMaster</b>, your ultimate partner in achieving
             your dreams and aspirations.
             <br />
-            <br /> At <b>GoalMaster</b>, we believe that every individual has
+            At <b>GoalMaster</b>, we believe that every individual has
             the potential to reach their goals, whether they are financial,
             personal, or professional.
           </p>

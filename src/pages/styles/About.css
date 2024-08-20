@@ -1,0 +1,25 @@
+.about-upper{
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+.upper-left{
+    width: 50%;
+    
+}
+.upper-img{
+    width: 400px;
+    height: 400px;
+}
+.upper-right{
+    width: 50%;
+}
+.upper-title{
+    margin-top: 3rem;
+    font-size: 40px;
+    font-weight: bolder;
+}
+.upper-text{
+    font-size: 20px;
+    line-height: 50px;
+}
