@@ -4,7 +4,7 @@ import "./styles/Home.css";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import Header from "../components/Header";
-import Scan from "../images/scan.png";
+import Scan from "../images/face-scan.png";
 const Home = () => {
   return (
     <>
@@ -32,11 +32,21 @@ const Home = () => {
       </div>
       <div className="face_scan">
         <div className="scan_right">
-            <img src={Scan} className="scan_img"></img>
+          <img src={Scan} className="scan_img"></img>
         </div>
-        <div className="scan_left"></div>
-
-
+        <div className="scan_left">
+          <p className="intro-title">
+            Feel Understood with Our Emotion Recognition
+          </p>
+          <p className="intro-text">
+            Facial Emotion Recognition is a cutting-edge technology that uses
+            computer vision and machine learning to analyze facial expressions
+            and detect emotions like happiness, sadness, anger, and surprise in
+            real-time. Our system can recognize these emotions with high
+            accuracy, allowing us to better understand how you're feeling.
+          </p>
+          <FilledButton text="Try it now!" onClick={() => {}} />
+        </div>
       </div>
     </>
   );
