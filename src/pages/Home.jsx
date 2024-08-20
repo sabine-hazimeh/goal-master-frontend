@@ -8,7 +8,9 @@ import Scan from "../images/face-scan.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBullseye, faBookOpen, faBrain } from '@fortawesome/free-solid-svg-icons';
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -48,7 +50,7 @@ const Home = () => {
             real-time. Our system can recognize these emotions with high
             accuracy, allowing us to better understand how you're feeling.
           </p>
-          <FilledButton text="Try it now!" onClick={() => {}} />
+          <FilledButton text="Try it now!"  onClick={() => navigate('/face-recognition')}/>
         </div>
         </div>
         <div className="Features_container">
