@@ -3,6 +3,7 @@ import { BrowserRouter,Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import About from './pages/About';
+import FaceRecognition from './pages/FaceRecognition';
 function App() {
   return (
     <BrowserRouter>
@@ -10,6 +11,8 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/about' element={<About/>}/>
+      <Route path='/face-recognition' element={<FaceRecognition/>}/>
+
     </Routes>
     </BrowserRouter>
   );
