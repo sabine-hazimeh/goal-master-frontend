@@ -43,11 +43,13 @@ const JournalsForm = () => {
               type="text"
               placeholder="Enter Description"
             />
+            <div className="journals-button-container">
             <FilledButton
               text="Submit"
               onClick={() => {}}
               className="journals-button"
             />
+            </div>
           </form>
         </div>
       </div>
