@@ -1,6 +1,7 @@
 import React from "react";
 import GoalImage from "../images/goal-achievement.png";
 import "./styles/Home.css";
+import FilledButton from "../components/FilledButton";
 const Home = () => {
   return (
     <>
@@ -17,7 +18,7 @@ const Home = () => {
             way. Start your journey towards success today!
           </p>
           <div className="intro-buttons">
-            <button>Get Started!</button>
+            <FilledButton text="Get Started!" onClick={() => {}} />
             <button>Free Consultation</button>
           </div>
         </div>

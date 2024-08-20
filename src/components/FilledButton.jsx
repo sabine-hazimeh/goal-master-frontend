@@ -1,5 +1,5 @@
 import React from 'react';
-import './FilledButton.css'; 
+import './styles/FilledButton.css'; 
 
 const FilledButton = ({ text, onClick }) => {
     return (
