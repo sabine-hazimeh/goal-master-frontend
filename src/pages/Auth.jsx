@@ -27,6 +27,7 @@ const Auth = () => {
                 Sign Up
               </button>
             </div>
+            {activeForm === "login" ? (
             <div className="Auth-inputs">
               <label className="Auth-label">Email</label>
               <input
@@ -44,6 +45,36 @@ const Auth = () => {
               <button className="Auth-submit">Log in</button>
               </div>
             </div>
+            ) : (
+              <div className="Auth-inputs">
+                <label className="Auth-label">Email</label>
+                <input
+                  className="Auth-input"
+                  type="text"
+                  placeholder="Enter your Email here"
+                />
+                <label className="Auth-label">Password</label>
+                <input
+                  className="Auth-input"
+                  type="password"
+                  placeholder="Enter your Password here"
+                />
+                <label className="Auth-label">Confirm Password</label>
+                <input
+                  className="Auth-input"
+                  type="password"
+                  placeholder="Confirm your Password here"
+                />
+                <label className="Auth-label">Profile Photo</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                />
+                <div className="button-container">
+                  <button className="Auth-submit">Sign Up</button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
