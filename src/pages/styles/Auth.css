@@ -34,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 30px;
 }
 .Auth-buttons{
     display: flex;
@@ -48,4 +48,19 @@
     border-bottom: 2px solid black;
     width: 50%;
     font-size: 24px;
+}
+.Auth-label{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.Auth-inputs{
+    width: 80%;
+}
+.Auth-input{
+    width:94%;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
 }
