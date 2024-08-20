@@ -1,0 +1,20 @@
+.Auth{
+    width: 80%;
+    margin: 1rem auto;
+    background-color: rgba(10, 69, 112, 0.6);
+    border-radius: 20px;
+    /* padding: 30px 0; */
+}
+.Auth-left{
+    width: 50%;
+    background: radial-gradient(circle at center, rgba(10, 69, 112, 0.6), rgba(255,255,255,0.7)); 
+    height: 100%;
+    padding: 30px 0;
+    border-radius: 20px 40px 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+.Auth-img{
+    width: 350px;
+    height: 500px;
+}
