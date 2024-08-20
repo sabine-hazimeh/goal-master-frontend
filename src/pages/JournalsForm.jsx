@@ -8,6 +8,10 @@ const JournalsForm = () => {
     <>
       <Header />
       <div className="journals-form-container">
+        <div className="journals">
+            <p className="journals-title">Today’s Journal</p>
+            <p className="journals-text">Please fill out the form below to capture your thoughts and experiences for today.</p>
+        </div>
         <div className="journals-left">
           <img src={woman} className="journals-img"></img>
         </div>
