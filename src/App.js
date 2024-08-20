@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Auth from './pages/Auth';
 import About from './pages/About';
 import FaceRecognition from './pages/FaceRecognition';
+import JournalsForm from './pages/JournalsForm';
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
       <Route path='/auth' element={<Auth/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/face-recognition' element={<FaceRecognition/>}/>
+      <Route path='/journals' element={<JournalsForm/>}/>
 
     </Routes>
     </BrowserRouter>
