@@ -1,5 +1,5 @@
 import React from "react";
-
+import GoalImage from "../images/goal-achievement.png";
 const Home = () => {
   return (
     <>
@@ -19,6 +19,9 @@ const Home = () => {
             <button>Get Started!</button>
             <button>Free Consultation</button>
           </div>
+        </div>
+        <div className="intro-right">
+            <img src={GoalImage}></img>
         </div>
       </div>
     </>
