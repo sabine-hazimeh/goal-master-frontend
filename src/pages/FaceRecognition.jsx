@@ -8,7 +8,7 @@ const FaceRecognition = () => {
     <>
       <Header />
       <div className="face-recognition">
-        <div className="recognition-lower">
+        <div className="recognition-left">
         <p className="recognition-title">
           Discover Your <br />
           Emotional Insights
@@ -19,7 +19,7 @@ const FaceRecognition = () => {
           emotional state, guiding you towards better self-awareness and goal
           achievement.
         </p>
-        <FilledButton text="Take photo" onClick={() => {}} />
+        <FilledButton text="Take photo" onClick={() => {}} className="recognition-button"/>
         </div>
         <div className="recognition-right">
             <img src={faceRecognition} className="recognition-img"></img>

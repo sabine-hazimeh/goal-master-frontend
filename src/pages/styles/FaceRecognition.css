@@ -1,0 +1,21 @@
+.face-recognition{
+    display: flex;
+    margin: 1rem auto;
+    width:90%;
+}
+.recognition-title{
+    font-size: 40px;
+    font-weight: bolder;
+}
+.recognition-text{
+    font-size: 1.25rem;
+    line-height: 2rem;
+}
+.recognition-button{
+    margin-top: 3rem;
+}
+.recognition-left{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
