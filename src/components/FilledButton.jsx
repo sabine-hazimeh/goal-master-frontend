@@ -3,7 +3,7 @@ import './styles/FilledButton.css';
 
 const FilledButton = ({ text, onClick }) => {
     return (
-        <button className="custom-button" onClick={onClick}>
+        <button className="filled-button" onClick={onClick}>
             {text}
         </button>
     );

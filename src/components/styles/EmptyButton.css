@@ -1,0 +1,10 @@
+.empty-button{
+    background-color: transparent;
+    border: 1px solid #C41B40;
+    color: #C41B40;
+    padding: 10px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 50%;
+    font-size: 1.25rem;
+}
