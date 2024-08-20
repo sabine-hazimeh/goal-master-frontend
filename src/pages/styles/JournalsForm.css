@@ -1,0 +1,15 @@
+.journals-form-container{
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+.journals-left{
+    width: 50%;
+}
+.journals-img{
+    width: 450px;
+    height: 450px;
+}
+.journals-right{
+    width: 50%;
+}

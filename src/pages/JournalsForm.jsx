@@ -7,7 +7,7 @@ const JournalsForm = () => {
   return (
     <>
       <Header />
-      <div className="journals-form">
+      <div className="journals-form-container">
         <div className="journals-left">
           <img src={woman} className="journals-img"></img>
         </div>
