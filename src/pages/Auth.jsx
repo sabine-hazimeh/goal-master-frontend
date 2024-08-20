@@ -10,7 +10,14 @@ const Auth = () => {
         <div className="Auth-left">
           <img src={woman} className="Auth-img"></img>
         </div>
-        <div className="Auth-right"></div>
+        <div className="Auth-right">
+          <div class="Auth-form">
+            <div className="Auth-buttons">
+              <button className="Auth-button">Login</button>
+              <button className="Auth-button">Sign Up</button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
