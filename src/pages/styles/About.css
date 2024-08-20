@@ -23,3 +23,27 @@
     font-size: 20px;
     line-height: 50px;
 }
+.about-lower{
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+.lower-left{
+    margin-top: 3rem;
+    width: 50%;
+}
+.lower-img{
+    width: 400px;
+    height: 400px;
+}
+.lower-right{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lower-text{
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 1rem;
+}

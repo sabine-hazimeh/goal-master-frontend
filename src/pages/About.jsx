@@ -26,19 +26,19 @@ const About = () => {
       </div>
       <div className="about-lower">
         <div className="lower-left">
-          <p>
+          <p className="lower-text">
             Our mission is to provide you with the tools, insights, and support
             you need to turn your ambitions into reality. Through our innovative
             platform, we offer personalized goal-setting, daily scheduling, and
             progress tracking, all designed to help you stay focused and
             motivated.
           </p>
-          <p>
+          <p className="lower-text">
             Thank you for choosing <b>GoalMaster</b> as your goal-setting and
             achievement partner. We are excited to be part of your journey and
             look forward to helping you reach new heights.
           </p>
-          <p>
+          <p className="lower-text">
             Together, let's turn your dreams into reality and make every goal
             achievable.
           </p>
