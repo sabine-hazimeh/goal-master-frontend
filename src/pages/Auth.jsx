@@ -14,8 +14,18 @@ const Auth = () => {
         <div className="Auth-right">
           <div class="Auth-form">
             <div className="Auth-buttons">
-              <button className="Auth-button">Login</button>
-              <button className="Auth-button">Sign Up</button>
+            <button
+                className={`Auth-button ${activeForm === "login" ? "active" : ""}`}
+                onClick={() => setActiveForm("login")}
+              >
+                Login
+              </button>
+              <button
+                className={`Auth-button ${activeForm === "signup" ? "active" : ""}`}
+                onClick={() => setActiveForm("signup")}
+              >
+                Sign Up
+              </button>
             </div>
             <div className="Auth-inputs">
               <label className="Auth-label">Email</label>
