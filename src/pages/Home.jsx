@@ -2,6 +2,7 @@ import React from "react";
 import GoalImage from "../images/goal-achievement.png";
 import "./styles/Home.css";
 import FilledButton from "../components/FilledButton";
+import EmptyButton from "../components/EmptyButton";
 const Home = () => {
   return (
     <>
@@ -19,7 +20,7 @@ const Home = () => {
           </p>
           <div className="intro-buttons">
             <FilledButton text="Get Started!" onClick={() => {}} />
-            <button>Free Consultation</button>
+            <EmptyButton text="Free Consultation" onClick={() => {}} />
           </div>
         </div>
         <div className="intro-right">

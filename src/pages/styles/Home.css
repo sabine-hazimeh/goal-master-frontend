@@ -30,3 +30,7 @@
   width: 500px;
   height: 500px;
 }
+.intro-buttons{
+  display: flex;
+  gap: 15px;
+}
