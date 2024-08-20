@@ -14,7 +14,6 @@ function App() {
       <Route path='/about' element={<About/>}/>
       <Route path='/face-recognition' element={<FaceRecognition/>}/>
       <Route path='/journals' element={<JournalsForm/>}/>
-
     </Routes>
     </BrowserRouter>
   );
