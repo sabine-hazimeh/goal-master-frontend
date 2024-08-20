@@ -1,5 +1,6 @@
 import React from "react";
 import GoalImage from "../images/goal-achievement.png";
+import "./styles/Home.css";
 const Home = () => {
   return (
     <>
@@ -21,7 +22,7 @@ const Home = () => {
           </div>
         </div>
         <div className="intro-right">
-            <img src={GoalImage}></img>
+          <img src={GoalImage}></img>
         </div>
       </div>
     </>
