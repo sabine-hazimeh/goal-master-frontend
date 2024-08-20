@@ -16,7 +16,17 @@ const Footer = () => {
             <p>goalMaster@gmail.com</p>
           </div>
         </div>
-        <div className="media"></div>
+        <div className="media">
+            <h5>Social Media </h5>
+            <div className="footer_details">
+            <FontAwesomeIcon icon={faFacebook} className="footer-icon"/>
+            <p>Goal Master</p>
+          </div>
+          <div className="footer_details">
+          <FontAwesomeIcon icon={faInstagram} className="footer-icon"/>
+            <p>Goal_Master</p>
+          </div>
+        </div>
         <div className="copyright">
           <h5>Copy Rights</h5>
           <div className="footer_details">
