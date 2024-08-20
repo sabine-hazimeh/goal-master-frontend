@@ -1,0 +1,26 @@
+.footer{
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    background-color: #C41B40;
+    padding: 10px 20px;
+    margin-top: 3rem;
+}
+.footer_details{
+    display: flex;
+    gap: 15px;
+}
+.footer_title{
+    font-size: 1.5rem;
+    font-weight: semi-bold;
+}
+.footer_parts{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.footer-icon{
+    font-size: 1.25rem;
+}

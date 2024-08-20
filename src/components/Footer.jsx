@@ -1,15 +1,15 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faCopyright } from '@fortawesome/free-solid-svg-icons';
-import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'; // Import brand icons
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'; 
 import "./styles/Footer.css";
 
 const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <div className="contact_info">
-          <h5>Contact Information</h5>
+        <div className="footer_parts">
+          <p className="footer_title">Contact Information</p>
           <div className="footer_details">
             <FontAwesomeIcon icon={faPhone} className="footer-icon" />
             <p>+961 3 374 791</p>
@@ -19,10 +19,10 @@ const Footer = () => {
             <p>goalMaster@gmail.com</p>
           </div>
         </div>
-        <div className="media">
-          <h5>Social Media</h5>
+        <div className="footer_parts">
+          <p className="footer_title">Social Media</p>
           <div className="footer_details">
-            <FontAwesomeIcon icon={faFacebookF} className="footer-icon" /> {/* Updated icon */}
+            <FontAwesomeIcon icon={faFacebookF} className="footer-icon" /> 
             <p>Goal Master</p>
           </div>
           <div className="footer_details">
@@ -30,11 +30,11 @@ const Footer = () => {
             <p>Goal_Master</p>
           </div>
         </div>
-        <div className="copyright">
-          <h5>Copy Rights</h5>
+        <div className="footer_parts">
+          <p className="footer_title">Copy Rights</p>
           <div className="footer_details">
             <FontAwesomeIcon icon={faCopyright} className="footer-icon" />
-            <p>2024 Goal Master. All rights reserved.</p>
+            <p>2024 Goal Master.<br /> All rights reserved.</p>
           </div>
         </div>
       </footer>
