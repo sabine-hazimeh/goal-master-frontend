@@ -3,9 +3,11 @@ import GoalImage from "../images/goal-achievement.png";
 import "./styles/Home.css";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
+import Header from "../components/Header";
 const Home = () => {
   return (
     <>
+      <Header />
       <div className="home-intro">
         <div className="intro-left">
           <p className="intro-title">
