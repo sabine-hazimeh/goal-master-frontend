@@ -6,12 +6,12 @@ const Home = () => {
     <>
       <div className="home-intro">
         <div className="intro-left">
-          <h1>
+          <p className="intro-title">
             Reach Your
             <br />
             Goal Easily!
-          </h1>
-          <p>
+          </p>
+          <p className="intro-text">
             Get personalized recommendations, daily journaling, and AI-driven
             insights to stay motivated and track your progress every step of the
             way. Start your journey towards success today!
@@ -22,7 +22,7 @@ const Home = () => {
           </div>
         </div>
         <div className="intro-right">
-          <img src={GoalImage}></img>
+          <img src={GoalImage} className="intro-img"></img>
         </div>
       </div>
     </>
