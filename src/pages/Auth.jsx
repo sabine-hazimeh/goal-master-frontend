@@ -28,7 +28,7 @@ const Auth = () => {
               </button>
             </div>
             {activeForm === "login" ? (
-            <div className="Auth-inputs">
+            <form className="Auth-inputs">
               <label className="Auth-label">Email</label>
               <input
                 className="Auth-input"
@@ -44,9 +44,9 @@ const Auth = () => {
               <div class="button-container">
               <button className="Auth-submit">Log in</button>
               </div>
-            </div>
+            </form>
             ) : (
-              <div className="Auth-inputs">
+              <form className="Auth-inputs">
                 <label className="Auth-label">Email</label>
                 <input
                   className="Auth-input"
@@ -73,7 +73,7 @@ const Auth = () => {
                 <div className="button-container">
                   <button className="Auth-submit">Sign Up</button>
                 </div>
-              </div>
+              </form>
             )}
           </div>
         </div>
