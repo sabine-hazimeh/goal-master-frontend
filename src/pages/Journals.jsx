@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./styles/Journals.css";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 function Journals() {
     const [journals, setJournals] = useState([]);
     const navigate = useNavigate();
@@ -30,7 +30,18 @@ function Journals() {
                     Add New Journal
                 </button>
                 <div className="journals-container">
-                    
+                {journals.length > 0 ? (
+                        journals.map((journal) => (
+                            <div key={journal.id} className="journal-item">
+                                <p>{journal.mood}</p>
+                                <p>{journal.productivity}</p>
+                                <p>{journal.focus}</p>
+                                <p>{journal.description}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No journals found.</p>
+                    )}
                 </div>
             </div>
         </>
