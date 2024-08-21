@@ -1,33 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./styles/Auth.css";
 import Header from "../components/Header";
 import woman from "../images/working-woman.png";
-import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess, loginFailure, logout } from "../redux/usersSlice/slice";
+import { useDispatch } from "react-redux";
+import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [passwordValid, setPasswordValid] = React.useState(false);
-  const [passwordMatch, setPasswordMatch] = React.useState(false);
+  const [passwordMatch, setPasswordMatch] = React.useState(true);
+  const [showPasswordValidation, setShowPasswordValidation] = React.useState(false);
+  const [showConfirmPasswordValidation, setShowConfirmPasswordValidation] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const validatePassword = (password)=>{
-    const Length = password.length>8;
-    const Uppercase = /[A-Z]/.test(password);
-    const characters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
-    setPasswordValid(Length && Uppercase && characters);
-  }
-  const validatePasswordMatch = (password)=>{
-    setPasswordMatch(password===password);
-  }
-  useEffect(() => {
-    validatePassword(password);
-    validatePasswordMatch(password);
-  }, [password, confirmPassword]);
+
+  // Validation functions
+  const validatePassword = (password) => {
+    const lengthValid = password.length > 8;
+    const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const uppercaseValid = /[A-Z]/.test(password);
+    setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
+  };
+
+  const checkPasswordMatch = () => {
+    setPasswordMatch(password === confirmPassword);
+  };
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -42,28 +45,38 @@ const Auth = () => {
       dispatch(loginFailure({ error: error.response.data.message }));
     }
   };
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    if (!passwordValid || !passwordMatch) {
+      return; // Prevent submission if validation fails
+    }
+    // Handle signup logic here
+  };
+
+  React.useEffect(() => {
+    validatePassword(password);
+    checkPasswordMatch();
+  }, [password, confirmPassword]);
+
   return (
     <>
       <Header />
       <div className="Auth">
         <div className="Auth-left">
-          <img src={woman} className="Auth-img"></img>
+          <img src={woman} className="Auth-img" alt="Working woman" />
         </div>
         <div className="Auth-right">
           <div className="Auth-form">
             <div className="Auth-buttons">
               <button
-                className={`Auth-button ${
-                  activeForm === "login" ? "active" : ""
-                }`}
+                className={`Auth-button ${activeForm === "login" ? "active" : ""}`}
                 onClick={() => setActiveForm("login")}
               >
                 Login
               </button>
               <button
-                className={`Auth-button ${
-                  activeForm === "signup" ? "active" : ""
-                }`}
+                className={`Auth-button ${activeForm === "signup" ? "active" : ""}`}
                 onClick={() => setActiveForm("signup")}
               >
                 Sign Up
@@ -78,6 +91,7 @@ const Auth = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your Email here"
+                  required
                 />
                 <label className="Auth-label">Password</label>
                 <input
@@ -86,57 +100,75 @@ const Auth = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your Password here"
+                  required
                 />
                 <div className="button-container">
                   <button className="Auth-submit">Log in</button>
                 </div>
               </form>
             ) : (
-              <form className="Auth-inputs">
+              <form className="Auth-inputs" onSubmit={handleSignup}>
                 <label className="Auth-label">Username</label>
                 <input
                   className="Auth-input"
                   type="text"
-                  placeholder="Enter your Email here"
+                  placeholder="Enter your Username here"
+                  required
                 />
                 <label className="Auth-label">Email</label>
                 <input
                   className="Auth-input"
                   type="email"
                   placeholder="Enter your Email here"
+                  required
                 />
                 <label className="Auth-label">Password</label>
                 <input
                   className="Auth-input"
                   type="password"
-                  placeholder="Enter your Password here"
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password here"
+                  onFocus={() => setShowPasswordValidation(true)}
+                  onBlur={() => setShowPasswordValidation(false)}
+                  required
                 />
-                <div className="password-validation">
+                {showPasswordValidation && (
+                  <div className="password-validation">
                     <ul>
                       <li className={password.length > 8 ? "valid" : "invalid"}>At least 8 characters long</li>
                       <li className={/[!@#$%^&*(),.?":{}|<>]/.test(password) ? "valid" : "invalid"}>Contain a special character</li>
                       <li className={/[A-Z]/.test(password) ? "valid" : "invalid"}>Contain an uppercase letter</li>
                     </ul>
                   </div>
-
+                )}
                 <label className="Auth-label">Confirm Password</label>
                 <input
                   className="Auth-input"
                   type="password"
-                  placeholder="Confirm your Password here"
+                  value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your Password here"
+                  onFocus={() => setShowConfirmPasswordValidation(true)}
+                  onBlur={() => setShowConfirmPasswordValidation(false)}
+                  required
                 />
-                 <div className="password-validation">
+                {showConfirmPasswordValidation && (
+                  <div className="password-validation">
                     <ul>
                       <li className={passwordMatch ? "valid" : "invalid"}>Match the confirmation password</li>
                     </ul>
                   </div>
-
+                )}
                 <label className="Auth-label">Profile Photo</label>
                 <input type="file" accept="image/*" />
                 <div className="button-container">
-                  <button className="Auth-submit">Sign Up</button>
+                  <button
+                    className="Auth-submit"
+                    disabled={!passwordValid || !passwordMatch}
+                  >
+                    Sign Up
+                  </button>
                 </div>
               </form>
             )}
