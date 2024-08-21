@@ -1,21 +1,44 @@
-.journals{
-    display: flex;
+.journals {
+  display: flex;
+  width: 85%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+.journals-text {
+  align-self: flex-start;
+  font-size: 1rem;
+}
+.journals-button {
+  align-self: flex-end;
+  width: 20%;
+  background-color: #0a4570;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+.journals-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; 
     width: 85%;
-    align-items: center;
+    margin: 2rem auto;
+  }
+  
+  .journal-item {
+    background-color: rgba(10, 69, 112, 0.6);
+    border-radius: 20px;
+    height: 6rem;
+    padding: 1rem; 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin: auto;
-}
-.journals-text{
-    align-self: flex-start;
-    font-size: 1rem;
-}
-.journals-button{
-    align-self: flex-end;
-    width: 20%;
-    background-color: #0A4570;
+  }
+  
+  .journal-card-text {
     color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 10px;
-    cursor: pointer;
-}
+    font-size: 0.9rem; 
+  }
+  
