@@ -6,12 +6,14 @@ import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+
 const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [name, setName] = React.useState("");
+  const [profile_photo, setProfilePhoto] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [passwordValid, setPasswordValid] = React.useState(false);
   const [passwordMatch, setPasswordMatch] = React.useState(true);
@@ -22,7 +24,6 @@ const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Validation functions
   const validatePassword = (password) => {
     const lengthValid = password.length > 8;
     const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
@@ -52,20 +53,50 @@ const Auth = () => {
   const handleSignup = async (event) => {
     event.preventDefault();
     if (!passwordValid || !passwordMatch) {
-      return; 
+      return;
     }
     try {
-      const response = await axios.post("http://localhost:8000/api/register", {
-        email,
-        password,
-        name,
-      });
-      toast.success('Registration successful, you can login now');
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        {
+          email,
+          password,
+          name,
+          profile_photo,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      setEmail("");
+      setPassword("");
+      setName("");
+      setConfirmPassword("");
+      setPasswordValid(false);
+      setPasswordMatch(true);
+      setProfilePhoto(null);
+
+      toast.success("Registration successful, you can login now");
       console.log("Registration successful", response.data);
-    } catch (error) { 
-      const errorMessage = error.response.data.message 
-      toast.error(errorMessage);
-      console.error("Registration error:", error);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const errorData = error.response.data;
+
+        if (errorData.email && errorData.email.length > 0) {
+          toast.error("The email address is already taken.");
+        } else {
+          const errorMessage = errorData.message || "Registration error.";
+          toast.error(errorMessage);
+        }
+
+        console.error("Registration error:", error);
+      } else {
+        toast.error("An unexpected error occurred.");
+        console.error("Unexpected error:", error);
+      }
     }
   };
 
@@ -200,7 +231,12 @@ const Auth = () => {
                   </div>
                 )}
                 <label className="Auth-label">Profile Photo</label>
-                <input type="file" accept="image/*" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setProfilePhoto(e.target.files[0])}
+                />
+
                 <div className="button-container">
                   <button
                     className="Auth-submit"
