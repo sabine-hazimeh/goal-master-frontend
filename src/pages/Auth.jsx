@@ -10,7 +10,9 @@ const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [passwordValid, setPasswordValid] = React.useState(false);
+  const [passwordMatch, setPasswordMatch] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const validatePassword = (password)=>{
@@ -19,9 +21,13 @@ const Auth = () => {
     const characters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
     setPasswordValid(Length && Uppercase && characters);
   }
+  const validatePasswordMatch = (password)=>{
+    setPasswordMatch(password===password);
+  }
   useEffect(() => {
     validatePassword(password);
-  }, [password]);
+    validatePasswordMatch(password);
+  }, [password, confirmPassword]);
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -104,6 +110,7 @@ const Auth = () => {
                   className="Auth-input"
                   type="password"
                   placeholder="Enter your Password here"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="password-validation">
                     <ul>
@@ -118,7 +125,14 @@ const Auth = () => {
                   className="Auth-input"
                   type="password"
                   placeholder="Confirm your Password here"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                 <div className="password-validation">
+                    <ul>
+                      <li className={passwordMatch ? "valid" : "invalid"}>Match the confirmation password</li>
+                    </ul>
+                  </div>
+
                 <label className="Auth-label">Profile Photo</label>
                 <input type="file" accept="image/*" />
                 <div className="button-container">
