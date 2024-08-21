@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from 'react-toastify';
 const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
@@ -60,8 +60,11 @@ const Auth = () => {
         password,
         name,
       });
+      toast.success('Registration successful, you can login now');
       console.log("Registration successful", response.data);
     } catch (error) { 
+      const errorMessage = error.response.data.message 
+      toast.error(errorMessage);
       console.error("Registration error:", error);
     }
   };
@@ -139,6 +142,8 @@ const Auth = () => {
                   type="email"
                   placeholder="Enter your Email here"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <label className="Auth-label">Password</label>
                 <input
