@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/Auth.css";
 import Header from "../components/Header";
 import woman from "../images/working-woman.png";
@@ -10,8 +10,18 @@ const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [passwordValid, setPasswordValid] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const validatePassword = (password)=>{
+    const Length = password.length>8;
+    const Uppercase = /[A-Z]/.test(password);
+    const characters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+    setPasswordValid(Length && Uppercase && characters);
+  }
+  useEffect(() => {
+    validatePassword(password);
+  }, [password]);
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -95,6 +105,14 @@ const Auth = () => {
                   type="password"
                   placeholder="Enter your Password here"
                 />
+                <div className="password-validation">
+                    <ul>
+                      <li className={password.length > 8 ? "valid" : "invalid"}>At least 8 characters long</li>
+                      <li className={/[!@#$%^&*(),.?":{}|<>]/.test(password) ? "valid" : "invalid"}>Contain a special character</li>
+                      <li className={/[A-Z]/.test(password) ? "valid" : "invalid"}>Contain an uppercase letter</li>
+                    </ul>
+                  </div>
+
                 <label className="Auth-label">Confirm Password</label>
                 <input
                   className="Auth-input"
