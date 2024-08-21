@@ -4,6 +4,7 @@
     background-color: rgba(10, 69, 112, 0.6);
     border-radius: 20px;
     display: flex;
+    height: 100vh;
 }
 .Auth-left{
     width: 50%;
@@ -27,13 +28,14 @@
 .Auth-form{
     background-color: #f1f1f1;
     width: 80%;
-    height: 90%;
+    height: fit-content;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
+    padding: 2rem 0;
 }
 .Auth-buttons{
     display: flex;

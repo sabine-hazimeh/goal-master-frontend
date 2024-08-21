@@ -34,7 +34,7 @@ const Auth = () => {
           <img src={woman} className="Auth-img"></img>
         </div>
         <div className="Auth-right">
-          <div class="Auth-form">
+          <div className="Auth-form">
             <div className="Auth-buttons">
               <button
                 className={`Auth-button ${
@@ -71,12 +71,18 @@ const Auth = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your Password here"
                 />
-                <div class="button-container">
+                <div className="button-container">
                   <button className="Auth-submit">Log in</button>
                 </div>
               </form>
             ) : (
               <form className="Auth-inputs">
+                <label className="Auth-label">Username</label>
+                <input
+                  className="Auth-input"
+                  type="text"
+                  placeholder="Enter your Email here"
+                />
                 <label className="Auth-label">Email</label>
                 <input
                   className="Auth-input"
