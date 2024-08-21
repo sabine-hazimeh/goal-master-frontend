@@ -11,11 +11,14 @@ const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [passwordValid, setPasswordValid] = React.useState(false);
   const [passwordMatch, setPasswordMatch] = React.useState(true);
-  const [showPasswordValidation, setShowPasswordValidation] = React.useState(false);
-  const [showConfirmPasswordValidation, setShowConfirmPasswordValidation] = React.useState(false);
+  const [showPasswordValidation, setShowPasswordValidation] =
+    React.useState(false);
+  const [showConfirmPasswordValidation, setShowConfirmPasswordValidation] =
+    React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,9 +52,18 @@ const Auth = () => {
   const handleSignup = async (event) => {
     event.preventDefault();
     if (!passwordValid || !passwordMatch) {
-      return; // Prevent submission if validation fails
+      return; 
     }
-    // Handle signup logic here
+    try {
+      const response = await axios.post("http://localhost:8000/api/register", {
+        email,
+        password,
+        name,
+      });
+      console.log("Registration successful", response.data);
+    } catch (error) { 
+      console.error("Registration error:", error);
+    }
   };
 
   React.useEffect(() => {
@@ -70,13 +82,17 @@ const Auth = () => {
           <div className="Auth-form">
             <div className="Auth-buttons">
               <button
-                className={`Auth-button ${activeForm === "login" ? "active" : ""}`}
+                className={`Auth-button ${
+                  activeForm === "login" ? "active" : ""
+                }`}
                 onClick={() => setActiveForm("login")}
               >
                 Login
               </button>
               <button
-                className={`Auth-button ${activeForm === "signup" ? "active" : ""}`}
+                className={`Auth-button ${
+                  activeForm === "signup" ? "active" : ""
+                }`}
                 onClick={() => setActiveForm("signup")}
               >
                 Sign Up
@@ -113,6 +129,8 @@ const Auth = () => {
                   className="Auth-input"
                   type="text"
                   placeholder="Enter your Username here"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
                 <label className="Auth-label">Email</label>
@@ -136,9 +154,23 @@ const Auth = () => {
                 {showPasswordValidation && (
                   <div className="password-validation">
                     <ul>
-                      <li className={password.length > 8 ? "valid" : "invalid"}>At least 8 characters long</li>
-                      <li className={/[!@#$%^&*(),.?":{}|<>]/.test(password) ? "valid" : "invalid"}>Contain a special character</li>
-                      <li className={/[A-Z]/.test(password) ? "valid" : "invalid"}>Contain an uppercase letter</li>
+                      <li className={password.length > 8 ? "valid" : "invalid"}>
+                        At least 8 characters long
+                      </li>
+                      <li
+                        className={
+                          /[!@#$%^&*(),.?":{}|<>]/.test(password)
+                            ? "valid"
+                            : "invalid"
+                        }
+                      >
+                        Contain a special character
+                      </li>
+                      <li
+                        className={/[A-Z]/.test(password) ? "valid" : "invalid"}
+                      >
+                        Contain an uppercase letter
+                      </li>
                     </ul>
                   </div>
                 )}
@@ -156,7 +188,9 @@ const Auth = () => {
                 {showConfirmPasswordValidation && (
                   <div className="password-validation">
                     <ul>
-                      <li className={passwordMatch ? "valid" : "invalid"}>Match the confirmation password</li>
+                      <li className={passwordMatch ? "valid" : "invalid"}>
+                        Match the confirmation password
+                      </li>
                     </ul>
                   </div>
                 )}
