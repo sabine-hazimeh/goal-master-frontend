@@ -42,8 +42,10 @@ const Auth = () => {
         email,
         password,
       });
-      const { token, user } = response.data;
-      dispatch(loginSuccess({ user, token }));
+      const {access_token, user } = response.data;
+      console.log('User:', user);
+      localStorage.setItem("Token", access_token);
+      dispatch(loginSuccess({ user, access_token}));
       navigate("/");
     } catch (error) {
       dispatch(loginFailure({ error: error.response.data.message }));
