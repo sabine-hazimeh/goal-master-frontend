@@ -5,10 +5,15 @@
 }
 .journals-left{
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 .journals-img{
-    width: 450px;
-    height: 450px;
+    width: 500px;
+    height: 400px;
 }
 .journals-right{
     width: 50%;
@@ -34,4 +39,16 @@
     display: flex;
     justify-content: center;
     margin-top:0.5rem;
+}
+.journals{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    align-items: center;
+}
+.journals-title{
+    font-size: 30px;
+    font-weight: bolder;
 }

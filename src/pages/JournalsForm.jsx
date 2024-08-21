@@ -1,17 +1,17 @@
 import React from "react";
 import "./styles/JournalsForm.css";
 import Header from "../components/Header";
-import woman from "../images/planning-woman.png";
+import woman from "../images/laptop.png";
 import FilledButton from "../components/FilledButton";
 const JournalsForm = () => {
   return (
     <>
       <Header />
-      <div className="journals-form-container">
-        <div className="journals">
-            <p className="journals-title">Today’s Journal</p>
+      <div className="journals">
+            <p className="journals-title">Today's Journal</p>
             <p className="journals-text">Please fill out the form below to capture your thoughts and experiences for today.</p>
         </div>
+      <div className="journals-form-container">
         <div className="journals-left">
           <img src={woman} className="journals-img"></img>
         </div>
