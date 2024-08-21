@@ -5,11 +5,13 @@ import woman from "../images/laptop.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 const JournalsForm = () => {
   const [mood, setMood] = useState("");
   const [focus, setFocus] = useState("");
   const [productivity, setProductivity] = useState("");
   const [description, setDescription] = useState("");
+  const [emotion, setEmotion] = useState("");
 
   const handleAddNewJournal = async (event) => {
     event.preventDefault();
@@ -21,14 +23,14 @@ const JournalsForm = () => {
     }
 
     try {
-      const response = await axios.post(
+      const journalResponse = await axios.post(
         "http://localhost:8000/api/journal",
         {
           mood,
           productivity,
-          description,
           focus,
-          emotion_id: 4,
+          description,
+          emotion, 
         },
         {
           headers: {
@@ -37,15 +39,23 @@ const JournalsForm = () => {
           },
         }
       );
+
       toast.success("Journal added successfully");
-      console.log("Journal added successfully", response.data);
-      
+      console.log("Journal added successfully", journalResponse.data);
+
       setMood("");
       setProductivity("");
       setFocus("");
       setDescription("");
+      setEmotion("");
     } catch (error) {
-      console.error("Error adding journal:", error);
+      if (error.response && error.response.data) {
+        console.error("Error adding journal:", error.response.data);
+        toast.error(`Failed to add journal: ${error.response.data.message}`);
+      } else {
+        console.error("Error adding journal:", error.message);
+        toast.error("Failed to add journal");
+      }
     }
   };
 
@@ -65,6 +75,14 @@ const JournalsForm = () => {
         </div>
         <div className="journals-right">
           <form className="journals-form" onSubmit={handleAddNewJournal}>
+            <label className="journals-label">Emotion</label>
+            <input
+              className="journals-input"
+              type="text"
+              placeholder="Enter Emotion"
+              value={emotion}
+              onChange={(e) => setEmotion(e.target.value)}
+            />
             <label className="journals-label">Overall mood</label>
             <input
               className="journals-input"
