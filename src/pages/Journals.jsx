@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import "./styles/Journals.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 function Journals() {
   const [journals, setJournals] = useState([]);
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function Journals() {
   const handleAddNewJournal = () => {
     navigate("/journal-form");
   };
+
   useEffect(() => {
     const fetchJournals = async () => {
       const token = localStorage.getItem("Token");
@@ -34,6 +36,7 @@ function Journals() {
     };
     fetchJournals();
   }, []);
+
   return (
     <>
       <Header />
@@ -46,10 +49,22 @@ function Journals() {
           {journals.length > 0 ? (
             journals.map((journal) => (
               <div key={journal.id} className="journal-item">
-                <p className="journal-card-text"><b>Overall Mood: </b>{journal.mood}</p>
-                <p className="journal-card-text"><b>Productivity: </b>{journal.productivity}</p>
-                <p className="journal-card-text"><b>Focus: </b>{journal.focus}</p>
-                <p className="journal-card-text"><b>Description: </b>{journal.description}</p>
+                <p className="journal-card-text">
+                  <b>Emotion: </b>
+                  {journal.emotion ? journal.emotion.emotion : 'N/A'}
+                </p>
+                <p className="journal-card-text">
+                  <b>Overall Mood: </b>{journal.mood}
+                </p>
+                <p className="journal-card-text">
+                  <b>Productivity: </b>{journal.productivity}
+                </p>
+                <p className="journal-card-text">
+                  <b>Focus: </b>{journal.focus}
+                </p>
+                <p className="journal-card-text">
+                  <b>Description: </b>{journal.description}
+                </p>
               </div>
             ))
           ) : (
