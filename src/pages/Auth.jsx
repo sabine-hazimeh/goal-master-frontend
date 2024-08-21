@@ -54,17 +54,21 @@ const Auth = () => {
               </button>
             </div>
             {activeForm === "login" ? (
-              <form className="Auth-inputs">
+              <form className="Auth-inputs" onSubmit={handleLogin}>
                 <label className="Auth-label">Email</label>
                 <input
                   className="Auth-input"
                   type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your Email here"
                 />
                 <label className="Auth-label">Password</label>
                 <input
                   className="Auth-input"
                   type="text"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your Password here"
                 />
                 <div class="button-container">
