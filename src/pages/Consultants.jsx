@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/Consultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import Header from "../components/Header";
+
 function Consultants() {
   const [consultants, setConsultants] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchConsultants() {
@@ -23,7 +26,6 @@ function Consultants() {
             },
           }
         );
-        console.log("Fetched consultants data:", response.data);
         setConsultants(response.data[1]);
       } catch (error) {
         console.error("Error fetching consultants:", error);
@@ -33,9 +35,24 @@ function Consultants() {
     fetchConsultants();
   }, []);
 
-  useEffect(() => {
-    console.log("Updated consultants state:", consultants);
-  }, [consultants]);
+  const handleChatNow = async (consultantId) => {
+    const token = localStorage.getItem("Token");
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/chat`,
+        { consultant_id: consultantId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      navigate(`/chat/${response.data.chat.id}`);
+    } catch (error) {
+      console.error("Error starting chat:", error);
+    }
+  };
 
   return (
     <>
@@ -49,7 +66,8 @@ function Consultants() {
                   <img
                     src={consultant.profile_picture || Default}
                     className="Consultant-img"
-                  ></img>
+                    alt="Consultant"
+                  />
                   <div className="Consultant-name">
                     <p>{consultant.name}</p>
                     <p>{consultant.phone_number}</p>
@@ -65,7 +83,12 @@ function Consultants() {
                     {consultant.description}
                   </p>
                   <div className="button-wrapper">
-                  <button className="Consultant-button">Chat now</button>
+                    <button
+                      className="Consultant-button"
+                      onClick={() => handleChatNow(consultant.id)}
+                    >
+                      Chat now
+                    </button>
                   </div>
                 </div>
               </div>

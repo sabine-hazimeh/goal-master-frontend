@@ -7,6 +7,7 @@ import FaceRecognition from './pages/FaceRecognition';
 import JournalsForm from './pages/JournalsForm';
 import Journals from './pages/Journals';
 import Consultants from './pages/Consultants';
+import Chat from './pages/Chat';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
       <Route path='/journal-form' element={<JournalsForm/>}/>
       <Route path='/journals' element={<Journals/>}/>
       <Route path='/consultants' element={<Consultants/>}/>
+      <Route path="/chat/:chatId" element={<Chat />} />
     </Routes>
     </BrowserRouter>
   );
