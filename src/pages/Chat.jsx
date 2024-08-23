@@ -5,10 +5,14 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux"; 
+
 function Chat() {
   const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const user = useSelector((state) => state.user.user); 
+  const userId = user ? user.id : null; 
 
   useEffect(() => {
     async function fetchMessages() {
@@ -52,13 +56,23 @@ function Chat() {
     }
   };
 
+  console.log("User ID:", userId);
+  console.log("Messages:", messages);
+
   return (
     <>
       <Header />
       <div className="Chat">
         <div className="Chat-messages">
           {messages.map((message) => (
-            <p>{message.content}</p>
+            <p
+              key={message.id}
+              className={`Chat-message ${
+                message.sender_id === userId ? "sent" : "received"
+              }`}
+            >
+              {message.content}
+            </p>
           ))}
         </div>
         <div className="Chat-input">
@@ -69,7 +83,7 @@ function Chat() {
             placeholder="Type your message..."
           />
           <button onClick={handleSendMessage}>
-            <FontAwesomeIcon icon={faPaperPlane} className="chat-icon"/>
+            <FontAwesomeIcon icon={faPaperPlane} className="chat-icon" />
           </button>
         </div>
       </div>

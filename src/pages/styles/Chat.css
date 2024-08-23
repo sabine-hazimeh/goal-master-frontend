@@ -51,7 +51,7 @@
 
 .Chat-message.sent {
   align-self: flex-end;
-  background-color: #e1ffc7;
+  background-color: #71cf1e;
 }
 
 .Chat-message.received {
