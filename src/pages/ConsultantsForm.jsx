@@ -3,7 +3,12 @@ import "./styles/ConsultantsForm.css";
 import Header from "../components/Header";
 
 function ConsultantsForm() {
-  return <div className="ConsultantsForm"></div>;
+  return (
+    <>
+      <Header />
+      <div className="ConsultantsForm"></div>
+    </>
+  );
 }
 
 export default ConsultantsForm;
