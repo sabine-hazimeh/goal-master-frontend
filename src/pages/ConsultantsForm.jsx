@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/ConsultantForm.css";
 import Header from "../components/Header";
 import consultant from "../images/consultant.png";
 import FilledButton from "../components/FilledButton";
 function ConsultantsForm() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [experience, setExperience] = useState("");
+    const [description, setDescription] = useState("");
+    const [profilePhoto, setProfilePhoto] = useState(null);
+  
   return (
     <>
       <Header />
