@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import consultant from "../images/consultant.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function ConsultantsForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,9 +37,10 @@ function ConsultantsForm() {
           },
         }
       );
-
+      toast.success("Consultant registered successfully!");
       console.log("Consultant registered:", response.data);
     } catch (error) {
+      toast.error("Error registering consultant.");
       console.error("Error registering consultant:", error);
     }
   };
