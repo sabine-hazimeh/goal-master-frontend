@@ -6,16 +6,29 @@
     margin: 2rem auto;
 }
 .Consultant{
-    background-color: rgba(10, 69, 112, 0.6);
-    border-radius: 20px;
-    height: 6rem;
+    background-color: rgba(10, 69, 112, 0.8);
+    border-radius: 10px;
+    height: 9rem;
     padding: 1rem;
 }
 .Consultant-info{
     color: white;
+    
 }
 .Consultant-img{
     border-radius:50%;
     width: 3rem;
     height: 3rem;
+}
+.Consultant-details{
+    display: flex;
+    gap:20px;
+}
+.Consultant-name{
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+.Consultant-description{
+    padding-top: 0.75rem;
 }

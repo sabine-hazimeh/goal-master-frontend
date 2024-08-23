@@ -49,8 +49,10 @@ function Consultants() {
               <p>{consultant.phone_number}</p>
               </div>
               </div>
-              <p>{consultant.experience}</p>
-              <p>{consultant.description}</p>
+              <div className="Consultant-description">
+              <p><b>Years of Experience: </b>{consultant.experience}</p>
+              <p><b>Description: </b>{consultant.description}</p>
+              </div>
             </div>
           </div>
         ))
