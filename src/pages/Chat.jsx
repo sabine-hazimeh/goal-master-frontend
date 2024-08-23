@@ -3,7 +3,8 @@ import "./styles/Chat.css";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 function Chat() {
   const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
@@ -30,6 +31,7 @@ function Chat() {
 
     fetchMessages();
   }, [chatId]);
+
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
     try {
@@ -49,15 +51,14 @@ function Chat() {
       console.error("Error sending message:", error);
     }
   };
+
   return (
     <>
       <Header />
       <div className="Chat">
         <div className="Chat-messages">
           {messages.map((message) => (
-            <div key={message.id} className="Chat-message">
-              <p>{message.content}</p>
-            </div>
+            <p>{message.content}</p>
           ))}
         </div>
         <div className="Chat-input">
@@ -67,7 +68,9 @@ function Chat() {
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type your message..."
           />
-          <button onClick={handleSendMessage}>Send</button>
+          <button onClick={handleSendMessage}>
+            <FontAwesomeIcon icon={faPaperPlane} className="chat-icon"/>
+          </button>
         </div>
       </div>
     </>
