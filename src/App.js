@@ -9,6 +9,7 @@ import Journals from './pages/Journals';
 import Consultants from './pages/Consultants';
 import Chat from './pages/Chat';
 import Users from './pages/Users';
+import ConsultantsForm from './pages/ConsultantsForm';
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ function App() {
       <Route path='/consultants' element={<Consultants/>}/>
       <Route path="/chat/:chatId" element={<Chat />} />
       <Route path='/users' element={<Users/>}/>
+      <Route path='/consultants-form' element={<ConsultantsForm/>}/>
     </Routes>
     </BrowserRouter>
   );
