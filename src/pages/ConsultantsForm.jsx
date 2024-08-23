@@ -4,14 +4,43 @@ import Header from "../components/Header";
 import consultant from "../images/consultant.png";
 import FilledButton from "../components/FilledButton";
 function ConsultantsForm() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [experience, setExperience] = useState("");
-    const [description, setDescription] = useState("");
-    const [profilePhoto, setProfilePhoto] = useState(null);
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [experience, setExperience] = useState("");
+  const [description, setDescription] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        name,
+        email,
+        password,
+        phoneNumber,
+        experience,
+        description,
+        profilePhoto,
+      };
+
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Consultant registered:", response.data);
+    } catch (error) {
+      console.error("Error registering consultant:", error);
+    }
+  };
+
   return (
     <>
       <Header />
