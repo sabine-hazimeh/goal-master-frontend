@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Consultants.css";
 import axios from "axios";
-
+import Default from "../images/default-profile.jpeg";
 function Consultants() {
   const [consultants, setConsultants] = useState([]);
 
@@ -22,16 +22,39 @@ function Consultants() {
             },
           }
         );
-        setConsultants(response.data.consultants);
+        console.log("Fetched consultants data:", response.data);
+        setConsultants(response.data[1]);
       } catch (error) {
         console.error("Error fetching consultants:", error);
       }
     }
 
-    fetchConsultants(); 
+    fetchConsultants();
   }, []);
 
-  return <div className="Consultants"></div>;
+  useEffect(() => {
+    console.log("Updated consultants state:", consultants);
+  }, [consultants]);
+
+  return (
+    <div className="Consultants">
+      {Array.isArray(consultants) && consultants.length > 0 ? (
+        consultants.map((consultant) => (
+          <div className="Consultant" key={consultant.id}>
+            <div className="Consultant-info">
+              <img src={consultant.profile_picture || Default}></img>
+              <p>{consultant.name}</p>
+              <p>{consultant.phone_number}</p>
+              <p>{consultant.experience}</p>
+              <p>{consultant.description}</p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No consultants found.</p>
+      )}
+    </div>
+  );
 }
 
 export default Consultants;
