@@ -55,10 +55,6 @@ function Chat() {
       console.error("Error sending message:", error);
     }
   };
-
-  console.log("User ID:", userId);
-  console.log("Messages:", messages);
-
   return (
     <>
       <Header />

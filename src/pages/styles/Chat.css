@@ -8,19 +8,23 @@
   flex: 1;
   overflow-y: auto;
   padding: 10px;
+  padding-bottom: 70px; /* Add padding to account for the height of the fixed input section */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .Chat-input {
   display: flex;
   align-items: center;
   padding: 10px;
-
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  background-color: #fff; /* Ensure the background color covers messages */
 }
 
 .Chat-input input {
@@ -46,17 +50,19 @@
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
+  width: fit-content;
   max-width: 60%;
 }
 
 .Chat-message.sent {
   align-self: flex-end;
-  background-color: #71cf1e;
+  background-color: rgba(196, 27, 64, 0.3);
 }
 
 .Chat-message.received {
   align-self: flex-start;
-  background-color: #f1f1f1;
+  background-color: rgba(10, 69, 112, 0.8);
+  color: white;
 }
 
 .chat-icon {
