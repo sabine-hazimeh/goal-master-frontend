@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/Consultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
+import Header from "../components/Header";
 function Consultants() {
   const [consultants, setConsultants] = useState([]);
 
@@ -37,6 +38,7 @@ function Consultants() {
   }, [consultants]);
 
   return (
+    <><Header />
     <div className="Consultants">
       {Array.isArray(consultants) && consultants.length > 0 ? (
         consultants.map((consultant) => (
@@ -60,6 +62,7 @@ function Consultants() {
         <p>No consultants found.</p>
       )}
     </div>
+    </>
   );
 }
 
