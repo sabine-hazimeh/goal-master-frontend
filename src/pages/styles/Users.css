@@ -1,0 +1,24 @@
+.Users{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 85%;
+    margin: 2rem auto;
+}
+.user-card{
+    background-color: rgba(10, 69, 112, 0.8);
+    border-radius: 10px;
+    height: 7rem;
+    padding: 1rem;
+    color: white;
+}
+.user-details{
+    display: flex;
+    gap:20px;
+    margin-bottom: 1rem;
+}
+.user-info{
+    display: flex;
+    flex-direction: column;
+    
+}

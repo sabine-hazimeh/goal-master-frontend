@@ -27,17 +27,33 @@ function Users() {
   return (
     <>
       <Header />
+      <div className="Users">
       {users.map((user) => (
         <div key={user._id} className="user-card">
+            <div className="user-details">
           <img
             src={user.profile_picture || Default}
             className="Consultant-img"
             alt="user profile"
           />
+          <div className="user-info">
           <h3>{user.name}</h3>
           <p>{user.email}</p>
+          </div>
+          </div>
+          
+          <div className="button-wrapper">
+                  <button
+                    className="Consultant-button"
+                    // onClick={() => handleChatNow(user.id)}
+                  >
+                    Chat now
+                  </button>
+                </div>
         </div>
+        
       ))}
+      </div>
     </>
   );
 }
