@@ -42,9 +42,13 @@ function Consultants() {
         consultants.map((consultant) => (
           <div className="Consultant" key={consultant.id}>
             <div className="Consultant-info">
-              <img src={consultant.profile_picture || Default}></img>
+                <div className="Consultant-details">
+              <img src={consultant.profile_picture || Default} className="Consultant-img"></img>
+              <div className="Consultant-name">
               <p>{consultant.name}</p>
               <p>{consultant.phone_number}</p>
+              </div>
+              </div>
               <p>{consultant.experience}</p>
               <p>{consultant.description}</p>
             </div>

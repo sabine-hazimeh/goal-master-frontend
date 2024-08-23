@@ -1,0 +1,21 @@
+.Consultants{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 85%;
+    margin: 2rem auto;
+}
+.Consultant{
+    background-color: rgba(10, 69, 112, 0.6);
+    border-radius: 20px;
+    height: 6rem;
+    padding: 1rem;
+}
+.Consultant-info{
+    color: white;
+}
+.Consultant-img{
+    border-radius:50%;
+    width: 3rem;
+    height: 3rem;
+}
