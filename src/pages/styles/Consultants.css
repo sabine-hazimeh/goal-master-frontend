@@ -8,7 +8,7 @@
 .Consultant{
     background-color: rgba(10, 69, 112, 0.8);
     border-radius: 10px;
-    height: 9rem;
+    height: 11rem;
     padding: 1rem;
 }
 .Consultant-info{
@@ -31,4 +31,18 @@
 }
 .Consultant-description{
     padding-top: 0.75rem;
+}
+.Consultant-button{
+    background-color: #0A4570;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    width: 10rem;
+}
+.button-wrapper{
+    display: flex;
+    justify-content: center;
 }

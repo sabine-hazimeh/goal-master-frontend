@@ -38,30 +38,43 @@ function Consultants() {
   }, [consultants]);
 
   return (
-    <><Header />
-    <div className="Consultants">
-      {Array.isArray(consultants) && consultants.length > 0 ? (
-        consultants.map((consultant) => (
-          <div className="Consultant" key={consultant.id}>
-            <div className="Consultant-info">
+    <>
+      <Header />
+      <div className="Consultants">
+        {Array.isArray(consultants) && consultants.length > 0 ? (
+          consultants.map((consultant) => (
+            <div className="Consultant" key={consultant.id}>
+              <div className="Consultant-info">
                 <div className="Consultant-details">
-              <img src={consultant.profile_picture || Default} className="Consultant-img"></img>
-              <div className="Consultant-name">
-              <p>{consultant.name}</p>
-              <p>{consultant.phone_number}</p>
-              </div>
-              </div>
-              <div className="Consultant-description">
-              <p><b>Years of Experience: </b>{consultant.experience}</p>
-              <p><b>Description: </b>{consultant.description}</p>
+                  <img
+                    src={consultant.profile_picture || Default}
+                    className="Consultant-img"
+                  ></img>
+                  <div className="Consultant-name">
+                    <p>{consultant.name}</p>
+                    <p>{consultant.phone_number}</p>
+                  </div>
+                </div>
+                <div className="Consultant-description">
+                  <p>
+                    <b>Years of Experience: </b>
+                    {consultant.experience}
+                  </p>
+                  <p>
+                    <b>Description: </b>
+                    {consultant.description}
+                  </p>
+                  <div className="button-wrapper">
+                  <button className="Consultant-button">Chat now</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>No consultants found.</p>
-      )}
-    </div>
+          ))
+        ) : (
+          <p>No consultants found.</p>
+        )}
+      </div>
     </>
   );
 }
