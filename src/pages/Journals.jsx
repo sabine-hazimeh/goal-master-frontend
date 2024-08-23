@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import "./styles/Journals.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 function Journals() {
   const [journals, setJournals] = useState([]);
@@ -45,32 +47,42 @@ function Journals() {
         <button className="journals-button" onClick={handleAddNewJournal}>
           Add New Journal
         </button>
-        <div className="journals-container">
-          {journals.length > 0 ? (
-            journals.map((journal) => (
+        {/* <div className="journals-container"> */}
+        {journals.length > 0 ? (
+          <div className="journals-container">
+            {journals.map((journal) => (
               <div key={journal.id} className="journal-item">
                 <p className="journal-card-text">
                   <b>Emotion: </b>
-                  {journal.emotion ? journal.emotion.emotion : 'N/A'}
+                  {journal.emotion ? journal.emotion.emotion : "N/A"}
                 </p>
                 <p className="journal-card-text">
-                  <b>Overall Mood: </b>{journal.mood}
+                  <b>Overall Mood: </b>
+                  {journal.mood}
                 </p>
                 <p className="journal-card-text">
-                  <b>Productivity: </b>{journal.productivity}
+                  <b>Productivity: </b>
+                  {journal.productivity}
                 </p>
                 <p className="journal-card-text">
-                  <b>Focus: </b>{journal.focus}
+                  <b>Focus: </b>
+                  {journal.focus}
                 </p>
                 <p className="journal-card-text">
-                  <b>Description: </b>{journal.description}
+                  <b>Description: </b>
+                  {journal.description}
                 </p>
               </div>
-            ))
-          ) : (
-            <p>No journals found.</p>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>No journals found.</p>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
