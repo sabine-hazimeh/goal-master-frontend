@@ -30,7 +30,7 @@ const JournalsForm = () => {
           productivity,
           focus,
           description,
-          emotion, 
+          emotion,
         },
         {
           headers: {
@@ -75,6 +75,7 @@ const JournalsForm = () => {
         </div>
         <div className="journals-right">
           <form className="journals-form" onSubmit={handleAddNewJournal}>
+            <h3 className="journals-title">Add New Journal</h3>
             <label className="journals-label">Emotion</label>
             <input
               className="journals-input"

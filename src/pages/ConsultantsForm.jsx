@@ -54,6 +54,7 @@ function ConsultantsForm() {
         </div>
         <div className="journals-right">
           <form className="journals-form" onSubmit={handleSubmit}>
+            <h3 className="journals-title">Add New Consultant</h3>
             <label className="journals-label">Name</label>
             <input
               className="journals-input"

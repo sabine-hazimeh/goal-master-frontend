@@ -1,54 +1,58 @@
-.journals-form-container{
-    display: flex;
-    width: 90%;
-    margin: 3rem auto;
+.journals-form-container {
+  display: flex;
+  width: 90%;
+  margin: 3rem auto;
 }
-.journals-left{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+.journals-left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.journals-img{
-    width: 500px;
-    height: 400px;
+.journals-img {
+  width: 500px;
+  height: 400px;
 }
-.journals-right{
-    width: 50%;
+.journals-right {
+  width: 50%;
 }
-.journals-form{
-   background-color: rgba(217, 217, 217, 0.44);
-   display: flex;
-   flex-direction: column;
-   padding: 2rem;
-   border-radius: 20px;
+.journals-form {
+  background-color: rgba(217, 217, 217, 0.44);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 20px;
 }
-.journals-input{
-    border: none;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
+.journals-input {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
-.journals-label{
-    margin-bottom: 0.25rem;
+.journals-label {
+  margin-bottom: 0.25rem;
 }
-.journals-button-container{
-    display: flex;
-    justify-content: center;
-    margin-top:0.5rem;
+.journals-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
-.journals{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1.5rem 0;
-    align-items: center;
+.journals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  align-items: center;
 }
-.journals-title{
-    font-size: 30px;
-    font-weight: bolder;
+.journals-title {
+  font-size: 30px;
+  font-weight: bolder;
+}
+.journals-title {
+  color: #c41b40;
+  margin: auto;
+  font-size: 1.5rem;
 }
