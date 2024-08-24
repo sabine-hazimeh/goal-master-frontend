@@ -16,6 +16,24 @@
     width: 50%;  
 }
 .goals-form{
+    background-color: rgba(217, 217, 217, 0.44);
     display: flex;
     flex-direction: column;
+    padding: 2rem;
+    border-radius: 20px;
+}
+.goals-input{
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+.goals-label{
+    margin-bottom: 0.25rem;
+}
+.goals-button-container{
+    display: flex;
+    justify-content: center;
+    margin-top:0.5rem;
 }
