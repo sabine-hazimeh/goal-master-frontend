@@ -1,0 +1,21 @@
+.goals-form-container{
+    display: flex;
+    width: 85%;
+    margin: 3rem auto
+}
+.goals-form-left{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.goals-form-image{
+    width: 400px;
+    height: 400px;
+}
+.goals-form-right{
+    width: 50%;  
+}
+.goals-form{
+    display: flex;
+    flex-direction: column;
+}
