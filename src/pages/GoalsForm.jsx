@@ -109,7 +109,7 @@ function GoalsForm() {
         <div className="goals-form-right">
           {category.finance && (
             <form className="goals-form" onSubmit={handleSubmit}>
-              <h3>Finance Goals</h3>
+              <h3 className="goals-form-title">Finance Goals</h3>
               <label className="goals-label">Income</label>
               <input
                 type="number"
@@ -160,7 +160,7 @@ function GoalsForm() {
           )}
           {category.health && (
             <form className="goals-form" onSubmit={handleSubmit}>
-              <h3>Health Goals</h3>
+              <h3 className="goals-form-title">Health Goals</h3>
               <label className="goals-label">Age</label>
               <input
                 type="number"
@@ -227,7 +227,7 @@ function GoalsForm() {
           )}
           {category.education && (
             <form className="goals-form" onSubmit={handleSubmit}>
-              <h3>Education Goals</h3>
+              <h3 className="goals-form-title">Education Goals</h3>
               <label className="goals-label">Goal</label>
               <input
                 type="text"
