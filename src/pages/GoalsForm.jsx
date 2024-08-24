@@ -3,7 +3,9 @@ import "./styles/GoalsForm.css";
 import Header from "../components/Header";
 
 function GoalsForm() {
-  return <></>;
+  return <>
+  <Header />
+  </>;
 }
 
 export default GoalsForm;
