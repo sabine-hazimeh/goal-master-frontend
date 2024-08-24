@@ -1,0 +1,38 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 50%;
+}
+.profile-img {
+  border-radius: 50%;
+  width: 7rem;
+  height: 7rem;
+}
+.profile-img-container {
+  display: flex;
+  gap: 2rem;
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+.profile-input {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.filled-button, .empty-button {
+    height: auto; 
+    max-height: 3rem; 
+}
+.profile-img-buttons{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    gap: 1rem;
+}  

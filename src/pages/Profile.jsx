@@ -10,14 +10,18 @@ function Profile() {
       <Header />
       <div className="profile">
         <p>Profile Picture</p>
-        <img src={Default} className="profile-img" alt="Profile" />
-        <FilledButton text="Change picture" />
-        <EmptyButton text="Delete picture" />
+        <div className="profile-img-container">
+          <img src={Default} className="profile-img" alt="Profile" />
+          <div className="profile-img-buttons">
+          <FilledButton text="Change picture" />
+          <EmptyButton text="Delete picture" />
+          </div>
+        </div>
         <form className="profile-form">
           <label>Username</label>
-          <input type="text" />
+          <input type="text" className="profile-input"/>
           <label>email</label>
-          <input type="email" />
+          <input type="email" className="profile-input"/>
           <p>Change Password?</p>
           <FilledButton text="Save Changes" />
         </form>
