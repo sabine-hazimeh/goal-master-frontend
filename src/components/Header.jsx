@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const user = useSelector((state) => state.user.user);
   const isConsultant = user && user.role === "consultant";
+  const isAdmin = user && user.role === "admin";
 
   return (
     <>
@@ -31,6 +32,11 @@ const Header = () => {
           {isConsultant && (
             <Link to="/users" className="header-links">
               Users
+            </Link>
+          )}
+          {isAdmin && (
+            <Link to="/consultants-form" className="header-links">
+              Consultants
             </Link>
           )}
           <Link to="/auth" className="header-links">
