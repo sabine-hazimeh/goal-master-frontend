@@ -13,7 +13,7 @@ import ConsultantsForm from "./pages/ConsultantsForm";
 import GoalsForm from "./pages/GoalsForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PreventBackButton from "./components/PreventBackButton";
-
+import Profile from "./pages/Profile";
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +31,7 @@ function App() {
           <Route path="/chat/:chatId" element={<Chat />} />
           <Route path="/users" element={<Users />} />
           <Route path="/face-recognition" element={<FaceRecognition />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

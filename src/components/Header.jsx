@@ -26,7 +26,7 @@ const Header = () => {
           <Link to="/about" className="header-links">
             About
           </Link>
-          <Link to="#" className="header-links">
+          <Link to="/profile" className="header-links">
             Profile
           </Link>
           {isConsultant && (
