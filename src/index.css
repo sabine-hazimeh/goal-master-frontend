@@ -8,4 +8,23 @@
 }
 body{
   background-color: #F1F1F1;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 7px; 
+  
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c41b4048; 
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c41b40b7; 
 }
