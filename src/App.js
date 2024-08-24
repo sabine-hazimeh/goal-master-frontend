@@ -12,9 +12,12 @@ import Users from "./pages/Users";
 import ConsultantsForm from "./pages/ConsultantsForm";
 import GoalsForm from "./pages/GoalsForm";
 import PrivateRoute from "./components/PrivateRoute";
+import PreventBackButton from "./components/PreventBackButton";
+
 function App() {
   return (
     <BrowserRouter>
+      <PreventBackButton />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
