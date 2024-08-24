@@ -3,6 +3,27 @@ import "./styles/GoalsForm.css";
 import Header from "../components/Header";
 import Goal from "../images/goal.png";
 function GoalsForm() {
+  const [category, setCategory] = useState({
+    finance: false,
+    health: false,
+    education: false,
+  });
+  function handleChange(e) {
+    const { name, checked } = e.target;
+    if (checked) {
+      setCategory({
+        finance: name === "finance",
+        health: name === "health",
+        education: name === "education",
+      });
+    } else {
+      setCategory({
+        finance: false,
+        health: false,
+        education: false,
+      });
+    }
+  }
   return (
     <>
       <Header />
