@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles/GoalsForm.css";
 import Header from "../components/Header";
 import Goal from "../images/goal.png";
-
+import FilledButton from "../components/FilledButton";
 function GoalsForm() {
   const [category, setCategory] = useState({
     finance: false,
@@ -105,6 +105,9 @@ function GoalsForm() {
 
               <label className="goals-label">Target Date</label>
               <input type="date" name="target_date" className="goals-input" />
+              <div className="goals-button-container">
+                <FilledButton text="Submit" className="goals-form-button" />
+              </div>
             </form>
           )}
           {category.health && (
@@ -155,6 +158,9 @@ function GoalsForm() {
               />
               <label className="goals-label">Time Horizon</label>
               <input type="date" name="time_horizon" className="goals-input" />
+              <div className="goals-button-container">
+                <FilledButton text="Submit" className="goals-form-button" />
+              </div>
             </form>
           )}
           {category.education && (
@@ -190,6 +196,9 @@ function GoalsForm() {
               />
               <label className="goals-label">Time Horizon</label>
               <input type="date" name="time_horizon" className="goals-input" />
+              <div className="goals-button-container">
+                <FilledButton text="Submit" className="goals-form-button" />
+              </div>
             </form>
           )}
         </div>
