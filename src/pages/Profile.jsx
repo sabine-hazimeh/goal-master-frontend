@@ -23,7 +23,9 @@ function Profile() {
           <label>email</label>
           <input type="email" className="profile-input"/>
           <p>Change Password?</p>
+          <div className="save-button">
           <FilledButton text="Save Changes" />
+          </div>
         </form>
       </div>
     </>
