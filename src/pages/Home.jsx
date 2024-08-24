@@ -33,7 +33,7 @@ const Home = () => {
             way. Start your journey towards success today!
           </p>
           <div className="intro-buttons">
-            <FilledButton text="Get Started!" onClick={() => {}} />
+            <FilledButton text="Get Started!"  onClick={() => navigate("/goals-form")} />
             <EmptyButton
               text="Free Consultation"
               onClick={() => navigate("/consultants")}

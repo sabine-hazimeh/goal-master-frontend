@@ -72,34 +72,35 @@ function GoalsForm() {
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
-            <label>
+            <label className="goals-checkbox-label">
               <input
                 type="checkbox"
                 name="finance"
                 checked={category.finance}
                 onChange={handleChange}
               />
-              Finance
+              <span></span> Finance
             </label>
+
             <br />
-            <label>
+            <label className="goals-checkbox-label">
               <input
                 type="checkbox"
                 name="health"
                 checked={category.health}
                 onChange={handleChange}
               />
-              Health
+              <span></span> Health
             </label>
             <br />
-            <label>
+            <label className="goals-checkbox-label">
               <input
                 type="checkbox"
                 name="education"
                 checked={category.education}
                 onChange={handleChange}
               />
-              Education
+              <span></span> Education
             </label>
           </form>
           <div className="goals-form-img">
