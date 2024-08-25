@@ -42,6 +42,14 @@ function ConsultantsForm() {
       );
       toast.success("Consultant registered successfully!");
       console.log("Consultant registered:", response.data);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setPhoneNumber("");
+      setExperience("");
+      setDescription("");
+      setProfilePhoto(null);
+      document.querySelector('input[type="file"]').value = null;
     } catch (error) {
       toast.error("Error registering consultant.");
       console.error(
@@ -96,7 +104,7 @@ function ConsultantsForm() {
             <label className="journals-label">Experience</label>
             <input
               className="journals-input"
-              type="number" 
+              type="number"
               placeholder="Enter Experience"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
