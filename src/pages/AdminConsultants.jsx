@@ -5,11 +5,12 @@ import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     async function fetchConsultants() {
       const token = localStorage.getItem("Token");
@@ -119,6 +120,16 @@ function AdminConsultants() {
                     <b>Description: </b>
                     {consultant.description}
                   </p>
+                  <div className="button-wrapper">
+                    <button
+                      className="Consultant-button"
+                      onClick={() =>
+                        navigate(`/update-consultant/${consultant.id}`)
+                      }
+                    >
+                      Chat now
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

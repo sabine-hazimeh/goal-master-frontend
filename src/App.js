@@ -35,7 +35,7 @@ function App() {
           <Route path="/face-recognition" element={<FaceRecognition />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin-consultants" element={<AdminConsultants />} />
-          <Route path="/update-consultant/:consultantId" element={<UpdateConsultnat />} />
+          <Route path="/update-consultant/:id" element={<UpdateConsultnat />} />
         </Route>
       </Routes>
     </BrowserRouter>
