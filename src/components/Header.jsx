@@ -17,6 +17,23 @@ const Header = () => {
     const token = localStorage.getItem("Token");
     setIsAuthenticated(!!token);
   }, []);
+  const handleLogout = async () => {
+    const token = localStorage.getItem("Token");
+    try {
+      const response = await axios.get("http://localhost:8000/api/logout", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log("Logout response:", response.data);
+      localStorage.removeItem("Token");
+      setIsAuthenticated(false);
+      navigate("/auth");
+    } catch (error) {
+      console.error(
+        "Logout error:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
 
   return (
     <header className="header">
