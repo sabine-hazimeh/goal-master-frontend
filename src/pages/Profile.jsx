@@ -68,11 +68,11 @@ const Profile = () => {
           "Content-Type": "application/json",
         },
       });
-      toast.success("Profile updated successfully!"); // Show success toast
-      setError(""); // Clear any existing errors
+      toast.success("Profile updated successfully!");
+      setError("");
     } catch (err) {
       setError("Failed to update profile.");
-      toast.error("Failed to update profile."); // Show error toast
+      toast.error("Failed to update profile.");
       console.error(err);
     }
   };

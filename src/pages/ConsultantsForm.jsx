@@ -6,6 +6,7 @@ import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function ConsultantsForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,26 +15,28 @@ function ConsultantsForm() {
   const [experience, setExperience] = useState("");
   const [description, setDescription] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("phone_number", phoneNumber);
+    formData.append("experience", experience);
+    formData.append("description", description);
+    if (profilePhoto) {
+      formData.append("profile_photo", profilePhoto);
+    }
 
     try {
-      const payload = {
-        name,
-        email,
-        password,
-        phoneNumber,
-        experience,
-        description,
-        profilePhoto,
-      };
-
       const response = await axios.post(
-        "http://localhost:8000/api/register",
-        payload,
+        "http://localhost:8000/api/register/consultant",
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -41,7 +44,10 @@ function ConsultantsForm() {
       console.log("Consultant registered:", response.data);
     } catch (error) {
       toast.error("Error registering consultant.");
-      console.error("Error registering consultant:", error);
+      console.error(
+        "Error registering consultant:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -90,7 +96,7 @@ function ConsultantsForm() {
             <label className="journals-label">Experience</label>
             <input
               className="journals-input"
-              type="text"
+              type="number" 
               placeholder="Enter Experience"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
@@ -113,6 +119,7 @@ function ConsultantsForm() {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
