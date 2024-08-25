@@ -14,6 +14,8 @@ const Profile = () => {
   const [passwordValid, setPasswordValid] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [error, setError] = useState("");
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -32,15 +34,15 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
+  useEffect(() => {
+    setPasswordMatch(newPassword === confirmPassword);
+  }, [newPassword, confirmPassword]);
+
   const validatePassword = (password) => {
     const lengthValid = password.length > 8;
     const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     const uppercaseValid = /[A-Z]/.test(password);
     setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
-  };
-
-  const checkPasswordMatch = () => {
-    setPasswordMatch(newPassword === confirmPassword);
   };
 
   return (
@@ -90,43 +92,56 @@ const Profile = () => {
                 }}
                 placeholder="Enter your new password"
                 required
+                onFocus={() => setPasswordFocused(true)}
+                onBlur={() => setPasswordFocused(false)}
               />
+              {passwordFocused && (
+                <div className="password-validation">
+                  <ul>
+                    <li
+                      className={newPassword.length > 8 ? "valid" : "invalid"}
+                    >
+                      At least 8 characters long
+                    </li>
+                    <li
+                      className={
+                        /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                          ? "valid"
+                          : "invalid"
+                      }
+                    >
+                      Contain a special character
+                    </li>
+                    <li
+                      className={
+                        /[A-Z]/.test(newPassword) ? "valid" : "invalid"
+                      }
+                    >
+                      Contain an uppercase letter
+                    </li>
+                  </ul>
+                </div>
+              )}
               <label>Confirm New Password</label>
               <input
                 type="password"
                 className="profile-input"
                 value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                  checkPasswordMatch();
-                }}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm your new password"
                 required
+                onFocus={() => setConfirmPasswordFocused(true)}
+                onBlur={() => setConfirmPasswordFocused(false)}
               />
-              <div className="password-validation">
-                <ul>
-                  <li className={newPassword.length > 8 ? "valid" : "invalid"}>
-                    At least 8 characters long
-                  </li>
-                  <li
-                    className={
-                      /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
-                        ? "valid"
-                        : "invalid"
-                    }
-                  >
-                    Contain a special character
-                  </li>
-                  <li
-                    className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}
-                  >
-                    Contain an uppercase letter
-                  </li>
-                  <li className={passwordMatch ? "valid" : "invalid"}>
-                    Match the confirmation password
-                  </li>
-                </ul>
-              </div>
+              {confirmPasswordFocused && (
+                <div className="password-validation">
+                  <ul>
+                    <li className={passwordMatch ? "valid" : "invalid"}>
+                      Passwords match
+                    </li>
+                  </ul>
+                </div>
+              )}
               {error && <p className="error-message">{error}</p>}
             </>
           )}
