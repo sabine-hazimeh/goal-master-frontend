@@ -25,7 +25,7 @@ function Profile() {
       <div className="profile">
         <p>Profile Picture</p>
         <div className="profile-img-container">
-          <img src={Default} className="profile-img" alt="Profile" />
+          <img src={profile.profile_picture || Default} className="profile-img" alt="Profile" />
           <div className="profile-img-buttons">
           <FilledButton text="Change picture" />
           <EmptyButton text="Delete picture" />
@@ -33,9 +33,9 @@ function Profile() {
         </div>
         <form className="profile-form">
           <label>Username</label>
-          <input type="text" className="profile-input"/>
+          <input type="text" className="profile-input" value={profile.name}/>
           <label>email</label>
-          <input type="email" className="profile-input"/>
+          <input type="email" className="profile-input" value={profile.email}/>
           <p>Change Password?</p>
           <div className="save-button">
           <FilledButton text="Save Changes" />
