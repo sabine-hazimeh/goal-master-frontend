@@ -4,9 +4,11 @@ import "./styles/Users.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { useNavigate } from "react-router-dom";
+
 function Users() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -24,6 +26,7 @@ function Users() {
 
     fetchUsers();
   }, []);
+
   const handleChatNow = async (userId) => {
     const token = localStorage.getItem("Token");
     try {
@@ -52,13 +55,13 @@ function Users() {
             <div className="user-details">
               <img
                 src={
-                  `http://localhost:8000/storage/${user.profile_photo}` ||
-                  Default
+                  user.profile_photo
+                    ? `http://localhost:8000/storage/${user.profile_photo}`
+                    : Default
                 }
                 className="Consultant-img"
                 alt="user profile"
               />
-
               <div className="user-info">
                 <h3>{user.name}</h3>
                 <p>{user.email}</p>
@@ -68,7 +71,7 @@ function Users() {
             <div className="button-wrapper">
               <button
                 className="Consultant-button"
-                onClick={() => handleChatNow(user.id)}
+                onClick={() => handleChatNow(user.id)} 
               >
                 Chat now
               </button>
