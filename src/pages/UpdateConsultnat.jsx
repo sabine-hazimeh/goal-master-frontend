@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./styles/ConsultantForm.css";
 import consultant from "../images/consultant.png";
 import FilledButton from "../components/FilledButton";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
+
 const UpdateConsultnat = () => {
+    const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
+    const [profile, setProfile] = useState({});
+    useEffect(() => {
+        async function fetchProfile() {
+          try {
+            const response = await axios.get("http://localhost:8000/api/profile", {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+              },
+            });
+            setProfile(response.data);
+            setProfilePhotoURL(response.data.profile_photo);
+          } catch (err) {
+            console.error("Failed to fetch profile", err);
+          }
+        }
+        fetchProfile();
+      }, []);
   return (
     <>
       <Header />
@@ -20,6 +41,7 @@ const UpdateConsultnat = () => {
               className="journals-input"
               type="text"
               placeholder="Enter Name"
+              value={profile.name}
             />
             <label className="journals-label">Email</label>
             <input
