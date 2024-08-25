@@ -39,6 +39,11 @@ const Header = () => {
           )}
           {isAdmin && (
             <Link to="/consultants-form" className="header-links">
+              Consultants Form
+            </Link>
+          )}
+          {isAdmin && (
+            <Link to="/admin-consultants" className="header-links">
               Consultants
             </Link>
           )}
