@@ -77,7 +77,59 @@ const Profile = () => {
           <p onClick={() => setShowPasswordFields(!showPasswordFields)}>
             {showPasswordFields ? "Cancel" : "Change Password?"}
           </p>
-
+          {showPasswordFields && (
+            <>
+              <label>New Password</label>
+              <input
+                type="password"
+                className="profile-input"
+                value={newPassword}
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                  validatePassword(e.target.value);
+                }}
+                placeholder="Enter your new password"
+                required
+              />
+              <label>Confirm New Password</label>
+              <input
+                type="password"
+                className="profile-input"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  checkPasswordMatch();
+                }}
+                placeholder="Confirm your new password"
+                required
+              />
+              <div className="password-validation">
+                <ul>
+                  <li className={newPassword.length > 8 ? "valid" : "invalid"}>
+                    At least 8 characters long
+                  </li>
+                  <li
+                    className={
+                      /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                        ? "valid"
+                        : "invalid"
+                    }
+                  >
+                    Contain a special character
+                  </li>
+                  <li
+                    className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}
+                  >
+                    Contain an uppercase letter
+                  </li>
+                  <li className={passwordMatch ? "valid" : "invalid"}>
+                    Match the confirmation password
+                  </li>
+                </ul>
+              </div>
+              {error && <p className="error-message">{error}</p>}
+            </>
+          )}
           <div className="save-button">
             <FilledButton text="Save Changes" />
           </div>
