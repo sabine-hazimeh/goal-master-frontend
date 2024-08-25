@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PreventBackButton from "./components/PreventBackButton";
 import AdminConsultants from "./pages/AdminConsultants";
 import Profile from "./pages/Profile";
+import UpdateConsultnat from "./pages/UpdateConsultnat";
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
           <Route path="/face-recognition" element={<FaceRecognition />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin-consultants" element={<AdminConsultants />} />
+          <Route path="/update-consultant/:consultantId" element={<UpdateConsultnat />} />
         </Route>
       </Routes>
     </BrowserRouter>
