@@ -1,48 +1,47 @@
-.Consultants{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    width: 85%;
-    margin: 2rem auto;
+.Consultants {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 85%;
+  margin: 2rem auto;
 }
-.Consultant{
-    background-color: rgba(10, 69, 112, 0.8);
-    border-radius: 10px;
-    height: 11rem;
-    padding: 1rem;
+.Consultant {
+  background-color: rgba(10, 69, 112, 0.8);
+  border-radius: 10px;
+  height: 11rem;
+  padding: 1rem;
 }
-.Consultant-info{
-    color: white;
-    
+.Consultant-info {
+  color: white;
 }
-.Consultant-img{
-    border-radius:50%;
-    width: 3rem;
-    height: 3rem;
+.Consultant-img {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
 }
-.Consultant-details{
-    display: flex;
-    gap:20px;
+.Consultant-details {
+  display: flex;
+  gap: 20px;
 }
-.Consultant-name{
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
+.Consultant-name {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
 }
-.Consultant-description{
-    padding-top: 0.75rem;
+.Consultant-description {
+  padding-top: 0.75rem;
 }
-.Consultant-button{
-    background-color: #0A4570;
-    border-radius: 5px;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    width: 10rem;
+.Consultant-button {
+  background-color: #0a4570;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 10rem;
 }
-.button-wrapper{
-    display: flex;
-    justify-content: center;
+.button-wrapper {
+  display: flex;
+  justify-content: center;
 }

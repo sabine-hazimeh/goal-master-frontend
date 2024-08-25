@@ -3,7 +3,8 @@ import Header from "../components/Header";
 import "./styles/AdminConsultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ function AdminConsultants() {
           consultants.map((consultant) => (
             <div className="Consultant" key={consultant.id}>
               <div className="Consultant-info">
+                <div className="Consultant-upper">  
                 <div className="Consultant-details">
                   <img
                     src={
@@ -68,6 +70,11 @@ function AdminConsultants() {
                   <div className="Consultant-name">
                     <p>{consultant.name}</p>
                     <p>{consultant.phone_number}</p>
+                  </div>
+                  </div>
+                  <div className="Consultant-options">
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                    <FontAwesomeIcon icon={faTrash} />
                   </div>
                 </div>
                 <div className="Consultant-description">
