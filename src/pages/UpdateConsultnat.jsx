@@ -43,6 +43,38 @@ const UpdateConsultant = () => {
     fetchProfile();
   }, [id]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const jsonData = {
+      name: profile.name,
+      email: profile.email,
+      phone_number: profile.phone_number,
+      experience: profile.experience,
+      description: profile.description,
+    };
+
+    if (profile.password) {
+      jsonData.password = profile.password;
+    }
+
+    try {
+      await axios.put(`http://localhost:8000/api/consultants/${id}`, jsonData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      toast.success("Consultant profile updated successfully!");
+    } catch (error) {
+      toast.error("Error updating consultant profile.");
+      console.error(
+        "Error updating profile:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
   return (
     <>
       <Header />
@@ -51,7 +83,7 @@ const UpdateConsultant = () => {
           <img src={consultant} className="journals-img" alt="Consultant" />
         </div>
         <div className="journals-right">
-          <form className="journals-form">
+          <form className="journals-form" onSubmit={handleSubmit}>
             <h3 className="journals-title">Update Consultant Profile</h3>
             <label className="journals-label">Name</label>
             <input
@@ -86,9 +118,9 @@ const UpdateConsultant = () => {
               className="journals-input"
               type="text"
               placeholder="Enter Phone Number"
-              value={profile.phone_number}
+              value={profile.phone_number} 
               onChange={(e) =>
-                setProfile({ ...profile, phoneNumber: e.target.value })
+                setProfile({ ...profile, phone_number: e.target.value })
               }
             />
             <label className="journals-label">Experience</label>
