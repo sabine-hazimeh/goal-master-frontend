@@ -71,7 +71,7 @@ function Users() {
             <div className="button-wrapper">
               <button
                 className="Consultant-button"
-                onClick={() => handleChatNow(user.id)} 
+                onClick={() => handleChatNow(user.id)}
               >
                 Chat now
               </button>

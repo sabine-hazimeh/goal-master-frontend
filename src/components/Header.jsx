@@ -8,6 +8,7 @@ const Header = () => {
   const user = useSelector((state) => state.user.user);
   const isConsultant = user && user.role === "consultant";
   const isAdmin = user && user.role === "admin";
+  const isUser = user && user.role === "user";
 
   return (
     <>
@@ -26,9 +27,11 @@ const Header = () => {
           <Link to="/about" className="header-links">
             About
           </Link>
-          <Link to="/profile" className="header-links">
-            Profile
-          </Link>
+          {isUser && (
+            <Link to="/profile" className="header-links">
+              Profile
+            </Link>
+          )}
           {isConsultant && (
             <Link to="/users" className="header-links">
               Users
