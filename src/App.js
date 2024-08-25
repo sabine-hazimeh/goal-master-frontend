@@ -13,6 +13,7 @@ import ConsultantsForm from "./pages/ConsultantsForm";
 import GoalsForm from "./pages/GoalsForm";
 import PrivateRoute from "./components/PrivateRoute";
 import PreventBackButton from "./components/PreventBackButton";
+import AdminConsultants from "./pages/AdminConsultants";
 import Profile from "./pages/Profile";
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/face-recognition" element={<FaceRecognition />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin-consultants" element={<AdminConsultants />} />
         </Route>
       </Routes>
     </BrowserRouter>

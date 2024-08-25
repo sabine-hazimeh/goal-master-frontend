@@ -5,7 +5,7 @@ import Default from "../images/default-profile.jpeg";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import axios from "axios";
-import { toast } from "react-toastify"; // Import toast functions
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
