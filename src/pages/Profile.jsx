@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/Profile.css";
 import Header from "../components/Header";
 import Default from "../images/default-profile.jpeg";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
+import axios from "axios";
 function Profile() {
+    const [profile, setProfile] = useState({});
+    useEffect(() => {
+       async function fetchProfile(){
+        const response = await axios.get("http://localhost:8000/api/profile",{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                "Content-Type": "application/json",
+            },
+        })
+        setProfile(response.data);
+        }
+        fetchProfile();
+    },[]);
   return (
     <>
       <Header />
