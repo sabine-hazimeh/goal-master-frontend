@@ -5,6 +5,7 @@ import Default from "../images/default-profile.jpeg";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import axios from "axios";
+import { toast } from "react-toastify"; // Import toast functions
 
 const Profile = () => {
   const [profile, setProfile] = useState({});
@@ -17,6 +18,7 @@ const Profile = () => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -28,6 +30,7 @@ const Profile = () => {
           },
         });
         setProfile(response.data);
+        setProfilePhotoURL(response.data.profile_photo);
       } catch (err) {
         console.error("Failed to fetch profile", err);
       }
@@ -50,6 +53,30 @@ const Profile = () => {
     setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
   };
 
+  const handleProfileUpdate = async (e) => {
+    e.preventDefault();
+    const updatedProfile = {
+      name: profile.name,
+      email: profile.email,
+      ...(newPassword && { password: newPassword }),
+    };
+
+    try {
+      await axios.put("http://localhost:8000/api/profile", updatedProfile, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          "Content-Type": "application/json",
+        },
+      });
+      toast.success("Profile updated successfully!"); // Show success toast
+      setError(""); // Clear any existing errors
+    } catch (err) {
+      setError("Failed to update profile.");
+      toast.error("Failed to update profile."); // Show error toast
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -57,29 +84,37 @@ const Profile = () => {
         <p>Profile Picture</p>
         <div className="profile-img-container">
           <img
-            src={profile.profile_picture || Default}
+            src={
+              profilePhotoURL
+                ? `http://localhost:8000/storage/${profilePhotoURL}`
+                : Default
+            }
             className="profile-img"
             alt="Profile"
           />
           <div className="profile-img-buttons">
-            <FilledButton text="Change picture" />
-            <EmptyButton text="Delete picture" />
+            <FilledButton text="Change picture" htmlFor="file-upload" />
+            <input type="file" id="file-upload" style={{ display: "none" }} />
+            <EmptyButton
+              text="Delete picture"
+              onClick={() => setProfilePhotoURL(null)}
+            />
           </div>
         </div>
-        <form className="profile-form">
+        <form className="profile-form" onSubmit={handleProfileUpdate}>
           <label>Username</label>
           <input
             type="text"
             className="profile-input"
             value={profile.name}
-            readOnly
+            onChange={(e) => setProfile({ ...profile, name: e.target.value })}
           />
           <label>Email</label>
           <input
             type="email"
             className="profile-input"
             value={profile.email}
-            readOnly
+            onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
           <p onClick={() => setShowPasswordFields(!showPasswordFields)}>
             {showPasswordFields ? "Cancel" : "Change Password?"}
@@ -103,13 +138,25 @@ const Profile = () => {
               {passwordFocused && (
                 <div className="password-validation">
                   <ul>
-                    <li className={newPassword.length > 8 ? "valid" : "invalid"}>
+                    <li
+                      className={newPassword.length > 8 ? "valid" : "invalid"}
+                    >
                       At least 8 characters long
                     </li>
-                    <li className={/[!@#$%^&*(),.?":{}|<>]/.test(newPassword) ? "valid" : "invalid"}>
+                    <li
+                      className={
+                        /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                          ? "valid"
+                          : "invalid"
+                      }
+                    >
                       Contain a special character
                     </li>
-                    <li className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}>
+                    <li
+                      className={
+                        /[A-Z]/.test(newPassword) ? "valid" : "invalid"
+                      }
+                    >
                       Contain an uppercase letter
                     </li>
                   </ul>
@@ -141,6 +188,7 @@ const Profile = () => {
           <div className="save-button">
             <FilledButton
               text="Save Changes"
+              type="submit"
               disabled={isButtonDisabled}
             />
           </div>
