@@ -16,6 +16,7 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -37,6 +38,10 @@ const Profile = () => {
   useEffect(() => {
     setPasswordMatch(newPassword === confirmPassword);
   }, [newPassword, confirmPassword]);
+
+  useEffect(() => {
+    setIsButtonDisabled(!passwordValid || !passwordMatch);
+  }, [passwordValid, passwordMatch]);
 
   const validatePassword = (password) => {
     const lengthValid = password.length > 8;
@@ -98,25 +103,13 @@ const Profile = () => {
               {passwordFocused && (
                 <div className="password-validation">
                   <ul>
-                    <li
-                      className={newPassword.length > 8 ? "valid" : "invalid"}
-                    >
+                    <li className={newPassword.length > 8 ? "valid" : "invalid"}>
                       At least 8 characters long
                     </li>
-                    <li
-                      className={
-                        /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
-                          ? "valid"
-                          : "invalid"
-                      }
-                    >
+                    <li className={/[!@#$%^&*(),.?":{}|<>]/.test(newPassword) ? "valid" : "invalid"}>
                       Contain a special character
                     </li>
-                    <li
-                      className={
-                        /[A-Z]/.test(newPassword) ? "valid" : "invalid"
-                      }
-                    >
+                    <li className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}>
                       Contain an uppercase letter
                     </li>
                   </ul>
@@ -146,7 +139,10 @@ const Profile = () => {
             </>
           )}
           <div className="save-button">
-            <FilledButton text="Save Changes" />
+            <FilledButton
+              text="Save Changes"
+              disabled={isButtonDisabled}
+            />
           </div>
         </form>
       </div>
