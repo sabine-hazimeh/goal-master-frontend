@@ -51,10 +51,14 @@ function Users() {
           <div key={user._id} className="user-card">
             <div className="user-details">
               <img
-                src={user.profile_picture || Default}
+                src={
+                  `http://localhost:8000/storage/${user.profile_photo}` ||
+                  Default
+                }
                 className="Consultant-img"
                 alt="user profile"
               />
+
               <div className="user-info">
                 <h3>{user.name}</h3>
                 <p>{user.email}</p>
