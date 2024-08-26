@@ -6,6 +6,12 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
+// Helper function to format date
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-CA'); // Formats date as YYYY-MM-DD
+};
+
 function Journals() {
   const [journals, setJournals] = useState([]);
   const navigate = useNavigate();
@@ -47,11 +53,13 @@ function Journals() {
         <button className="journals-button" onClick={handleAddNewJournal}>
           Add New Journal
         </button>
-        {/* <div className="journals-container"> */}
         {journals.length > 0 ? (
           <div className="journals-container">
             {journals.map((journal) => (
               <div key={journal.id} className="journal-item">
+                <div className="date-container">
+                <p className="journal-card-text">{formatDate(journal.created_at)}</p>
+                </div>
                 <p className="journal-card-text">
                   <b>Emotion: </b>
                   {journal.emotion ? journal.emotion.emotion : "N/A"}
