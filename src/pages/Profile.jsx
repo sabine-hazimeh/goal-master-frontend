@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles/Profile.css";
 import Header from "../components/Header";
 import Default from "../images/default-profile.jpeg";
@@ -19,6 +19,8 @@ const Profile = () => {
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
+  const [profilePhotoFile, setProfilePhotoFile] = useState(null);
+  const fileInputRef = useRef(null); // Add a ref for the file input
 
   useEffect(() => {
     async function fetchProfile() {
@@ -55,17 +57,22 @@ const Profile = () => {
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
-    const updatedProfile = {
-      name: profile.name,
-      email: profile.email,
-      ...(newPassword && { password: newPassword }),
-    };
+    const updatedProfile = new FormData();
+
+    updatedProfile.append("name", profile.name);
+    updatedProfile.append("email", profile.email);
+    if (newPassword) updatedProfile.append("password", newPassword);
+    if (profilePhotoFile) {
+      updatedProfile.append("profile_photo", profilePhotoFile);
+    } else if (profilePhotoURL === null) {
+      updatedProfile.append("profile_photo", "");
+    }
 
     try {
-      await axios.put("http://localhost:8000/api/profile", updatedProfile, {
+      await axios.post("http://localhost:8000/api/profile", updatedProfile, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("Token")}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
       toast.success("Profile updated successfully!");
@@ -76,6 +83,7 @@ const Profile = () => {
       console.error(err);
     }
   };
+
 
   return (
     <>
@@ -93,11 +101,19 @@ const Profile = () => {
             alt="Profile"
           />
           <div className="profile-img-buttons">
-            <FilledButton text="Change picture" htmlFor="file-upload" />
-            <input type="file" id="file-upload" style={{ display: "none" }} />
+            <FilledButton
+              text="Change picture"
+              onClick={triggerFileInput} 
+            />
+            <input
+              type="file"
+              ref={fileInputRef} 
+              style={{ display: "none" }} 
+              onChange={handleProfilePhotoChange}
+            />
             <EmptyButton
               text="Delete picture"
-              onClick={() => setProfilePhotoURL(null)}
+              onClick={handleDeleteProfilePhoto}
             />
           </div>
         </div>
@@ -189,7 +205,7 @@ const Profile = () => {
             <FilledButton
               text="Save Changes"
               type="submit"
-              disabled={isButtonDisabled}
+              disabled={isButtonDisabled && !profilePhotoFile}
             />
           </div>
         </form>
