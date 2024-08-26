@@ -54,6 +54,19 @@ const Profile = () => {
     const uppercaseValid = /[A-Z]/.test(password);
     setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
   };
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePhotoFile(file);
+      setProfilePhotoURL(URL.createObjectURL(file));
+    }
+  };
+
+  const handleDeleteProfilePhoto = () => {
+    setProfilePhotoURL(null);
+    setProfilePhotoFile(null);
+  };
+
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
