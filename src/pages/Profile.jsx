@@ -96,7 +96,11 @@ const Profile = () => {
       console.error(err);
     }
   };
-
+  const triggerFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); 
+    }
+  };
 
   return (
     <>
