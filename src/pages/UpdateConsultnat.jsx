@@ -9,17 +9,16 @@ import { useParams } from "react-router-dom";
 
 const UpdateConsultant = () => {
   const { id } = useParams();
-  const [profilePhotoURL, setProfilePhotoURL] = useState("");
+
   const [profile, setProfile] = useState({
     name: "",
     email: "",
     password: "",
     phone_number: "",
-    experience: "",
+    experience: 0,
     description: "",
-    profilePhoto: "",
+    profile_photo: "",
   });
-  const [profilePhoto, setProfilePhoto] = useState(null);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -34,7 +33,6 @@ const UpdateConsultant = () => {
           }
         );
         setProfile(response.data.data);
-        setProfilePhotoURL(response.data.profile_photo);
       } catch (err) {
         console.error("Failed to fetch profile", err);
         toast.error("Failed to fetch consultant data.");
@@ -45,25 +43,33 @@ const UpdateConsultant = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const jsonData = {
-      name: profile.name,
-      email: profile.email,
-      phone_number: profile.phone_number,
-      experience: profile.experience,
-      description: profile.description,
-    };
+
+    const formData = new FormData();
+    formData.append("name", profile.name);
+    formData.append("email", profile.email);
+    formData.append("phone_number", profile.phone_number);
+    formData.append("experience", profile.experience);
+    formData.append("description", profile.description);
 
     if (profile.password) {
-      jsonData.password = profile.password;
+      formData.append("password", profile.password);
+    }
+
+    if (profile.profile_photo) {
+      formData.append("profile_photo", profile.profile_photo);
     }
 
     try {
-      await axios.put(`http://localhost:8000/api/consultants/${id}`, jsonData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `http://localhost:8000/api/consultants/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       toast.success("Consultant profile updated successfully!");
     } catch (error) {
@@ -93,6 +99,7 @@ const UpdateConsultant = () => {
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
             />
+
             <label className="journals-label">Email</label>
             <input
               className="journals-input"
@@ -118,7 +125,7 @@ const UpdateConsultant = () => {
               className="journals-input"
               type="text"
               placeholder="Enter Phone Number"
-              value={profile.phone_number} 
+              value={profile.phone_number}
               onChange={(e) =>
                 setProfile({ ...profile, phone_number: e.target.value })
               }
@@ -143,10 +150,15 @@ const UpdateConsultant = () => {
               }
             />
             <label className="journals-label">Profile Photo</label>
+            <label className="journals-label">Profile Photo</label>
             <input
               type="file"
-              onChange={(e) => setProfilePhoto(e.target.files[0])}
+              accept="image/*"
+              onChange={(e) =>
+                setProfile({ ...profile, profile_photo: e.target.files[0] })
+              }
             />
+
             <div className="journals-button-container">
               <FilledButton text="Submit" className="journals-button" />
             </div>
