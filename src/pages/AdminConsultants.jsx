@@ -127,7 +127,7 @@ function AdminConsultants() {
                         navigate(`/update-consultant/${consultant.id}`)
                       }
                     >
-                      Chat now
+                      Update
                     </button>
                   </div>
                 </div>
