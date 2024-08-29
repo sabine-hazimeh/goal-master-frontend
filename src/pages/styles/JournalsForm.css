@@ -56,3 +56,12 @@
   margin: auto;
   font-size: 1.5rem;
 }
+.journal-button {
+  background-color: #0a4570;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+  width: 50%;
+}
