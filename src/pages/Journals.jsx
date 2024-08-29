@@ -98,6 +98,9 @@ function Journals() {
           </div>
         )}
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <JournalsForm />
+      </Modal>
     </>
   );
 }
