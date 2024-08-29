@@ -18,7 +18,7 @@ function Users() {
             "Content-Type": "application/json",
           },
         });
-        setUsers(response.data[1]);
+        setUsers(response.data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -50,37 +50,40 @@ function Users() {
     <>
       <Header />
       <div className="Users">
-        {users.map((user) => (
-          <div key={user._id} className="user-card">
-            <div className="user-details">
-              <img
-                src={
-                  user.profile_photo
-                    ? `http://localhost:8000/storage/${user.profile_photo}`
-                    : Default
-                }
-                className="Consultant-img"
-                alt="user profile"
-              />
-              <div className="user-info">
-                <h3>{user.name}</h3>
-                <p>{user.email}</p>
+        {Array.isArray(users) && users.length > 0 ? (
+          users.map((user) => (
+            <div key={user._id} className="user-card">
+              <div className="user-details">
+                <img
+                  src={
+                    user.profile_photo
+                      ? `http://localhost:8000/storage/${user.profile_photo}`
+                      : Default
+                  }
+                  className="Consultant-img"
+                  alt="user profile"
+                />
+                <div className="user-info">
+                  <h3>{user.name}</h3>
+                  <p>{user.email}</p>
+                </div>
+              </div>
+
+              <div className="button-wrapper">
+                <button
+                  className="Consultant-button"
+                  onClick={() => handleChatNow(user.id)}
+                >
+                  Chat now
+                </button>
               </div>
             </div>
-
-            <div className="button-wrapper">
-              <button
-                className="Consultant-button"
-                onClick={() => handleChatNow(user.id)}
-              >
-                Chat now
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p>No users found</p>
+        )}
       </div>
     </>
   );
 }
-
 export default Users;

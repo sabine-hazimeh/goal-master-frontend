@@ -104,7 +104,7 @@ function AdminConsultants() {
                     </div>
                   </div>
                   <div className="Consultant-options">
-                    <FontAwesomeIcon icon={faPenToSquare} />
+                    {/* <FontAwesomeIcon icon={faPenToSquare} /> */}
                     <FontAwesomeIcon
                       icon={faTrash}
                       onClick={() => deleteConsultant(consultant.id)}

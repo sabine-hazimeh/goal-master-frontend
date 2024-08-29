@@ -149,7 +149,7 @@ const Profile = () => {
             value={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
-          <p onClick={() => setShowPasswordFields(!showPasswordFields)}>
+          <p onClick={() => setShowPasswordFields(!showPasswordFields)} className="change-password">
             {showPasswordFields ? "Cancel" : "Change Password?"}
           </p>
           {showPasswordFields && (
