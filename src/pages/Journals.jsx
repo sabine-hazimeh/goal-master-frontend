@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "./styles/Journals.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../components/Modal";
 import JournalsForm from "./JournalsForm";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-CA"); 
+  return date.toLocaleDateString('en-CA');
 };
 
 function Journals() {
@@ -62,9 +62,7 @@ function Journals() {
             {journals.map((journal) => (
               <div key={journal.id} className="journal-item">
                 <div className="date-container">
-                  <p className="journal-card-text">
-                    {formatDate(journal.created_at)}
-                  </p>
+                  <p className="journal-card-text">{formatDate(journal.created_at)}</p>
                 </div>
                 <p className="journal-card-text">
                   <b>Emotion: </b>
@@ -98,6 +96,7 @@ function Journals() {
           </div>
         )}
       </div>
+
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <JournalsForm />
       </Modal>

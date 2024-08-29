@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/JournalsForm.css";
 import Header from "../components/Header";
-import woman from "../images/laptop.png";
+// import woman from "../images/laptop.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -61,18 +61,7 @@ const JournalsForm = () => {
 
   return (
     <>
-      <Header />
-      <div className="journals">
-        <p className="journals-title">Today's Journal</p>
-        <p className="journals-form-text">
-          Please fill out the form below to capture your thoughts and
-          experiences for today.
-        </p>
-      </div>
       <div className="journals-form-container">
-        <div className="journals-left">
-          <img src={woman} className="journals-img" alt="Laptop" />
-        </div>
         <div className="journals-right">
           <form className="journals-form" onSubmit={handleAddNewJournal}>
             <h3 className="journals-title">Add New Journal</h3>
