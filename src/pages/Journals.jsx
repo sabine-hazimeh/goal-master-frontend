@@ -5,19 +5,23 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import JournalsForm from "./JournalsForm";
 
-// Helper function to format date
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-CA'); // Formats date as YYYY-MM-DD
+  return date.toLocaleDateString("en-CA"); 
 };
 
 function Journals() {
   const [journals, setJournals] = useState([]);
-  const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleAddNewJournal = () => {
-    navigate("/journal-form");
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   useEffect(() => {
@@ -58,7 +62,9 @@ function Journals() {
             {journals.map((journal) => (
               <div key={journal.id} className="journal-item">
                 <div className="date-container">
-                <p className="journal-card-text">{formatDate(journal.created_at)}</p>
+                  <p className="journal-card-text">
+                    {formatDate(journal.created_at)}
+                  </p>
                 </div>
                 <p className="journal-card-text">
                   <b>Emotion: </b>
