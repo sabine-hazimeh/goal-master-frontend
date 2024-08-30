@@ -4,9 +4,10 @@ import Header from "../components/Header";
 import Default from "../images/default-profile.jpeg";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
+import Modal from "../components/Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Modal from "../components/Modal";
+
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -20,14 +21,8 @@ const Profile = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
   const [profilePhotoFile, setProfilePhotoFile] = useState(null);
-  const fileInputRef = useRef(null); 
-  const openPasswordModal = () => {
-    setShowPasswordFields(true);
-  };
+  const fileInputRef = useRef(null); // Add a ref for the file input
 
-  const closePasswordModal = () => {
-    setShowPasswordFields(false);
-  };
   useEffect(() => {
     async function fetchProfile() {
       try {
@@ -60,6 +55,7 @@ const Profile = () => {
     const uppercaseValid = /[A-Z]/.test(password);
     setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
   };
+
   const handleProfilePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -72,7 +68,6 @@ const Profile = () => {
     setProfilePhotoURL(null);
     setProfilePhotoFile(null);
   };
-
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -102,10 +97,19 @@ const Profile = () => {
       console.error(err);
     }
   };
+
   const triggerFileInput = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); 
+      fileInputRef.current.click();
     }
+  };
+
+  const openPasswordModal = () => {
+    setShowPasswordFields(true);
+  };
+
+  const closePasswordModal = () => {
+    setShowPasswordFields(false);
   };
 
   return (
@@ -124,14 +128,11 @@ const Profile = () => {
             alt="Profile"
           />
           <div className="profile-img-buttons">
-            <FilledButton
-              text="Change picture"
-              onClick={triggerFileInput} 
-            />
+            <FilledButton text="Change picture" onClick={triggerFileInput} />
             <input
               type="file"
-              ref={fileInputRef} 
-              style={{ display: "none" }} 
+              ref={fileInputRef}
+              style={{ display: "none" }}
               onChange={handleProfilePhotoChange}
             />
             <EmptyButton
@@ -155,75 +156,9 @@ const Profile = () => {
             value={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
-          <p onClick={() => setShowPasswordFields(!showPasswordFields)} className="change-password">
-            {showPasswordFields ? "Cancel" : "Change Password?"}
+          <p onClick={openPasswordModal} className="change-password">
+            Change Password?
           </p>
-          {showPasswordFields && (
-            <>
-              <label>New Password</label>
-              <input
-                type="password"
-                className="profile-input"
-                value={newPassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                  validatePassword(e.target.value);
-                }}
-                placeholder="Enter your new password"
-                required
-                onFocus={() => setPasswordFocused(true)}
-                onBlur={() => setPasswordFocused(false)}
-              />
-              {passwordFocused && (
-                <div className="password-validation">
-                  <ul>
-                    <li
-                      className={newPassword.length > 8 ? "valid" : "invalid"}
-                    >
-                      At least 8 characters long
-                    </li>
-                    <li
-                      className={
-                        /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
-                          ? "valid"
-                          : "invalid"
-                      }
-                    >
-                      Contain a special character
-                    </li>
-                    <li
-                      className={
-                        /[A-Z]/.test(newPassword) ? "valid" : "invalid"
-                      }
-                    >
-                      Contain an uppercase letter
-                    </li>
-                  </ul>
-                </div>
-              )}
-              <label>Confirm New Password</label>
-              <input
-                type="password"
-                className="profile-input"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your new password"
-                required
-                onFocus={() => setConfirmPasswordFocused(true)}
-                onBlur={() => setConfirmPasswordFocused(false)}
-              />
-              {confirmPasswordFocused && (
-                <div className="password-validation">
-                  <ul>
-                    <li className={passwordMatch ? "valid" : "invalid"}>
-                      Passwords match
-                    </li>
-                  </ul>
-                </div>
-              )}
-              {error && <p className="error-message">{error}</p>}
-            </>
-          )}
           <div className="save-button">
             <FilledButton
               text="Save Changes"
@@ -233,6 +168,76 @@ const Profile = () => {
           </div>
         </form>
       </div>
+
+      {/* Modal for password change */}
+      <Modal isOpen={showPasswordFields} onClose={closePasswordModal}>
+        <div className="password-modal-content">
+          <h2>Change Password</h2>
+          <label>New Password</label>
+          <input
+            type="password"
+            className="profile-input"
+            value={newPassword}
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+              validatePassword(e.target.value);
+            }}
+            placeholder="Enter your new password"
+            required
+            onFocus={() => setPasswordFocused(true)}
+            onBlur={() => setPasswordFocused(false)}
+          />
+          {passwordFocused && (
+            <div className="password-validation">
+              <ul>
+                <li className={newPassword.length > 8 ? "valid" : "invalid"}>
+                  At least 8 characters long
+                </li>
+                <li
+                  className={
+                    /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                      ? "valid"
+                      : "invalid"
+                  }
+                >
+                  Contain a special character
+                </li>
+                <li className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}>
+                  Contain an uppercase letter
+                </li>
+              </ul>
+            </div>
+          )}
+          <label>Confirm New Password</label>
+          <input
+            type="password"
+            className="profile-input"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your new password"
+            required
+            onFocus={() => setConfirmPasswordFocused(true)}
+            onBlur={() => setConfirmPasswordFocused(false)}
+          />
+          {confirmPasswordFocused && (
+            <div className="password-validation">
+              <ul>
+                <li className={passwordMatch ? "valid" : "invalid"}>
+                  Passwords match
+                </li>
+              </ul>
+            </div>
+          )}
+          {error && <p className="error-message">{error}</p>}
+          <div className="modal-save-button">
+            <FilledButton
+              text="Save Password"
+              onClick={closePasswordModal}
+              disabled={isButtonDisabled}
+            />
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
