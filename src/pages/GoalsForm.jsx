@@ -11,8 +11,8 @@ function GoalsForm() {
     health: false,
     education: false,
   });
-
   const [formData, setFormData] = useState({});
+  const [plan, setPlan] = useState(null);
 
   function handleChange(e) {
     const { name, checked } = e.target;
@@ -39,33 +39,53 @@ function GoalsForm() {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     if (!apiKey) {
       console.error("API key is missing.");
       return;
     }
+
     const currentDate = new Date();
     const targetDate = new Date(formData.target_date);
     const monthsRemaining =
       (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
       targetDate.getMonth() -
       currentDate.getMonth();
-      const openAiData = {
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
-          },
-        ],
-        max_tokens: 150,
-        temperature: 0.7,
-      };
-  
-    let url = "";
 
+    const openAiData = {
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
+        },
+      ],
+      max_tokens: 150,
+      temperature: 0.7,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        openAiData,
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("OpenAI Response:", response.data);
+      setPlan(response.data.choices[0].message.content);
+    } catch (error) {
+      console.error("There was an error with the OpenAI request:", error);
+      return;
+    }
+
+    let url = "";
     if (category.finance) {
       url = "http://localhost:8000/api/finance";
     } else if (category.health) {
@@ -74,19 +94,27 @@ function GoalsForm() {
       url = "http://localhost:8000/api/education";
     }
 
+    if (!url) {
+      console.error("Category is not defined.");
+      return;
+    }
+
     const token = localStorage.getItem("Token");
-    axios
-      .post(url, formData, {
+    if (!token) {
+      console.error("Token is missing.");
+      return;
+    }
+
+    try {
+      const result = await axios.post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((response) => {
-        console.log("Goal submitted successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error submitting the goal!", error);
       });
+      console.log("Goal submitted successfully:", result.data);
+    } catch (error) {
+      console.error("There was an error submitting the goal!", error);
+    }
   }
 
   return (
