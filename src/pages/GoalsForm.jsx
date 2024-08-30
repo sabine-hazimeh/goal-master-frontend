@@ -41,6 +41,13 @@ function GoalsForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+    if (!apiKey) {
+      console.error("API key is missing.");
+      return;
+    }
+
+
     let url = "";
 
     if (category.finance) {
