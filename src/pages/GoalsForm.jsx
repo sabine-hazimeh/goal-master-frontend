@@ -6,29 +6,18 @@ import FilledButton from "../components/FilledButton";
 import axios from "axios";
 
 function GoalsForm() {
-  const [category, setCategory] = useState({
-    finance: false,
-    health: false,
-    education: false,
-  });
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
   const [plan, setPlan] = useState(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleChange(e) {
-    const { name, checked } = e.target;
-    if (checked) {
-      setCategory({
-        finance: name === "finance",
-        health: name === "health",
-        education: name === "education",
-      });
-    } else {
-      setCategory({
-        finance: false,
-        health: false,
-        education: false,
-      });
+    const { name } = e.target;
+    if (selectedCategory !== name) {
+      setPlan(null);
+      setIsSubmitted(false);
     }
+    setSelectedCategory(selectedCategory === name ? null : name);
   }
 
   function handleInputChange(e) {
@@ -80,17 +69,18 @@ function GoalsForm() {
       );
       console.log("OpenAI Response:", response.data);
       setPlan(response.data.choices[0].message.content);
+      setIsSubmitted(true);
     } catch (error) {
       console.error("There was an error with the OpenAI request:", error);
       return;
     }
 
     let url = "";
-    if (category.finance) {
+    if (selectedCategory === "finance") {
       url = "http://localhost:8000/api/finance";
-    } else if (category.health) {
+    } else if (selectedCategory === "health") {
       url = "http://localhost:8000/api/health";
-    } else if (category.education) {
+    } else if (selectedCategory === "education") {
       url = "http://localhost:8000/api/education";
     }
 
@@ -127,7 +117,7 @@ function GoalsForm() {
               <input
                 type="checkbox"
                 name="finance"
-                checked={category.finance}
+                checked={selectedCategory === "finance"}
                 onChange={handleChange}
               />
               <span></span> Finance
@@ -138,7 +128,7 @@ function GoalsForm() {
               <input
                 type="checkbox"
                 name="health"
-                checked={category.health}
+                checked={selectedCategory === "health"}
                 onChange={handleChange}
               />
               <span></span> Health
@@ -148,7 +138,7 @@ function GoalsForm() {
               <input
                 type="checkbox"
                 name="education"
-                checked={category.education}
+                checked={selectedCategory === "education"}
                 onChange={handleChange}
               />
               <span></span> Education
@@ -159,7 +149,7 @@ function GoalsForm() {
           </div>
         </div>
         <div className="goals-form-right">
-          {category.finance && (
+          {!isSubmitted && selectedCategory === "finance" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Finance Goals</h3>
               <label className="goals-label">Income</label>
@@ -210,13 +200,13 @@ function GoalsForm() {
               </div>
             </form>
           )}
-          {plan && (
+          {isSubmitted && plan && selectedCategory === "finance" && (
             <div className="goals-plan-container">
               <h3>Your Financial Plan:</h3>
               <p>{plan}</p>
             </div>
           )}
-          {category.health && (
+          {selectedCategory === "health" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Health Goals</h3>
               <label className="goals-label">Age</label>
@@ -283,7 +273,7 @@ function GoalsForm() {
               </div>
             </form>
           )}
-          {category.education && (
+          {selectedCategory === "education" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Education Goals</h3>
               <label className="goals-label">Goal</label>
