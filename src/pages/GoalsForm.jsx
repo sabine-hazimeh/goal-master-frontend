@@ -46,7 +46,12 @@ function GoalsForm() {
       console.error("API key is missing.");
       return;
     }
-
+    const currentDate = new Date();
+    const targetDate = new Date(formData.target_date);
+    const monthsRemaining =
+      (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
+      targetDate.getMonth() -
+      currentDate.getMonth();
 
     let url = "";
 
