@@ -172,7 +172,8 @@ const Profile = () => {
       <Modal isOpen={showPasswordFields} onClose={closePasswordModal}>
         <div className="password-modal-content">
           <h2 className="password-modal-title">Change Password</h2>
-          <label>New Password</label>
+          <div className="password-modal-form">
+          <label className="modal-label">New Password</label>
           <input
             type="password"
             className="modal-input"
@@ -207,7 +208,7 @@ const Profile = () => {
               </ul>
             </div>
           )}
-          <label>Confirm New Password</label>
+          <label className="modal-label">Confirm New Password</label>
           <input
             type="password"
             className="modal-input"
@@ -234,6 +235,7 @@ const Profile = () => {
               onClick={closePasswordModal}
               disabled={isButtonDisabled}
             />
+            </div>
           </div>
         </div>
       </Modal>
