@@ -42,10 +42,10 @@ const Auth = () => {
         email,
         password,
       });
-      const {access_token, user } = response.data;
-      console.log('User:', user);
+      const { access_token, user } = response.data;
+      console.log("User:", user);
       localStorage.setItem("Token", access_token);
-      dispatch(loginSuccess({ user, access_token}));
+      dispatch(loginSuccess({ user, access_token }));
       navigate("/");
     } catch (error) {
       dispatch(loginFailure({ error: error.response.data.message }));
@@ -136,24 +136,30 @@ const Auth = () => {
             </div>
             {activeForm === "login" ? (
               <form className="Auth-inputs" onSubmit={handleLogin}>
-                <label className="Auth-label">Email</label>
-                <input
-                  className="Auth-input"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your Email here"
-                  required
-                />
-                <label className="Auth-label">Password</label>
-                <input
-                  className="Auth-input"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your Password here"
-                  required
-                />
+                <div className="login-inputs">
+                  <div>
+                    <label className="Auth-label">Email</label>
+                    <input
+                      className="Auth-input"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your Email here"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="Auth-label">Password</label>
+                    <input
+                      className="Auth-input"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your Password here"
+                      required
+                    />
+                  </div>
+                </div>
                 <div className="button-container">
                   <button className="Auth-submit">Log in</button>
                 </div>
