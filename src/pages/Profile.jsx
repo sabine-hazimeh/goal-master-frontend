@@ -6,7 +6,7 @@ import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import Modal from "../components/Modal";
 const Profile = () => {
   const [profile, setProfile] = useState({});
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -20,8 +20,14 @@ const Profile = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
   const [profilePhotoFile, setProfilePhotoFile] = useState(null);
-  const fileInputRef = useRef(null); // Add a ref for the file input
+  const fileInputRef = useRef(null); 
+  const openPasswordModal = () => {
+    setShowPasswordFields(true);
+  };
 
+  const closePasswordModal = () => {
+    setShowPasswordFields(false);
+  };
   useEffect(() => {
     async function fetchProfile() {
       try {
