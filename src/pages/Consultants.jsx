@@ -26,7 +26,7 @@ function Consultants() {
             },
           }
         );
-        setConsultants(response.data[1]);
+        setConsultants(response.data.consultants);
       } catch (error) {
         console.error("Error fetching consultants:", error);
       }

@@ -62,7 +62,7 @@ function ConsultantsForm() {
   return (
     <>
       <Header />
-      <div className="journals-form-container">
+      <div className="consultants-form-container">
         <div className="journals-left">
           <img src={consultant} className="journals-img" alt="Consultant" />
         </div>
