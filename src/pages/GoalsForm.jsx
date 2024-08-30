@@ -52,7 +52,18 @@ function GoalsForm() {
       (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
       targetDate.getMonth() -
       currentDate.getMonth();
-
+      const openAiData = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
+          },
+        ],
+        max_tokens: 150,
+        temperature: 0.7,
+      };
+  
     let url = "";
 
     if (category.finance) {
