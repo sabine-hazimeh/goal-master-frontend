@@ -41,7 +41,7 @@ function GoalsForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     if (!apiKey) {
       console.error("API key is missing.");
@@ -209,6 +209,12 @@ function GoalsForm() {
                 <FilledButton text="Submit" className="goals-form-button" />
               </div>
             </form>
+          )}
+          {plan && (
+            <div className="goals-plan-container">
+              <h3>Your Financial Plan:</h3>
+              <p>{plan}</p>
+            </div>
           )}
           {category.health && (
             <form className="goals-form" onSubmit={handleSubmit}>
