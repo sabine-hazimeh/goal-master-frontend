@@ -26,21 +26,39 @@
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
-.filled-button, .empty-button {
-    height: auto; 
-    max-height: 3rem; 
+.filled-button,
+.empty-button {
+  height: auto;
+  max-height: 3rem;
 }
-.profile-img-buttons{
-    display: flex;
-    align-items: center;
-    width: 60%;
-    gap: 1rem;
-}  
-.save-button{
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
+.profile-img-buttons {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  gap: 1rem;
 }
-.change-password{
-    cursor: pointer;
+.save-button {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.change-password {
+  cursor: pointer;
+}
+.password-modal-content {
+  display: flex;
+  flex-direction: column;
+}
+.modal-input {
+  border: none;
+  background-color: rgba(217, 217, 217, 0.44);
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  width: 90%;
+  margin-top: 0.5rem;
+}
+.password-modal-title {
+  margin: 2rem auto;
+  color: #c41b40;
 }

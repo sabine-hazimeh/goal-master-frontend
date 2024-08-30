@@ -169,14 +169,13 @@ const Profile = () => {
         </form>
       </div>
 
-      {/* Modal for password change */}
       <Modal isOpen={showPasswordFields} onClose={closePasswordModal}>
         <div className="password-modal-content">
-          <h2>Change Password</h2>
+          <h2 className="password-modal-title">Change Password</h2>
           <label>New Password</label>
           <input
             type="password"
-            className="profile-input"
+            className="modal-input"
             value={newPassword}
             onChange={(e) => {
               setNewPassword(e.target.value);
@@ -211,7 +210,7 @@ const Profile = () => {
           <label>Confirm New Password</label>
           <input
             type="password"
-            className="profile-input"
+            className="modal-input"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm your new password"
