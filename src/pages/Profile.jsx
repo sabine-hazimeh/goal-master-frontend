@@ -208,10 +208,10 @@ const Profile = () => {
               </ul>
             </div>
           )}
-          <label className="modal-label">Confirm New Password</label>
+          <label className="modal-label confirm-label">Confirm New Password</label>
           <input
             type="password"
-            className="modal-input"
+            className="modal-input "
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm your new password"
