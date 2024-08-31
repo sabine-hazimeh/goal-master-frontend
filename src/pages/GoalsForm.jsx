@@ -106,6 +106,16 @@ function GoalsForm() {
       console.error("There was an error submitting the goal!", error);
     }
   }
+  const requestRecommendation = async () => {
+    const EducationForm = {
+      desired_course: formData.goal,
+      available_hours_per_day: parseInt(formData.available_hours, 10),
+      available_days_per_week: parseInt(formData.available_days, 10),
+      target_date: formData.time_horizon,
+      current_level: formData.current_knowledge,
+    };
+
+  }
 
   return (
     <>
