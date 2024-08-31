@@ -31,6 +31,9 @@ function GoalsForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    let url = "";
+    if (selectedCategory === "finance") {
+      
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     if (!apiKey) {
       console.error("API key is missing.");
@@ -74,9 +77,6 @@ function GoalsForm() {
       console.error("There was an error with the OpenAI request:", error);
       return;
     }
-
-    let url = "";
-    if (selectedCategory === "finance") {
       url = "http://localhost:8000/api/finance";
     } else if (selectedCategory === "health") {
       url = "http://localhost:8000/api/health";
