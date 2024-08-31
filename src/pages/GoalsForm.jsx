@@ -345,6 +345,7 @@ function GoalsForm() {
               </div>
             </form>
           )}
+           {selectedCategory === "education" && (
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <h3 className="education-modal-title">Recommended Courses:</h3>
             <ul>
@@ -361,6 +362,7 @@ function GoalsForm() {
               ))}
             </ul>
           </Modal>
+          )}
         </div>
       </div>
     </>
