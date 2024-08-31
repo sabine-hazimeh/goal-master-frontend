@@ -33,50 +33,49 @@ function GoalsForm() {
 
     let url = "";
     if (selectedCategory === "finance") {
-      
-    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-    if (!apiKey) {
-      console.error("API key is missing.");
-      return;
-    }
+      const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+      if (!apiKey) {
+        console.error("API key is missing.");
+        return;
+      }
 
-    const currentDate = new Date();
-    const targetDate = new Date(formData.target_date);
-    const monthsRemaining =
-      (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
-      targetDate.getMonth() -
-      currentDate.getMonth();
+      const currentDate = new Date();
+      const targetDate = new Date(formData.target_date);
+      const monthsRemaining =
+        (targetDate.getFullYear() - currentDate.getFullYear()) * 12 +
+        targetDate.getMonth() -
+        currentDate.getMonth();
 
-    const openAiData = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
-        },
-      ],
-      max_tokens: 150,
-      temperature: 0.7,
-    };
-
-    try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        openAiData,
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
+      const openAiData = {
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
           },
-        }
-      );
-      console.log("OpenAI Response:", response.data);
-      setPlan(response.data.choices[0].message.content);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error("There was an error with the OpenAI request:", error);
-      return;
-    }
+        ],
+        max_tokens: 150,
+        temperature: 0.7,
+      };
+
+      try {
+        const response = await axios.post(
+          "https://api.openai.com/v1/chat/completions",
+          openAiData,
+          {
+            headers: {
+              Authorization: `Bearer ${apiKey}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("OpenAI Response:", response.data);
+        setPlan(response.data.choices[0].message.content);
+        setIsSubmitted(true);
+      } catch (error) {
+        console.error("There was an error with the OpenAI request:", error);
+        return;
+      }
       url = "http://localhost:8000/api/finance";
     } else if (selectedCategory === "health") {
       url = "http://localhost:8000/api/health";
@@ -125,8 +124,7 @@ function GoalsForm() {
     } else {
       console.log(response.data.message);
     }
-
-  }
+  };
 
   return (
     <>
@@ -306,13 +304,17 @@ function GoalsForm() {
                 onChange={handleInputChange}
               />
               <label className="goals-label">Current Knowledge</label>
-              <input
-                type="text"
+              <select
                 name="current_knowledge"
                 className="goals-input"
-                placeholder="Enter Current Knowledge"
                 onChange={handleInputChange}
-              />
+              >
+                <option value="">Select Knowledge Level</option>
+                <option value="Beginner level">Beginner Level</option>
+                <option value="Intermediate level">Intermediate Level</option>
+                <option value="Advanced level">Advanced Level</option>
+              </select>
+
               <label className="goals-label">Available Days</label>
               <input
                 type="number"
