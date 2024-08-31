@@ -122,7 +122,7 @@ function GoalsForm() {
 
     if (response.data.recommended_courses) {
       setRecommendedCourses(response.data.recommended_courses);
-      setIsModalOpen(true); 
+      setIsModalOpen(true);
     } else {
       console.log(response.data.message);
     }
@@ -345,6 +345,19 @@ function GoalsForm() {
               </div>
             </form>
           )}
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <h3>Recommended Courses:</h3>
+            <ul>
+              {recommendedCourses.map((course, index) => (
+                <li key={index}>
+                  <strong>Course Title:</strong> {course["Course Title"]} <br />
+                  <strong>Duration:</strong>{" "}
+                  {course["Duration to complete (Approx.)"]} <br />
+                  <strong>Level:</strong> {course["Level"]}
+                </li>
+              ))}
+            </ul>
+          </Modal>
         </div>
       </div>
     </>
