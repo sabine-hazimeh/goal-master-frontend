@@ -8,15 +8,13 @@ import Modal from "../components/Modal";
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
-  const [plan, setPlan] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
+  const [modalContent, setModalContent] = useState("");
   function handleChange(e) {
     const { name } = e.target;
     if (selectedCategory !== name) {
-      setPlan(null);
-      setIsSubmitted(false);
+      setModalContent(null);
     }
     setSelectedCategory(selectedCategory === name ? null : name);
   }
@@ -55,7 +53,7 @@ function GoalsForm() {
             content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date: ${formData.target_date}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
           },
         ],
-        max_tokens: 150,
+        max_tokens: 300,
         temperature: 0.7,
       };
 
@@ -71,8 +69,8 @@ function GoalsForm() {
           }
         );
         console.log("OpenAI Response:", response.data);
-        setPlan(response.data.choices[0].message.content);
-        setIsSubmitted(true);
+        setModalContent(response.data.choices[0].message.content);
+        setIsModalOpen(true);
       } catch (error) {
         console.error("There was an error with the OpenAI request:", error);
         return;
@@ -170,7 +168,7 @@ function GoalsForm() {
           </div>
         </div>
         <div className="goals-form-right">
-          {!isSubmitted && selectedCategory === "finance" && (
+          { selectedCategory === "finance" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Finance Goals</h3>
               <label className="goals-label">Income</label>
@@ -221,11 +219,13 @@ function GoalsForm() {
               </div>
             </form>
           )}
-          {isSubmitted && plan && selectedCategory === "finance" && (
+          {selectedCategory === "finance" && (
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             <div className="goals-plan-container">
               <h3>Your Financial Plan:</h3>
-              <p>{plan}</p>
+              <p>{modalContent}</p>
             </div>
+          </Modal>
           )}
           {selectedCategory === "health" && (
             <form className="goals-form" onSubmit={handleSubmit}>
@@ -353,8 +353,10 @@ function GoalsForm() {
                   <strong>Course Title:</strong> {course["Course Title"]} <br />
                   <strong>Duration:</strong>{" "}
                   {course["Duration to complete (Approx.)"]} {"hours"} <br />
-                  <strong>Level:</strong> {course["Level"]}<br />
-                  <strong>URL: </strong>{course["Course Url"]}
+                  <strong>Level:</strong> {course["Level"]}
+                  <br />
+                  <strong>URL: </strong>
+                  {course["Course Url"]}
                 </li>
               ))}
             </ul>
