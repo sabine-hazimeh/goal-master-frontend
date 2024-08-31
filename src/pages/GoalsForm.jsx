@@ -352,8 +352,9 @@ function GoalsForm() {
                 <li key={index}>
                   <strong>Course Title:</strong> {course["Course Title"]} <br />
                   <strong>Duration:</strong>{" "}
-                  {course["Duration to complete (Approx.)"]} <br />
-                  <strong>Level:</strong> {course["Level"]}
+                  {course["Duration to complete (Approx.)"]} {"hours"} <br />
+                  <strong>Level:</strong> {course["Level"]}<br />
+                  <strong>URL: </strong>{course["Course Url"]}
                 </li>
               ))}
             </ul>
