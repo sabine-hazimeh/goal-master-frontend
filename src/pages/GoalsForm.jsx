@@ -133,6 +133,39 @@ function GoalsForm() {
       console.log(response.data.message);
     }
   };
+  async function handleAddCourse(course) {
+    const token = localStorage.getItem("Token");
+    if (!token) {
+      console.error("Token is missing.");
+      return;
+    }
+  
+    const courseData = {
+      title: course["Course Title"],
+      level: course["Level"],
+      hours: course["Duration to complete (Approx.)"],
+      url: course["Course Url"],
+      education_id: educationGoalId,
+    };
+  
+    console.log(courseData);
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/coursera",
+        courseData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Course added successfully:", response.data);
+    } catch (error) {
+      console.error("Error adding the course:", error);
+    }
+  }
+  
   return (
     <>
       <Header />
