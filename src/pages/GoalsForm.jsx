@@ -5,12 +5,14 @@ import Goal from "../images/goal.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import Modal from "../components/Modal";
+
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [modalContent, setModalContent] = useState("");
+  const [educationGoalId, setEducationGoalId] = useState(null);
   function handleChange(e) {
     const { name } = e.target;
     if (selectedCategory !== name) {
@@ -100,7 +102,13 @@ function GoalsForm() {
           Authorization: `Bearer ${token}`,
         },
       });
+
       console.log("Goal submitted successfully:", result.data);
+      if (selectedCategory === "education") {
+        const goalId = result.data['education goal'].id;
+        console.log("Education goal ID:", goalId);
+        setEducationGoalId(goalId);
+      }
     } catch (error) {
       console.error("There was an error submitting the goal!", error);
     }
@@ -125,7 +133,6 @@ function GoalsForm() {
       console.log(response.data.message);
     }
   };
-
   return (
     <>
       <Header />
@@ -366,7 +373,12 @@ function GoalsForm() {
                       {course["Course Url"]}
                     </a>
                     <div className="add-course-button-container">
-                      <button className="add-course-button">Add Course</button>
+                      <button
+                        className="add-course-button"
+                        onClick={() => handleAddCourse(course)}
+                      >
+                        Add Course
+                      </button>
                     </div>
                   </li>
                 ))}
