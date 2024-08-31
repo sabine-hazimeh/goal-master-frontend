@@ -4,13 +4,14 @@ import Header from "../components/Header";
 import Goal from "../images/goal.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
-
+import Modal from "../components/Modal";
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
   const [plan, setPlan] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [recommendedCourses, setRecommendedCourses] = useState([]);
   function handleChange(e) {
     const { name } = e.target;
     if (selectedCategory !== name) {
