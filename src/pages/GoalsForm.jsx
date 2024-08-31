@@ -82,6 +82,7 @@ function GoalsForm() {
       url = "http://localhost:8000/api/health";
     } else if (selectedCategory === "education") {
       url = "http://localhost:8000/api/education";
+      requestRecommendation();
     }
 
     if (!url) {
