@@ -357,7 +357,9 @@ function GoalsForm() {
                   <strong>Level:</strong> {course["Level"]}
                   <br />
                   <strong>URL: </strong>
-                  {course["Course Url"]}
+                  <a href={course["Course Url"]} target="_blank" rel="noopener noreferrer">
+            {course["Course Url"]}
+          </a>
                 </li>
               ))}
             </ul>
