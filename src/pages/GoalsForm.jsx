@@ -346,10 +346,10 @@ function GoalsForm() {
             </form>
           )}
           <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <h3>Recommended Courses:</h3>
+            <h3 className="education-modal-title">Recommended Courses:</h3>
             <ul>
               {recommendedCourses.map((course, index) => (
-                <li key={index}>
+                <li key={index} className="education-modal-item">
                   <strong>Course Title:</strong> {course["Course Title"]} <br />
                   <strong>Duration:</strong>{" "}
                   {course["Duration to complete (Approx.)"]} {"hours"} <br />
