@@ -114,6 +114,16 @@ function GoalsForm() {
       target_date: formData.time_horizon,
       current_level: formData.current_knowledge,
     };
+    const response = await axios.post(
+      "http://localhost:5000/recommend",
+      EducationForm
+    );
+
+    if (response.data.recommended_courses) {
+      console.log("Recommended courses:", response.data.recommended_courses);
+    } else {
+      console.log(response.data.message);
+    }
 
   }
 
