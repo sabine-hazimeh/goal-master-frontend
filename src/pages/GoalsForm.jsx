@@ -121,7 +121,8 @@ function GoalsForm() {
     );
 
     if (response.data.recommended_courses) {
-      console.log("Recommended courses:", response.data.recommended_courses);
+      setRecommendedCourses(response.data.recommended_courses);
+      setIsModalOpen(true); 
     } else {
       console.log(response.data.message);
     }
