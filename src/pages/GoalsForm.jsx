@@ -168,7 +168,7 @@ function GoalsForm() {
           </div>
         </div>
         <div className="goals-form-right">
-          { selectedCategory === "finance" && (
+          {selectedCategory === "finance" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Finance Goals</h3>
               <label className="goals-label">Income</label>
@@ -221,11 +221,11 @@ function GoalsForm() {
           )}
           {selectedCategory === "finance" && (
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <div className="goals-plan-container">
-              <h3>Your Financial Plan:</h3>
-              <p>{modalContent}</p>
-            </div>
-          </Modal>
+              <div className="goals-plan-container">
+                <h3>Your Financial Plan:</h3>
+                <p>{modalContent}</p>
+              </div>
+            </Modal>
           )}
           {selectedCategory === "health" && (
             <form className="goals-form" onSubmit={handleSubmit}>
@@ -345,25 +345,33 @@ function GoalsForm() {
               </div>
             </form>
           )}
-           {selectedCategory === "education" && (
-          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-            <h3 className="education-modal-title">Recommended Courses:</h3>
-            <ul>
-              {recommendedCourses.map((course, index) => (
-                <li key={index} className="education-modal-item">
-                  <strong>Course Title:</strong> {course["Course Title"]} <br />
-                  <strong>Duration:</strong>{" "}
-                  {course["Duration to complete (Approx.)"]} {"hours"} <br />
-                  <strong>Level:</strong> {course["Level"]}
-                  <br />
-                  <strong>URL: </strong>
-                  <a href={course["Course Url"]} target="_blank" rel="noopener noreferrer">
-            {course["Course Url"]}
-          </a>
-                </li>
-              ))}
-            </ul>
-          </Modal>
+          {selectedCategory === "education" && (
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+              <h3 className="education-modal-title">Recommended Courses:</h3>
+              <ul>
+                {recommendedCourses.map((course, index) => (
+                  <li key={index} className="education-modal-item">
+                    <strong>Course Title:</strong> {course["Course Title"]}{" "}
+                    <br />
+                    <strong>Duration:</strong>{" "}
+                    {course["Duration to complete (Approx.)"]} {"hours"} <br />
+                    <strong>Level:</strong> {course["Level"]}
+                    <br />
+                    <strong>URL: </strong>
+                    <a
+                      href={course["Course Url"]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {course["Course Url"]}
+                    </a>
+                    <div className="add-course-button-container">
+                      <button className="add-course-button">Add Course</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Modal>
           )}
         </div>
       </div>
