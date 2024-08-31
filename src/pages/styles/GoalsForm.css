@@ -94,3 +94,18 @@
   color: #c41b40;
   text-align: center;
 }
+.add-course-button-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.add-course-button{
+  background-color: #c41b40;
+  color: white;
+  padding: 5px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 50%;
+  font-size: 1rem;
+}
