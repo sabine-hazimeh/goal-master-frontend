@@ -5,7 +5,7 @@ import Goal from "../images/goal.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import Modal from "../components/Modal";
-
+import { useNavigate } from "react-router-dom";
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
@@ -13,6 +13,7 @@ function GoalsForm() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [modalContent, setModalContent] = useState("");
   const [educationGoalId, setEducationGoalId] = useState(null);
+  const navigate = useNavigate();
   function handleChange(e) {
     const { name } = e.target;
     if (selectedCategory !== name) {
@@ -169,6 +170,11 @@ function GoalsForm() {
   return (
     <>
       <Header />
+      <div className="goals-form-button">
+        <div className="goals-form-button-container">
+        <FilledButton text="View Goals" onClick={() => navigate("/goals")}/>
+          </div>
+        </div>
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
