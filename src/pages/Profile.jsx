@@ -21,7 +21,7 @@ const Profile = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
   const [profilePhotoFile, setProfilePhotoFile] = useState(null);
-  const fileInputRef = useRef(null); // Add a ref for the file input
+  const fileInputRef = useRef(null); 
 
   useEffect(() => {
     async function fetchProfile() {
