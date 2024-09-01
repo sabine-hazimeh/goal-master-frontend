@@ -17,3 +17,17 @@
   flex-basis: calc(33.333% - 1rem);
   box-sizing: border-box;
 }
+.education-button-container {
+  display: flex;
+  justify-content: center;
+}
+.education-button {
+  background-color: #0a4570;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 10rem;
+}
