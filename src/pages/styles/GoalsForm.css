@@ -109,3 +109,13 @@
   width: 50%;
   font-size: 1rem;
 }
+.goals-form-button{
+  display: flex;
+  width: 94%;
+  justify-content: flex-end;
+}
+.goals-form-button-container{
+  width: 35%;
+  display: flex;
+  justify-content: flex-end;
+}
