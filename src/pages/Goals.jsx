@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./styles/Goals.css";
 import Header from "../components/Header";
 import axios from "axios";
+import Modal from "../components/Modal";
+
 const Goals = () => {
   const [goals, setGoals] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState(null);
+
   useEffect(() => {
     const fetchGoals = async () => {
       try {
@@ -21,6 +26,24 @@ const Goals = () => {
 
     fetchGoals();
   }, []);
+  const handleViewDetails = async (education_id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/api/coursera/education/${education_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setSelectedGoal(response.data.courses);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -48,7 +71,12 @@ const Goals = () => {
               {goal.time_horizon}
             </p>
             <div className="education-button-container">
-              <button className="education-button">View Details</button>
+              <button
+                className="education-button"
+                onClick={() => handleViewDetails(goal.id)}
+              >
+                View Details
+              </button>
             </div>
           </div>
         ))}
