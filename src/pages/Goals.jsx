@@ -15,7 +15,7 @@ const Goals = () => {
                         }
                     }
                 );
-                setGoals(response.data);
+                setGoals(response.data.educationGoal);
             } catch (error) {
                 console.log(error);
             }
@@ -26,6 +26,17 @@ const Goals = () => {
     return (
         <div>
             <Header />
+            <div className="goals-container">
+                {goals.map((goal) => (
+                    <div className="goal-card" key={goal.id}>
+                        <p className="goal-title">{goal.goal}</p>
+                        <p className="goal-description">{goal.current_knowledge}</p>
+                        <p className="goal-description">{goal.available_days}</p>
+                        <p className="goal-description">{goal.available_hours}</p>
+                        <p className="goal-description">{goal.time_horizon}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
