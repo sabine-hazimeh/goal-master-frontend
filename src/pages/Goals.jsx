@@ -81,6 +81,33 @@ const Goals = () => {
           </div>
         ))}
       </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {selectedGoal ? (
+          <div>
+            <h2>Course Details</h2>
+            {selectedGoal.map((course, index) => (
+              <div key={index}>
+                <p>
+                  <strong>Course Title:</strong> {course.title}
+                </p>
+                <p>
+                  <strong>Duration:</strong> {course.hours} hours
+                </p>
+                <p>
+                  {" "}
+                  <strong>Level:</strong> {course.level}
+                </p>
+                <strong>URL: </strong>
+                <a href={course.url} target="_blank" rel="noopener noreferrer">
+                  {course.url}
+                </a>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </Modal>
     </div>
   );
 };
