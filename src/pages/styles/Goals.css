@@ -1,0 +1,20 @@
+.goals-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
+  gap: 1rem;
+}
+
+.goal-card {
+  background-color: rgba(10, 69, 112, 0.8);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: white;
+  font-size: 1.25rem;
+  flex-basis: calc(33.333% - 1rem);
+  box-sizing: border-box;
+}
