@@ -29,11 +29,11 @@ const Goals = () => {
             <div className="goals-container">
                 {goals.map((goal) => (
                     <div className="goal-card" key={goal.id}>
-                        <p className="goal-title">{goal.goal}</p>
-                        <p className="goal-description">{goal.current_knowledge}</p>
-                        <p className="goal-description">{goal.available_days}</p>
-                        <p className="goal-description">{goal.available_hours}</p>
-                        <p className="goal-description">{goal.time_horizon}</p>
+                        <p className="goal-title"><b>Goal: </b>{goal.goal}</p>
+                        <p className="goal-description"><b>Current Knowledge: </b>{goal.current_knowledge}</p>
+                        <p className="goal-description"><b>Available Days: </b>{goal.available_days}</p>
+                        <p className="goal-description"><b>Available Hours: </b>{goal.available_hours}</p>
+                        <p className="goal-description"><b>Deadline: </b>{goal.time_horizon}</p>
                     </div>
                 ))}
             </div>
