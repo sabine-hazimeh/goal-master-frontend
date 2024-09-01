@@ -81,6 +81,7 @@ function GoalsForm() {
       url = "http://localhost:8000/api/finance";
     } else if (selectedCategory === "health") {
       url = "http://localhost:8000/api/health";
+      requestExerciseRecommendation();
     } else if (selectedCategory === "education") {
       url = "http://localhost:8000/api/education";
       requestRecommendation();
@@ -106,7 +107,7 @@ function GoalsForm() {
 
       console.log("Goal submitted successfully:", result.data);
       if (selectedCategory === "education") {
-        const goalId = result.data['education goal'].id;
+        const goalId = result.data["education goal"].id;
         console.log("Education goal ID:", goalId);
         setEducationGoalId(goalId);
       }
@@ -134,13 +135,26 @@ function GoalsForm() {
       console.log(response.data.message);
     }
   };
+  const requestExerciseRecommendation = async () => {
+    const healthData = {
+      age: parseInt(formData.age, 10),
+      gender: formData.gender,
+      height: parseFloat(formData.height),
+      weight: parseFloat(formData.current_weight),
+    };
+    const response = await axios.post(
+      "http://localhost:5001/predict",
+      healthData
+    );
+    console.log(response.data);
+  };
   async function handleAddCourse(course) {
     const token = localStorage.getItem("Token");
     if (!token) {
       console.error("Token is missing.");
       return;
     }
-  
+
     const courseData = {
       title: course["Course Title"],
       level: course["Level"],
@@ -148,9 +162,9 @@ function GoalsForm() {
       url: course["Course Url"],
       education_id: educationGoalId,
     };
-  
+
     console.log(courseData);
-  
+
     try {
       const response = await axios.post(
         "http://localhost:8000/api/coursera",
@@ -166,15 +180,15 @@ function GoalsForm() {
       console.error("Error adding the course:", error);
     }
   }
-  
+
   return (
     <>
       <Header />
       <div className="goals-form-button">
         <div className="goals-form-button-container">
-        <FilledButton text="View Goals" onClick={() => navigate("/goals")}/>
-          </div>
+          <FilledButton text="View Goals" onClick={() => navigate("/goals")} />
         </div>
+      </div>
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
