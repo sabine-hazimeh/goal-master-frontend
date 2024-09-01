@@ -84,7 +84,7 @@ const Goals = () => {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {selectedGoal ? (
           <div>
-            <h2>Course Details</h2>
+            <h2 className="coursera-modal-title">Course Details</h2>
             {selectedGoal.map((course, index) => (
               <div key={index}>
                 <p>
