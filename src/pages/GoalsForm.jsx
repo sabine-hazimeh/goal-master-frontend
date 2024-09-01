@@ -142,11 +142,21 @@ function GoalsForm() {
       height: parseFloat(formData.height),
       weight: parseFloat(formData.current_weight),
     };
-    const response = await axios.post(
-      "http://localhost:5001/predict",
-      healthData
-    );
-    console.log(response.data);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5001/predict",
+        healthData
+      );
+      console.log(response.data);
+      setModalContent(response.data.predicted_plan);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error(
+        "There was an error getting the exercise recommendation:",
+        error
+      );
+    }
   };
   async function handleAddCourse(course) {
     const token = localStorage.getItem("Token");
@@ -354,6 +364,7 @@ function GoalsForm() {
               </div>
             </form>
           )}
+
           {selectedCategory === "education" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Education Goals</h3>
