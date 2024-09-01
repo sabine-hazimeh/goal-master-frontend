@@ -364,7 +364,15 @@ function GoalsForm() {
               </div>
             </form>
           )}
-
+          {selectedCategory === "health" && (
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+              <div className="goals-plan-container">
+                <h3>Your Exercise Plan:</h3>
+                <p>The Exercise that fits you is: <b>{modalContent}</b></p>
+              
+              </div>
+            </Modal>
+          )}
           {selectedCategory === "education" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Education Goals</h3>
