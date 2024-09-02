@@ -149,7 +149,7 @@ function GoalsForm() {
         healthData
       );
       console.log(response.data);
-      setModalContent(response.data.predicted_plan);
+      setModalContent(response.data);
       setIsModalOpen(true);
     } catch (error) {
       console.error(
@@ -158,6 +158,7 @@ function GoalsForm() {
       );
     }
   };
+
   async function handleAddCourse(course) {
     const token = localStorage.getItem("Token");
     if (!token) {
@@ -367,12 +368,23 @@ function GoalsForm() {
           {selectedCategory === "health" && (
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
               <div className="goals-plan-container">
-                <h3>Your Exercise Plan:</h3>
-                <p>The Exercise that fits you is: <b>{modalContent}</b></p>
-              
+                <h3 className="education-modal-title">Your Exercise Plan:</h3>
+                {modalContent ? (
+                  <>
+                    <p>
+                      The Exercise that fits you is:{" "}
+                      <b>{modalContent.predicted_plan}</b>
+                    </p>
+                    <p>Explanation: {modalContent.explanation}</p>
+                    <p>Ideal Times: {modalContent.ideal_times}</p>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
             </Modal>
           )}
+
           {selectedCategory === "education" && (
             <form className="goals-form" onSubmit={handleSubmit}>
               <h3 className="goals-form-title">Education Goals</h3>
