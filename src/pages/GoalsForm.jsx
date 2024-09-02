@@ -370,14 +370,19 @@ function GoalsForm() {
               <div className="goals-plan-container">
                 <h3 className="education-modal-title">Your Exercise Plan:</h3>
                 {modalContent ? (
-                  <>
+                  <div className="health-modal">
                     <p>
-                      The Exercise that fits you is:{" "}
-                      <b>{modalContent.predicted_plan}</b>
+                      <span className="health-modal-item">{modalContent.predicted_plan}</span> is the plan that
+                      fits your case
                     </p>
-                    <p>Explanation: {modalContent.explanation}</p>
-                    <p>Ideal Times: {modalContent.ideal_times}</p>
-                  </>
+                    <p>
+                      <b>Explanation: </b> {modalContent.explanation}
+                    </p>
+                    <p>
+                      <b>Ideal Times: </b>
+                      {modalContent.ideal_times}
+                    </p>
+                  </div>
                 ) : (
                   <p>Loading...</p>
                 )}
