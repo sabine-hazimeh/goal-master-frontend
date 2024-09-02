@@ -94,12 +94,12 @@
   color: #c41b40;
   text-align: center;
 }
-.add-course-button-container{
+.add-course-button-container {
   display: flex;
   justify-content: center;
   margin-top: 0.5rem;
 }
-.add-course-button{
+.add-course-button {
   background-color: #c41b40;
   color: white;
   padding: 5px 0;
@@ -109,13 +109,23 @@
   width: 50%;
   font-size: 1rem;
 }
-.goals-form-button{
+.goals-form-button {
   display: flex;
   width: 94%;
   justify-content: flex-end;
 }
-.goals-form-button-container{
+.goals-form-button-container {
   width: 35%;
   display: flex;
   justify-content: flex-end;
+}
+.health-modal-item {
+  font-weight: bold;
+  color: #c41b40;
+}
+.health-modal {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
