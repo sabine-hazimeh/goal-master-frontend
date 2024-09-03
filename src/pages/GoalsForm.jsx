@@ -195,11 +195,13 @@ function GoalsForm() {
   return (
     <>
       <Header />
+      {selectedCategory === "education" && (
       <div className="goals-form-button">
         <div className="goals-form-button-container">
           <FilledButton text="View Goals" onClick={() => navigate("/goals")} />
         </div>
       </div>
+      )}
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
@@ -315,8 +317,8 @@ function GoalsForm() {
                 className="goals-input"
                 onChange={handleInputChange}
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="male">Female</option>
+                <option value="female">Male</option>
               </select>
               <label className="goals-label">Height</label>
               <input
