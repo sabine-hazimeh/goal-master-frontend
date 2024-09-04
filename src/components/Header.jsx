@@ -3,10 +3,11 @@ import "./styles/Header.css";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios"; // Make sure axios is installed for making API requests
+import axios from "axios";
 
 const Header = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const isConsultant = user && user.role === "consultant";
@@ -34,7 +35,9 @@ const Header = () => {
       );
     }
   };
-
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   return (
     <header className="header">
       <div className="header-left">

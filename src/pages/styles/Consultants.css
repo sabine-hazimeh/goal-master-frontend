@@ -40,6 +40,7 @@
   cursor: pointer;
   margin-top: 0.5rem;
   width: 10rem;
+  font-weight: bold;
 }
 .button-wrapper {
   display: flex;
