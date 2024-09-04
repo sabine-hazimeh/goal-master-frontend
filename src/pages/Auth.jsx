@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles/Auth.css";
-import Header from "../components/Header";
 import woman from "../images/working-woman.png";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
@@ -114,7 +113,7 @@ const Auth = () => {
       <div className="Auth">
         <div className="Auth-left">
           <div className="Auth-back">
-            <FontAwesomeIcon icon={faArrowLeft} className="Auth-icon" />
+            <FontAwesomeIcon icon={faArrowLeft} className="Auth-icon" onClick={() => navigate("/")}/>
           </div>
           <img src={woman} className="Auth-img" alt="Working woman" />
         </div>
