@@ -295,7 +295,7 @@ function GoalsForm() {
           {selectedCategory === "finance" && (
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
               <div className="goals-plan-container">
-                <h3>Your Financial Plan:</h3>
+                <h3 className="finance-form-title">Your Financial Plan</h3>
                 <p>{modalContent}</p>
               </div>
             </Modal>
@@ -370,7 +370,7 @@ function GoalsForm() {
           {selectedCategory === "health" && (
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
               <div className="goals-plan-container">
-                <h3 className="education-modal-title">Your Exercise Plan:</h3>
+                <h3 className="education-modal-title">Your Exercise Plan</h3>
                 {modalContent ? (
                   <div className="health-modal">
                     <p>
@@ -445,7 +445,7 @@ function GoalsForm() {
           )}
           {selectedCategory === "education" && (
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-              <h3 className="education-modal-title">Recommended Courses:</h3>
+              <h3 className="education-modal-title">Recommended Courses</h3>
               <ul>
                 {recommendedCourses.map((course, index) => (
                   <li key={index} className="education-modal-item">
