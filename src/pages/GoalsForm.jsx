@@ -460,6 +460,7 @@ function GoalsForm() {
                       href={course["Course Url"]}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="course-link"
                     >
                       {course["Course Url"]}
                     </a>
