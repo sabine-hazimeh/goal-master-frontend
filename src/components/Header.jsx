@@ -75,11 +75,11 @@ const Header = () => {
           </Link>
         )}
         {isAuthenticated ? (
-          <Link onClick={handleLogout} className="header-links">
+          <Link onClick={handleLogout} className="header-links auth-link">
             Log Out
           </Link>
         ) : (
-          <Link to="/auth" className="header-links">
+          <Link to="/auth" className="header-links auth-link">
             Sign In
           </Link>
         )}

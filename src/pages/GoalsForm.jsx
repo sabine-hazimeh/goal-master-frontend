@@ -53,7 +53,7 @@ function GoalsForm() {
         messages: [
           {
             role: "user",
-            content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date(in month): ${monthsRemaining}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why.`,
+            content: `Based on the following financial information: income: ${formData.income}, savings: ${formData.savings}, expenses: ${formData.expenses}, target: ${formData.target}, target date(in month): ${monthsRemaining}. Calculate the monthly savings needed to reach the target by the target date. Is this goal reachable? if no, explain why. your response should be formatted in a list of bullet points. Each list item must be on a new line include \n whenever possible.`,
           },
         ],
         max_tokens: 300,
