@@ -7,6 +7,8 @@ import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
@@ -109,9 +111,11 @@ const Auth = () => {
 
   return (
     <>
-      <Header />
       <div className="Auth">
         <div className="Auth-left">
+          <div className="Auth-back">
+            <FontAwesomeIcon icon={faArrowLeft} className="Auth-icon" />
+          </div>
           <img src={woman} className="Auth-img" alt="Working woman" />
         </div>
         <div className="Auth-right">

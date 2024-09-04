@@ -4,7 +4,8 @@
   background-color: rgba(10, 69, 112, 0.6);
   border-radius: 20px;
   display: flex;
-  height: 100vh;
+  height: 90vh;
+  position: relative;
 }
 .Auth-left {
   width: 50%;
@@ -17,6 +18,22 @@
   border-radius: 20px 40px 40px 20px;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+.Auth-back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Auth-icon {
+  font-size: 2rem;
+  color: #0a4570;
+  cursor: pointer;
+  margin-left: 1rem;
 }
 .Auth-right {
   width: 50%;
@@ -65,7 +82,6 @@
   border: none;
   padding: 10px;
   border-radius: 10px;
-  /* margin-bottom: 1.5rem; */
 }
 .button-container {
   display: flex;
@@ -111,9 +127,20 @@
 .password-validation .invalid {
   color: red;
 }
-.login-inputs{
+.login-inputs {
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
   gap: 2.5rem;
 }
+/* .Auth-icon{
+  font-size: 2rem;
+  color:#0a4570;
+  cursor: pointer;
+}
+.Auth-back{
+  width: 80%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: flex-start;
+} */
