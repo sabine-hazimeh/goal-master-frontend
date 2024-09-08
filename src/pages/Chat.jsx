@@ -5,20 +5,22 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux"; 
+import { useSelector } from "react-redux";
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 
 function Chat() {
   const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [receiverId, setReceiverId] = useState(null); 
-  const user = useSelector((state) => state.user.user); 
-  const userId = user ? user.id : null; 
+  const [receiverId, setReceiverId] = useState(null);
+  const user = useSelector((state) => state.user.user);
+  const userId = user ? user.id : null;
 
   useEffect(() => {
     async function fetchChatDetails() {
       const token = localStorage.getItem("Token");
-  
+
       try {
         const chatResponse = await axios.get(
           `http://localhost:8000/api/chats/${chatId}`,
@@ -29,13 +31,14 @@ function Chat() {
             },
           }
         );
-  
+
         const chat = chatResponse.data.chat;
         const { user_id, consultant_id } = chat;
-  
-        const determinedReceiverId = userId === user_id ? consultant_id : user_id;
+
+        const determinedReceiverId =
+          userId === user_id ? consultant_id : user_id;
         setReceiverId(determinedReceiverId);
-        
+
         const messagesResponse = await axios.get(
           `http://localhost:8000/api/messages/${chatId}`,
           {
@@ -50,9 +53,40 @@ function Chat() {
         console.error("Error fetching chat details or messages:", error);
       }
     }
-  
+
     fetchChatDetails();
   }, [chatId, userId]);
+
+  useEffect(() => {
+    if (receiverId) {
+      window.Pusher = Pusher;
+
+      const echo = new Echo({
+        broadcaster: "pusher",
+        key: "acef436b4b534dafb513",
+        cluster: "eu",
+        encrypted: true,
+        forceTLS: true,
+        authEndpoint: "http://localhost:8000/api/broadcasting/auth",
+        auth: {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "application/json",
+          },
+        },
+      });
+
+      const channel = echo.private(`chat.${receiverId}`);
+
+      channel.listen(".message.sent", (data) => {
+        setMessages((prevMessages) => [...prevMessages, data.message]);
+      });
+
+      return () => {
+        echo.disconnect();
+      };
+    }
+  }, [receiverId]);
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
