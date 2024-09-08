@@ -93,7 +93,7 @@ function Chat() {
     try {
       const response = await axios.post(
         `http://localhost:8000/api/message`,
-        { content: newMessage, chat_id: chatId },
+        { content: newMessage, chat_id: chatId, receiver_id: receiverId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
