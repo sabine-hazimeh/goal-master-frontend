@@ -11,14 +11,32 @@ function Chat() {
   const { chatId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [receiverId, setReceiverId] = useState(null); 
   const user = useSelector((state) => state.user.user); 
   const userId = user ? user.id : null; 
 
   useEffect(() => {
-    async function fetchMessages() {
+    async function fetchChatDetails() {
       const token = localStorage.getItem("Token");
+  
       try {
-        const response = await axios.get(
+        const chatResponse = await axios.get(
+          `http://localhost:8000/api/chats/${chatId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        const chat = chatResponse.data.chat;
+        const { user_id, consultant_id } = chat;
+  
+        const determinedReceiverId = userId === user_id ? consultant_id : user_id;
+        setReceiverId(determinedReceiverId);
+        
+        const messagesResponse = await axios.get(
           `http://localhost:8000/api/messages/${chatId}`,
           {
             headers: {
@@ -27,14 +45,14 @@ function Chat() {
             },
           }
         );
-        setMessages(response.data.messages);
+        setMessages(messagesResponse.data.messages);
       } catch (error) {
-        console.error("Error fetching messages:", error);
+        console.error("Error fetching chat details or messages:", error);
       }
     }
-
-    fetchMessages();
-  }, [chatId]);
+  
+    fetchChatDetails();
+  }, [chatId, userId]);
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
