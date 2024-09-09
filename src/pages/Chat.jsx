@@ -58,35 +58,36 @@ function Chat() {
   }, [chatId, userId]);
 
   useEffect(() => {
-    if (receiverId) {
+    if (chatId) {
       window.Pusher = Pusher;
-
+  
       const echo = new Echo({
         broadcaster: "pusher",
-        key: "acef436b4b534dafb513",
-        cluster: "eu",
+        key: process.env.REACT_APP_PUSHER_KEY,
+        cluster: process.env.REACT_APP_PUSHER_CLUSTER,
         encrypted: true,
-        forceTLS: true,
-        authEndpoint: "http://localhost:8000/api/broadcasting/auth",
-        auth: {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
-            "Content-Type": "application/json",
-          },
-        },
       });
-
-      const channel = echo.private(`chat.${receiverId}`);
-
-      channel.listen(".message.sent", (data) => {
-        setMessages((prevMessages) => [...prevMessages, data.message]);
-      });
-
+  
+      const channel = echo.channel(`chat.${chatId}`);  
+  
+      channel
+        .subscribed(() => {
+          console.log(`Subscribed to chat.${chatId}`);
+        })
+        .listen(".message.sent", (data) => {
+          console.log("Message data received:", data);
+          setMessages((prevMessages) => [...prevMessages, data.message]);
+        })
+        .error((error) => {
+          console.error("Error subscribing to channel:", error);
+        });
+  
       return () => {
         echo.disconnect();
       };
     }
-  }, [receiverId]);
+  }, [chatId]);
+  
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
