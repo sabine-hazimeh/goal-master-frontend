@@ -8,6 +8,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
+import { useNavigate } from "react-router-dom";
 
 function Chat() {
   const { chatId } = useParams();
@@ -15,9 +16,9 @@ function Chat() {
   const [newMessage, setNewMessage] = useState("");
   const [receiverId, setReceiverId] = useState(null);
   const [chats, setChats] = useState([]);
-
   const user = useSelector((state) => state.user.user);
   const userId = user ? user.id : null;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchChats() {
@@ -130,6 +131,9 @@ function Chat() {
     } catch (error) {
       console.error("Error sending message:", error);
     }
+  };
+  const handleChatClick = (chatId) => {
+    navigate(`/chat/${chatId}`);
   };
   return (
     <>
