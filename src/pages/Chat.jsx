@@ -138,6 +138,27 @@ function Chat() {
   return (
     <>
       <Header />
+      <div className="Chat-container">
+        <div className="Chat-sidebar">
+          {chats.length > 0 ? (
+            chats.map((chat) => {
+              const isUser = userId === chat.user_id;
+              const chatPartnerName = isUser ? chat.consultant.name : chat.user.name;
+
+              return (
+                <div
+                  key={chat.id}
+                  className="Chat-sidebar-item"
+                  onClick={() => handleChatClick(chat.id)}
+                >
+                  Chat with {chatPartnerName || "Unknown"}
+                </div>
+              );
+            })
+          ) : (
+            <p>No chats available.</p>
+          )}
+        </div>
       <div className="Chat">
         <div className="Chat-messages">
           {messages.map((message) => (
@@ -162,6 +183,7 @@ function Chat() {
             <FontAwesomeIcon icon={faPaperPlane} className="chat-icon" />
           </button>
         </div>
+      </div>
       </div>
     </>
   );
