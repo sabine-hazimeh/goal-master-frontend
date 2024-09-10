@@ -14,8 +14,33 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [receiverId, setReceiverId] = useState(null);
+  const [chats, setChats] = useState([]);
+
   const user = useSelector((state) => state.user.user);
   const userId = user ? user.id : null;
+
+  useEffect(() => {
+    async function fetchChats() {
+      const token = localStorage.getItem("Token");
+
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/api/user-chats",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setChats(response.data);
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    }
+
+    fetchChats();
+  }, []);
 
   useEffect(() => {
     async function fetchChatDetails() {
@@ -60,16 +85,15 @@ function Chat() {
   useEffect(() => {
     if (chatId) {
       window.Pusher = Pusher;
-  
       const echo = new Echo({
         broadcaster: "pusher",
         key: process.env.REACT_APP_PUSHER_KEY,
         cluster: process.env.REACT_APP_PUSHER_CLUSTER,
         encrypted: true,
       });
-  
-      const channel = echo.channel(`chat.${chatId}`);  
-  
+
+      const channel = echo.channel(`chat.${chatId}`);
+
       channel
         .subscribed(() => {
           console.log(`Subscribed to chat.${chatId}`);
@@ -81,13 +105,12 @@ function Chat() {
         .error((error) => {
           console.error("Error subscribing to channel:", error);
         });
-  
+
       return () => {
         echo.disconnect();
       };
     }
   }, [chatId]);
-  
 
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
