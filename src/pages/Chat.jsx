@@ -143,7 +143,9 @@ function Chat() {
           {chats.length > 0 ? (
             chats.map((chat) => {
               const isUser = userId === chat.user_id;
-              const chatPartnerName = isUser ? chat.consultant.name : chat.user.name;
+              const chatPartnerName = isUser
+                ? chat.consultant.name
+                : chat.user.name;
 
               return (
                 <div
@@ -159,31 +161,32 @@ function Chat() {
             <p>No chats available.</p>
           )}
         </div>
-      <div className="Chat">
-        <div className="Chat-messages">
-          {messages.map((message) => (
-            <p
-              key={message.id}
-              className={`Chat-message ${
-                message.sender_id === userId ? "sent" : "received"
-              }`}
-            >
-              {message.content}
-            </p>
-          ))}
+
+        <div className="Chat">
+          <div className="Chat-messages">
+            {messages.map((message) => (
+              <p
+                key={message.id}
+                className={`Chat-message ${
+                  message.sender_id === userId ? "sent" : "received"
+                }`}
+              >
+                {message.content}
+              </p>
+            ))}
+          </div>
+          <div className="Chat-input">
+            <input
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              placeholder="Type your message..."
+            />
+            <button onClick={handleSendMessage}>
+              <FontAwesomeIcon icon={faPaperPlane} className="chat-icon" />
+            </button>
+          </div>
         </div>
-        <div className="Chat-input">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message..."
-          />
-          <button onClick={handleSendMessage}>
-            <FontAwesomeIcon icon={faPaperPlane} className="chat-icon" />
-          </button>
-        </div>
-      </div>
       </div>
     </>
   );

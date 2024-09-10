@@ -1,3 +1,8 @@
+.Chat-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; 
+}
 .Chat {
   display: flex;
   flex-direction: column;
@@ -21,6 +26,7 @@
   position: fixed;
   bottom: 0;
   margin: auto;
+  left: 25%;
   width: 75%;
   z-index: 10;
 }
@@ -62,11 +68,10 @@
   color: white;
 }
 
-/* Sidebar and container layout */
-.Chat-container {
+/* .Chat-container {
   display: flex;
   height: 100vh;
-}
+} */
 
 .Chat-sidebar {
   width: 25%;
