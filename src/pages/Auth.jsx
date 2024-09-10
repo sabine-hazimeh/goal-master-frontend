@@ -4,7 +4,7 @@ import woman from "../images/working-woman.png";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +24,26 @@ const Auth = () => {
     React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8000/api/login", {
+        email,
+        password,
+      });
+      const { access_token, user } = response.data;
+      localStorage.setItem("Token", access_token);
+      dispatch(loginSuccess({ user, access_token }));
+      navigate(from);
+    } catch (error) {
+      dispatch(loginFailure({ error: error.response.data.message }));
+      toast.error("Login failed. Please check your credentials.");
+    }
+  };
 
   const validatePassword = (password) => {
     const lengthValid = password.length > 8;
@@ -34,23 +54,6 @@ const Auth = () => {
 
   const checkPasswordMatch = () => {
     setPasswordMatch(password === confirmPassword);
-  };
-
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
-      });
-      const { access_token, user } = response.data;
-      console.log("User:", user);
-      localStorage.setItem("Token", access_token);
-      dispatch(loginSuccess({ user, access_token }));
-      navigate("/");
-    } catch (error) {
-      dispatch(loginFailure({ error: error.response.data.message }));
-    }
   };
 
   const handleSignup = async (event) => {
@@ -113,7 +116,11 @@ const Auth = () => {
       <div className="Auth">
         <div className="Auth-left">
           <div className="Auth-back">
-            <FontAwesomeIcon icon={faArrowLeft} className="Auth-icon" onClick={() => navigate("/")}/>
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="Auth-icon"
+              onClick={() => navigate("/")}
+            />
           </div>
           <img src={woman} className="Auth-img" alt="Working woman" />
         </div>
