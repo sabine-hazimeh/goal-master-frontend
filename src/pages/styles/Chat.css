@@ -1,12 +1,12 @@
 .Chat-container {
   display: flex;
   height: 100vh;
-  overflow: hidden; 
+  overflow: hidden;
 }
 .Chat {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 72vh;
   width: 100%;
 }
 
@@ -67,11 +67,6 @@
   background-color: rgba(10, 69, 112, 0.8);
   color: white;
 }
-
-/* .Chat-container {
-  display: flex;
-  height: 100vh;
-} */
 
 .Chat-sidebar {
   width: 25%;

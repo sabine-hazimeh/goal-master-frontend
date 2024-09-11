@@ -136,7 +136,7 @@ function Chat() {
     navigate(`/chat/${chatId}`);
   };
   return (
-    <>
+    <div className="Chat-page">
       <Header />
       <div className="Chat-container">
         <div className="Chat-sidebar">
@@ -188,7 +188,7 @@ function Chat() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
