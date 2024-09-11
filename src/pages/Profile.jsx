@@ -159,12 +159,14 @@ const Profile = () => {
           <p onClick={openPasswordModal} className="change-password">
             Change Password?
           </p>
+          <div className="save-button-container">
           <div className="save-button">
             <FilledButton
               text="Save Changes"
               type="submit"
               disabled={isButtonDisabled && !profilePhotoFile}
             />
+          </div>
           </div>
         </form>
       </div>
