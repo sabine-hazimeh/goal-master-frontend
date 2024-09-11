@@ -1,0 +1,8 @@
+.emotion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  margin: 3rem auto;
+  position: relative;
+}
