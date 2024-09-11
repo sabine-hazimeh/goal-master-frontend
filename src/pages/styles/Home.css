@@ -1,6 +1,5 @@
 .home-intro {
   display: flex;
-  /* margin: 1rem auto ; */
   width: 85%;
 }
 .intro-left {
@@ -12,7 +11,7 @@
   margin-top: 1rem;
 }
 .intro-title {
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bolder;
 }
 .intro-text {
@@ -36,7 +35,6 @@
 }
 .face_scan {
   display: flex;
-  margin: 5rem auto;
   width: 90%;
 }
 .scan_right {
@@ -54,28 +52,27 @@
   margin-left: 5rem;
 }
 .scan_img {
-  width: 400px;
-  height: 600px;
+  width: 300px;
+  height: 500px;
 }
 .Features_container {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  border: 2px solid #c41b40;
+  width: 85%;
+  margin-top: 3rem;
 }
 .features_title {
   font-size: 40px;
-  font-weight: bolder;
+  font-weight: bold;
   text-align: center;
-  padding: 20px;
+  /* padding: 20px; */
   color: #c41b40;
+  margin-bottom: 2rem;
 }
 .features {
   display: flex;
-  gap: 40px;
-  padding: 20px;
+  gap: 2.5rem;
   justify-content: space-between;
-  padding: 10px 70px;
 }
 .feature {
   display: flex;
@@ -93,6 +90,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 5rem;
   margin-top: 1rem;
 }
