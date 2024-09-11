@@ -4,12 +4,14 @@ import * as faceapi from "face-api.js";
 const EmotionRecognition = () => {
   const videoRef = useRef(null);
   const [emotion, setEmotion] = useState("");
+
   useEffect(() => {
     const loadModels = async () => {
       await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
       await faceapi.nets.faceExpressionNet.loadFromUri("/models");
       startVideo();
     };
+
     const startVideo = () => {
       navigator.mediaDevices
         .getUserMedia({ video: true })
@@ -18,6 +20,7 @@ const EmotionRecognition = () => {
         })
         .catch((err) => console.error("Error accessing webcam: ", err));
     };
+
     const detectEmotions = async () => {
       if (videoRef.current) {
         const detections = await faceapi
@@ -41,7 +44,12 @@ const EmotionRecognition = () => {
     setInterval(detectEmotions, 1000);
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <video ref={videoRef} autoPlay width="720" height="560" />
+      <p>Detected Emotion: {emotion}</p>
+    </div>
+  );
 };
 
 export default EmotionRecognition;
