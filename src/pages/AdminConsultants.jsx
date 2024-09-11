@@ -4,13 +4,15 @@ import "./styles/AdminConsultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare ,faBan, faSpinner} from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchConsultants() {
       const token = localStorage.getItem("Token");
@@ -46,8 +48,6 @@ function AdminConsultants() {
     fetchConsultants();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
   async function deleteConsultant(id) {
     const token = localStorage.getItem("Token");
     if (!token) {
@@ -80,10 +80,28 @@ function AdminConsultants() {
   }
 
   return (
-    <div>
+    <>
       <Header />
-      <div className="Consultants">
-        {consultants.length > 0 ? (
+      <div className={`Consultants ${consultants.length === 0 ? "empty" : ""}`}>
+        {loading ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="no-journals-icon"
+              />
+              <p>Loading consultants...</p>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>{error}</p>
+            </div>
+          </div>
+        ) : consultants.length > 0 ? (
           consultants.map((consultant) => (
             <div className="Consultant" key={consultant.id}>
               <div className="Consultant-info">
@@ -142,7 +160,7 @@ function AdminConsultants() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 
