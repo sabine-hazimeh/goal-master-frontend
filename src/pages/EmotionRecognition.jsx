@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
-
+import "./styles/EmotionRecognition.css";
+import Header from "../components/Header";
 const EmotionRecognition = () => {
   const videoRef = useRef(null);
   const [emotion, setEmotion] = useState("");
@@ -45,10 +46,13 @@ const EmotionRecognition = () => {
   }, []);
 
   return (
+    <>
+    <Header />
     <div>
       <video ref={videoRef} autoPlay width="720" height="560" />
       <p>Detected Emotion: {emotion}</p>
     </div>
+    </>
   );
 };
 
