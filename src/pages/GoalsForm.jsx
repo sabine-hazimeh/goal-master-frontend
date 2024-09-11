@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/GoalsForm.css";
 import Header from "../components/Header";
-import Goal from "../images/goal.png";
+import Goal from "../images/acheiving-goal.png";
 import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import Modal from "../components/Modal";
@@ -195,13 +195,13 @@ function GoalsForm() {
   return (
     <>
       <Header />
-      {selectedCategory === "education" && (
+      {/* {selectedCategory === "education" && (
       <div className="goals-form-button">
         <div className="goals-form-button-container">
           <FilledButton text="View Goals" onClick={() => navigate("/goals")} />
         </div>
       </div>
-      )}
+      )} */}
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
@@ -236,6 +236,15 @@ function GoalsForm() {
               <span></span> Education
             </label>
           </form>
+          {selectedCategory === "education" && (
+            <div className="goals-form-button">
+              {/* <div className="goals-form-button-container"> */}
+                <span onClick={() => navigate("/goals")} className="text-link">
+                  View prev Goals
+                </span>
+              {/* </div> */}
+            </div>
+          )}
           <div className="goals-form-img">
             <img src={Goal} className="goals-form-image" alt="Goal" />
           </div>
@@ -374,8 +383,10 @@ function GoalsForm() {
                 {modalContent ? (
                   <div className="health-modal">
                     <p>
-                      <span className="health-modal-item">{modalContent.predicted_plan}</span> is the plan that
-                      fits your case
+                      <span className="health-modal-item">
+                        {modalContent.predicted_plan}
+                      </span>{" "}
+                      is the plan that fits your case
                     </p>
                     <p>
                       <b>Explanation: </b> {modalContent.explanation}
