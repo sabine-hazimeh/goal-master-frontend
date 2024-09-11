@@ -1,49 +1,54 @@
-.about-upper{
-    display: flex;
-    width: 90%;
-    margin: auto;
+.about-us-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.upper-left{
-    width: 50%;
-    
+.about-upper {
+  display: flex;
+  width: 85%;
+  margin-top: 2.5rem;
+  margin-bottom: 7rem;
 }
-.upper-img{
-    width: 400px;
-    height: 400px;
+.upper-left {
+  width: 40%;
 }
-.upper-right{
-    width: 50%;
+.upper-img {
+  width: 350px;
+  height: 350px;
 }
-.upper-title{
-    margin-top: 3rem;
-    font-size: 40px;
-    font-weight: bolder;
+.upper-right {
+  width: 60%;
 }
-.upper-text{
-    font-size: 20px;
-    line-height: 50px;
+.upper-title {
+  margin-top: 3rem;
+  font-size: 40px;
+  font-weight: bold;
 }
-.about-lower{
-    display: flex;
-    width: 90%;
-    margin: auto;
+.upper-text {
+  font-size: 20px;
+  line-height: 40px;
 }
-.lower-left{
-    margin-top: 3rem;
-    width: 50%;
+.about-lower {
+  display: flex;
+  width: 85%;
+  margin-bottom: 2rem;
 }
-.lower-img{
-    width: 400px;
-    height: 400px;
+.lower-left {
+  width: 60%;
 }
-.lower-right{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.lower-img {
+  width: 400px;
+  height: 415px;
 }
-.lower-text{
-    font-size: 20px;
-    line-height: 30px;
-    margin-bottom: 1rem;
+.lower-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.lower-text {
+  font-size: 20px;
+  line-height: 35px;
+  margin-bottom: 1rem;
 }

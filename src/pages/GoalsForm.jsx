@@ -195,13 +195,6 @@ function GoalsForm() {
   return (
     <>
       <Header />
-      {/* {selectedCategory === "education" && (
-      <div className="goals-form-button">
-        <div className="goals-form-button-container">
-          <FilledButton text="View Goals" onClick={() => navigate("/goals")} />
-        </div>
-      </div>
-      )} */}
       <div className="goals-form-container">
         <div className="goals-form-left">
           <form>
@@ -238,11 +231,9 @@ function GoalsForm() {
           </form>
           {selectedCategory === "education" && (
             <div className="goals-form-button">
-              {/* <div className="goals-form-button-container"> */}
                 <span onClick={() => navigate("/goals")} className="text-link">
                   View prev Goals
                 </span>
-              {/* </div> */}
             </div>
           )}
           <div className="goals-form-img">
