@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import * as faceapi from "face-api.js";
 import "./styles/EmotionRecognition.css";
-import Header from "../components/Header";
 
-const EmotionRecognition = () => {
+const EmotionRecognition = ({ setEmotion, onClose }) => {
   const videoRef = useRef(null);
-  const [emotion, setEmotion] = useState("");
 
   useEffect(() => {
     const loadModels = async () => {
@@ -38,24 +36,20 @@ const EmotionRecognition = () => {
             expressions[a] > expressions[b] ? a : b
           );
           setEmotion(dominantEmotion);
+          onClose();
         }
       }
     };
 
     loadModels();
-    setInterval(detectEmotions, 1000);
-  }, []);
+    const intervalId = setInterval(detectEmotions, 1000);
+    return () => clearInterval(intervalId);
+  }, [setEmotion, onClose]);
 
   return (
-    <>
-      <Header />
-      <div className="emotion-container">
-        <div className="emotion-text">
-          <p>Detected Emotion: {emotion}</p>
-        </div>
-        <video ref={videoRef} autoPlay className="video" />
-      </div>
-    </>
+    <div className="emotion-container">
+      <video ref={videoRef} autoPlay className="video" />
+    </div>
   );
 };
 

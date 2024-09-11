@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./styles/JournalsForm.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const JournalsForm = () => {
   const [mood, setMood] = useState("");
@@ -10,8 +9,6 @@ const JournalsForm = () => {
   const [productivity, setProductivity] = useState("");
   const [description, setDescription] = useState("");
   const [emotion, setEmotion] = useState("");
-
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleAddNewJournal = async (event) => {
     event.preventDefault();
@@ -55,9 +52,7 @@ const JournalsForm = () => {
     }
   };
 
-  const navigateToEmotionRecognition = () => {
-    navigate("/emotion-recognition");
-  };
+
 
   return (
     <form className="journals-form" onSubmit={handleAddNewJournal}>
@@ -70,10 +65,7 @@ const JournalsForm = () => {
         value={emotion}
         onChange={(e) => setEmotion(e.target.value)}
       />
-      <p
-        className="emotion-recognition-text"
-        onClick={navigateToEmotionRecognition}
-      >
+      <p className="emotion-recognition-text" onClick={toggleEmotionModal}>
         Want to detect emotion automatically?
       </p>
       <label className="journals-label">Overall mood</label>
