@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles/JournalsForm.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import EmotionRecognitionModal from "../components/EmotionRecognitionModal"; // Import separate EmotionRecognitionModal component
 
 const JournalsForm = () => {
   const [mood, setMood] = useState("");
@@ -9,7 +10,7 @@ const JournalsForm = () => {
   const [productivity, setProductivity] = useState("");
   const [description, setDescription] = useState("");
   const [emotion, setEmotion] = useState("");
-  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false);
+  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false); // Separate state for emotion modal
 
   const handleAddNewJournal = async (event) => {
     event.preventDefault();
@@ -71,6 +72,7 @@ const JournalsForm = () => {
       <p className="emotion-recognition-text" onClick={toggleEmotionModal}>
         Want to detect emotion automatically?
       </p>
+
       <label className="journals-label">Overall mood</label>
       <input
         className="journals-input"
@@ -107,6 +109,14 @@ const JournalsForm = () => {
           Submit
         </button>
       </div>
+
+      {isEmotionModalOpen && (
+        <EmotionRecognitionModal
+          isOpen={isEmotionModalOpen}
+          onClose={toggleEmotionModal}
+          setEmotion={setEmotion}
+        />
+      )}
     </form>
   );
 };
