@@ -9,6 +9,7 @@ const JournalsForm = () => {
   const [productivity, setProductivity] = useState("");
   const [description, setDescription] = useState("");
   const [emotion, setEmotion] = useState("");
+  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false);
 
   const handleAddNewJournal = async (event) => {
     event.preventDefault();
@@ -52,7 +53,9 @@ const JournalsForm = () => {
     }
   };
 
-
+  const toggleEmotionModal = () => {
+    setIsEmotionModalOpen(!isEmotionModalOpen);
+  };
 
   return (
     <form className="journals-form" onSubmit={handleAddNewJournal}>
