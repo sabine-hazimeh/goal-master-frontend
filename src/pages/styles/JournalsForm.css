@@ -4,21 +4,35 @@
   padding: 0 2rem;
   border-radius: 20px;
 }
+
 .journals-input {
   border: none;
   background-color: rgba(217, 217, 217, 0.44);
   border-radius: 10px;
   padding: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
+
 .journals-label {
   margin-bottom: 0.25rem;
 }
+
+.emotion-recognition-text {
+  font-size: 0.85rem;
+  font-weight: thin;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: -0.25rem;
+  margin-bottom: 0.75rem;
+  color: rgb(85, 84, 84);
+}
+
 .journals-button-container {
   display: flex;
   justify-content: center;
   margin-top: 0.5rem;
 }
+
 .journals {
   display: flex;
   flex-direction: column;
@@ -27,15 +41,15 @@
   margin: 1.5rem 0;
   align-items: center;
 }
+
 .journals-title {
   font-size: 30px;
   font-weight: bolder;
-}
-.journals-title {
   color: #c41b40;
   margin: auto;
   font-size: 1.5rem;
 }
+
 .journal-button {
   background-color: #0a4570;
   color: white;
