@@ -4,7 +4,7 @@ import "./styles/AdminConsultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPenToSquare ,faBan, faSpinner} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
@@ -104,7 +104,6 @@ function AdminConsultants() {
                     </div>
                   </div>
                   <div className="Consultant-options">
-                    {/* <FontAwesomeIcon icon={faPenToSquare} /> */}
                     <FontAwesomeIcon
                       icon={faTrash}
                       onClick={() => deleteConsultant(consultant.id)}
@@ -135,7 +134,12 @@ function AdminConsultants() {
             </div>
           ))
         ) : (
-          <p>No consultants available.</p>
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>No Consultants found.</p>
+            </div>
+          </div>
         )}
       </div>
     </div>
