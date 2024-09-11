@@ -85,24 +85,24 @@ const UpdateConsultant = () => {
     <>
       <Header />
       <div className="consultants-form-container">
-        <div className="journals-left">
-          <img src={consultant} className="journals-img" alt="Consultant" />
+        <div className="consultants-left">
+          <img src={consultant} className="consultants-img" alt="Consultant" />
         </div>
-        <div className="journals-right">
-          <form className="journals-form" onSubmit={handleSubmit}>
-            <h3 className="journals-title">Update Consultant Profile</h3>
-            <label className="journals-label">Name</label>
+        <div className="consultants-right">
+          <form className="consultants-form" onSubmit={handleSubmit}>
+            <h3 className="consultants-title">Update Consultant Profile</h3>
+            <label className="consultants-label">Name</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Name"
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
             />
 
-            <label className="journals-label">Email</label>
+            <label className="consultants-label">Email</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="email"
               placeholder="Enter Email"
               value={profile.email}
@@ -110,9 +110,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, email: e.target.value })
               }
             />
-            <label className="journals-label">Password</label>
+            <label className="consultants-label">Password</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="password"
               placeholder="Enter Password"
               value={profile.password}
@@ -120,9 +120,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, password: e.target.value })
               }
             />
-            <label className="journals-label">Phone Number</label>
+            <label className="consultants-label">Phone Number</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Phone Number"
               value={profile.phone_number}
@@ -130,9 +130,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, phone_number: e.target.value })
               }
             />
-            <label className="journals-label">Experience</label>
+            <label className="consultants-label">Experience</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="number"
               placeholder="Enter Experience"
               value={profile.experience}
@@ -140,17 +140,16 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, experience: e.target.value })
               }
             />
-            <label className="journals-label">Description</label>
+            <label className="consultants-label">Description</label>
             <textarea
-              className="journals-input"
+              className="consultants-input"
               placeholder="Enter Description"
               value={profile.description}
               onChange={(e) =>
                 setProfile({ ...profile, description: e.target.value })
               }
             />
-            <label className="journals-label">Profile Photo</label>
-            <label className="journals-label">Profile Photo</label>
+            <label className="consultants-label">Profile Photo</label>
             <input
               type="file"
               accept="image/*"
@@ -159,8 +158,8 @@ const UpdateConsultant = () => {
               }
             />
 
-            <div className="journals-button-container">
-              <FilledButton text="Submit" className="journals-button" />
+            <div className="consultants-button-container">
+              <FilledButton text="Submit" className="consultants-button" />
             </div>
           </form>
         </div>
