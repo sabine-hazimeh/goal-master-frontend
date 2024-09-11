@@ -4,6 +4,8 @@ import "./styles/Users.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -49,7 +51,11 @@ function Users() {
   return (
     <>
       <Header />
-      <div className="Users">
+      <div
+        className={`Users ${
+          Array.isArray(users) && users.length === 0 ? "empty" : ""
+        }`}
+      >
         {Array.isArray(users) && users.length > 0 ? (
           users.map((user) => (
             <div key={user._id} className="user-card">
@@ -80,7 +86,12 @@ function Users() {
             </div>
           ))
         ) : (
-          <p>No users found</p>
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>No Users found.</p>
+            </div>
+          </div>
         )}
       </div>
     </>
