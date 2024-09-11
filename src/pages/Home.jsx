@@ -20,6 +20,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <div className="home">
       <div className="home-intro">
         <div className="intro-left">
           <p className="intro-title">
@@ -90,6 +91,7 @@ const Home = () => {
             </p>
           </div>
         </div>
+      </div>
       </div>
       <Footer />
     </>
