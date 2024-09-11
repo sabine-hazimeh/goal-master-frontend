@@ -10,6 +10,7 @@ import { faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 function Users() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -23,6 +24,8 @@ function Users() {
         setUsers(response.data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -56,7 +59,18 @@ function Users() {
           Array.isArray(users) && users.length === 0 ? "empty" : ""
         }`}
       >
-        {Array.isArray(users) && users.length > 0 ? (
+        {loading ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="no-journals-icon"
+              />
+              <p>Loading journals...</p>
+            </div>
+          </div>
+        ) : Array.isArray(users) && users.length > 0 ? (
           users.map((user) => (
             <div key={user._id} className="user-card">
               <div className="user-details">
@@ -97,4 +111,5 @@ function Users() {
     </>
   );
 }
+
 export default Users;
