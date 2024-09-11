@@ -39,7 +39,7 @@ function App() {
           <Route path="/admin-consultants" element={<AdminConsultants />} />
           <Route path="/update-consultant/:id" element={<UpdateConsultnat />} />
           <Route path="/goals" element={<Goals />} />
-          <Route path="emotion-recognition" element={<EmotionRecognition />} />
+          <Route path="/emotion-recognition" element={<EmotionRecognition />} />
         </Route>
       </Routes>
     </BrowserRouter>
