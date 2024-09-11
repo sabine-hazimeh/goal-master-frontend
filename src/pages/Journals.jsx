@@ -3,19 +3,19 @@ import Header from "../components/Header";
 import "./styles/Journals.css";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../components/Modal";
 import JournalsForm from "./JournalsForm";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-CA');
+  return date.toLocaleDateString("en-CA");
 };
 
 function Journals() {
   const [journals, setJournals] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   const handleAddNewJournal = () => {
     setModalOpen(true);
   };
@@ -44,6 +44,8 @@ function Journals() {
         setJournals(response.data.journals);
       } catch (error) {
         console.error("Error fetching journals:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchJournals();
@@ -57,12 +59,26 @@ function Journals() {
         <button className="journals-button" onClick={handleAddNewJournal}>
           Add New Journal
         </button>
-        {journals.length > 0 ? (
+
+        {loading ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="no-journals-icon"
+              />
+              <p>Loading journals...</p>
+            </div>
+          </div>
+        ) : journals.length > 0 ? (
           <div className="journals-container">
             {journals.map((journal) => (
               <div key={journal.id} className="journal-item">
                 <div className="date-container">
-                  <p className="journal-card-text">{formatDate(journal.created_at)}</p>
+                  <p className="journal-card-text">
+                    {formatDate(journal.created_at)}
+                  </p>
                 </div>
                 <p className="journal-card-text">
                   <b>Emotion: </b>
