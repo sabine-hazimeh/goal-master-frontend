@@ -8,7 +8,6 @@
 .user-card {
   background-color: rgba(10, 69, 112, 0.8);
   border-radius: 10px;
-  height: 7rem;
   padding: 1rem;
   color: white;
 }
@@ -35,13 +34,17 @@
   align-items: center;
   width: 85%;
 }
-/* .Consultant-text{
+.users-text-link {
   cursor: pointer;
   text-decoration: underline;
   color: white;
-
 }
-.chat-button-wrapper{
+.text-link-wrapper {
   display: flex;
   justify-content: flex-end;
-} */
+  align-items: center;
+  gap: 5px;
+}
+.loading-icon{
+  font-size: 5rem;
+}

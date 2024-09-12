@@ -65,9 +65,9 @@ function Users() {
               <FontAwesomeIcon
                 icon={faSpinner}
                 spin
-                className="no-journals-icon"
+                className="loading-icon"
               />
-              <p>Loading journals...</p>
+              <p>Loading users...</p>
             </div>
           </div>
         ) : Array.isArray(users) && users.length > 0 ? (
@@ -89,13 +89,13 @@ function Users() {
                 </div>
               </div>
 
-              <div className="button-wrapper">
-                <button
-                  className="Consultant-button"
+              <div className="text-link-wrapper">
+                <p
+                  className="users-text-link"
                   onClick={() => handleChatNow(user.id)}
                 >
                   Chat now
-                </button>
+                </p>
               </div>
             </div>
           ))
