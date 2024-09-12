@@ -6,6 +6,7 @@ import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import Modal from "../components/Modal";
 import { useNavigate } from "react-router-dom";
+import face from "../images/face-recognition.gif";
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
@@ -13,7 +14,13 @@ function GoalsForm() {
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [modalContent, setModalContent] = useState("");
   const [educationGoalId, setEducationGoalId] = useState(null);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setIsFeedbackOpen(true);
+  };
   function handleChange(e) {
     const { name } = e.target;
     if (selectedCategory !== name) {
@@ -187,6 +194,7 @@ function GoalsForm() {
         }
       );
       console.log("Course added successfully:", response.data);
+      navigate("/goals");
     } catch (error) {
       console.error("Error adding the course:", error);
     }
@@ -231,9 +239,9 @@ function GoalsForm() {
           </form>
           {selectedCategory === "education" && (
             <div className="goals-form-button">
-                <span onClick={() => navigate("/goals")} className="text-link">
-                  View prev Goals
-                </span>
+              <span onClick={() => navigate("/goals")} className="text-link">
+                View prev Goals
+              </span>
             </div>
           )}
           <div className="goals-form-img">
@@ -293,7 +301,7 @@ function GoalsForm() {
             </form>
           )}
           {selectedCategory === "finance" && (
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal isOpen={isModalOpen} onClose={handleModalClose}>
               <div className="goals-plan-container">
                 <h3 className="finance-form-title">Your Financial Plan</h3>
                 <p>{modalContent}</p>
@@ -368,7 +376,7 @@ function GoalsForm() {
             </form>
           )}
           {selectedCategory === "health" && (
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal isOpen={isModalOpen} onClose={handleModalClose}>
               <div className="goals-plan-container">
                 <h3 className="education-modal-title">Your Exercise Plan</h3>
                 {modalContent ? (
@@ -446,7 +454,7 @@ function GoalsForm() {
             </form>
           )}
           {selectedCategory === "education" && (
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal isOpen={isModalOpen} onClose={handleModalClose}>
               <h3 className="education-modal-title">Recommended Courses</h3>
               <ul>
                 {recommendedCourses.map((course, index) => (
@@ -480,6 +488,16 @@ function GoalsForm() {
             </Modal>
           )}
         </div>
+        <Modal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)}>
+          <div className="feedback-form">
+            <p>
+              Would you be interested in providing feedback through face
+              recognition to enhance our service?
+            </p>
+            <img src={face} className="feedback-img"></img>
+            <FilledButton text={"Feedback"} />
+          </div>
+        </Modal>
       </div>
     </>
   );
