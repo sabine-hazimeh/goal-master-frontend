@@ -36,3 +36,23 @@
   text-align: center;
   margin: 0.5rem auto 1rem auto;
 }
+.Loading-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: grey;
+}
+.Loading-icon {
+  font-size: 5rem;
+  text-align: center;
+}
+.Loading-goals {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
