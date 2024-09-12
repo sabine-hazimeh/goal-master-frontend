@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import Modal from "../components/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Goals = () => {
   const [goals, setGoals] = useState([]);
@@ -30,6 +30,24 @@ const Goals = () => {
 
     fetchGoals();
   }, []);
+  const handleDeleteGoal = async (goal_id) => {
+    if (window.confirm("Are you sure you want to delete this goal?")) {
+      try {
+        await axios.delete(`http://localhost:8000/api/education/${goal_id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        setGoals((prevGoals) =>
+          prevGoals.filter((goal) => goal.id !== goal_id)
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const handleViewDetails = async (education_id) => {
     try {
@@ -63,6 +81,11 @@ const Goals = () => {
         ) : Array.isArray(goals) && goals.length > 0 ? (
           goals.map((goal) => (
             <div className="goal-card" key={goal.id}>
+              <FontAwesomeIcon
+                icon={faTrash}
+                className="delete-icon"
+                onClick={() => handleDeleteGoal(goal.id)}
+              />
               <p className="goal-title">
                 <b>Goal: </b>
                 {goal.goal}
