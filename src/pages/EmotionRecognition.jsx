@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import "./styles/EmotionRecognition.css";
-
+import FilledButton from "../components/FilledButton";
 const EmotionRecognition = ({ setEmotion, onClose }) => {
   const videoRef = useRef(null);
+  const [detectedEmotion, setDetectedEmotion] = useState("");
 
   useEffect(() => {
     const loadModels = async () => {
@@ -35,8 +36,7 @@ const EmotionRecognition = ({ setEmotion, onClose }) => {
           const dominantEmotion = Object.keys(expressions).reduce((a, b) =>
             expressions[a] > expressions[b] ? a : b
           );
-          setEmotion(dominantEmotion);
-          onClose();
+          setDetectedEmotion(dominantEmotion);
         }
       }
     };
@@ -44,11 +44,18 @@ const EmotionRecognition = ({ setEmotion, onClose }) => {
     loadModels();
     const intervalId = setInterval(detectEmotions, 1000);
     return () => clearInterval(intervalId);
-  }, [setEmotion, onClose]);
+  }, []);
+
+  const handleSubmit = () => {
+    setEmotion(detectedEmotion);
+    onClose();
+  };
 
   return (
     <div className="emotion-container">
       <video ref={videoRef} autoPlay className="video" />
+      <p>Detected Emotion: {detectedEmotion}</p>
+      <FilledButton text="Submit" onClick={handleSubmit}></FilledButton>
     </div>
   );
 };
