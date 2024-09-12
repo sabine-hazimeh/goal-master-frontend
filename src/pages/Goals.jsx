@@ -83,13 +83,13 @@ const Goals = () => {
                 <b>Deadline: </b>
                 {goal.time_horizon}
               </p>
-              <div className="education-button-container">
-                <button
-                  className="education-button"
+              <div className="text-link-wrapper">
+                <p
+                  className="users-text-link"
                   onClick={() => handleViewDetails(goal.id)}
                 >
                   View Details
-                </button>
+                </p>
               </div>
             </div>
           ))
