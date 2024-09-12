@@ -7,6 +7,7 @@ import axios from "axios";
 import Modal from "../components/Modal";
 import { useNavigate } from "react-router-dom";
 import face from "../images/face-recognition.gif";
+import EmotionRecognitionModal from "../components/EmotionRecognitionModal";
 function GoalsForm() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
@@ -15,11 +16,20 @@ function GoalsForm() {
   const [modalContent, setModalContent] = useState("");
   const [educationGoalId, setEducationGoalId] = useState(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false);
+  const [emotion, setEmotion] = useState("");
   const navigate = useNavigate();
 
   const handleModalClose = () => {
     setIsModalOpen(false);
     setIsFeedbackOpen(true);
+  };
+  const handleFeedbackSubmit = () => {
+    setIsFeedbackOpen(false);
+    setIsEmotionModalOpen(true);
+  };
+  const handleEmotionModalClose = () => {
+    setIsEmotionModalOpen(false);
   };
   function handleChange(e) {
     const { name } = e.target;
@@ -488,16 +498,29 @@ function GoalsForm() {
             </Modal>
           )}
         </div>
-        <Modal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)}>
-          <div className="feedback-form">
-            <p>
-              Would you be interested in providing feedback through face
-              recognition to enhance our service?
-            </p>
-            <img src={face} className="feedback-img"></img>
-            <FilledButton text={"Feedback"} />
-          </div>
-        </Modal>
+        {isFeedbackOpen && (
+          <Modal
+            isOpen={isFeedbackOpen}
+            onClose={() => setIsFeedbackOpen(false)}
+          >
+            <div className="feedback-form">
+              <p>
+                Would you be interested in providing feedback through face
+                recognition to enhance our service?
+              </p>
+              <img src={face} className="feedback-img"></img>
+              <FilledButton text={"Feedback"} onClick={handleFeedbackSubmit} />
+            </div>
+          </Modal>
+        )}
+        {isEmotionModalOpen && (
+        <EmotionRecognitionModal
+          isOpen={isEmotionModalOpen}
+          onClose={handleEmotionModalClose}
+          setEmotion={setEmotion}
+        />
+      )}
+        
       </div>
     </>
   );
