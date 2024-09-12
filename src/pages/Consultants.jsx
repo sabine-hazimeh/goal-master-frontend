@@ -74,20 +74,20 @@ function Consultants() {
               </div>
               <div className="Consultant-description">
                 <p>
-                  <b>Years of Experience: </b>
+                  <span className="text-bold">Years of Experience: </span>
                   {consultant.experience}
                 </p>
                 <p>
-                  <b>Description: </b>
+                  <span className="text-bold">Description: </span>
                   {consultant.description}
                 </p>
-                <div className="button-wrapper">
-                  <button
-                    className="Consultant-button"
+                <div className="text-link-wrapper">
+                  <p
+                    className="users-text-link"
                     onClick={() => handleChatNow(consultant.id)}
                   >
                     Chat now
-                  </button>
+                  </p>
                 </div>
               </div>
             </div>
