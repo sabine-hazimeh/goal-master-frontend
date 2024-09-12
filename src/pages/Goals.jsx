@@ -3,12 +3,14 @@ import "./styles/Goals.css";
 import Header from "../components/Header";
 import axios from "axios";
 import Modal from "../components/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const Goals = () => {
   const [goals, setGoals] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchGoals = async () => {
       try {
@@ -21,11 +23,14 @@ const Goals = () => {
         setGoals(response.data.educationGoal);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchGoals();
   }, []);
+
   const handleViewDetails = async (education_id) => {
     try {
       const response = await axios.get(
@@ -48,38 +53,54 @@ const Goals = () => {
     <div>
       <Header />
       <div className="goals-container">
-        {goals.map((goal) => (
-          <div className="goal-card" key={goal.id}>
-            <p className="goal-title">
-              <b>Goal: </b>
-              {goal.goal}
-            </p>
-            <p className="goal-description">
-              <b>Current Knowledge: </b>
-              {goal.current_knowledge}
-            </p>
-            <p className="goal-description">
-              <b>Available Days: </b>
-              {goal.available_days}
-            </p>
-            <p className="goal-description">
-              <b>Available Hours: </b>
-              {goal.available_hours}
-            </p>
-            <p className="goal-description">
-              <b>Deadline: </b>
-              {goal.time_horizon}
-            </p>
-            <div className="education-button-container">
-              <button
-                className="education-button"
-                onClick={() => handleViewDetails(goal.id)}
-              >
-                View Details
-              </button>
+        {loading ? (
+          <div className="Loading-wrapper">
+            <div className="Loading-goals">
+              <FontAwesomeIcon icon={faSpinner} spin className="Loading-icon" />
+              <p>Loading goals...</p>
             </div>
           </div>
-        ))}
+        ) : Array.isArray(goals) && goals.length > 0 ? (
+          goals.map((goal) => (
+            <div className="goal-card" key={goal.id}>
+              <p className="goal-title">
+                <b>Goal: </b>
+                {goal.goal}
+              </p>
+              <p className="goal-description">
+                <b>Current Knowledge: </b>
+                {goal.current_knowledge}
+              </p>
+              <p className="goal-description">
+                <b>Available Days: </b>
+                {goal.available_days}
+              </p>
+              <p className="goal-description">
+                <b>Available Hours: </b>
+                {goal.available_hours}
+              </p>
+              <p className="goal-description">
+                <b>Deadline: </b>
+                {goal.time_horizon}
+              </p>
+              <div className="education-button-container">
+                <button
+                  className="education-button"
+                  onClick={() => handleViewDetails(goal.id)}
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="no-goals-wrapper">
+            <div className="no-goals">
+              <FontAwesomeIcon icon={faBan} className="no-goals-icon" />
+              <p>No Goals found.</p>
+            </div>
+          </div>
+        )}
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {selectedGoal ? (
