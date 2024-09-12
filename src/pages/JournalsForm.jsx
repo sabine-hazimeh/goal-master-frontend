@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import "./styles/JournalsForm.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import EmotionRecognitionModal from "../components/EmotionRecognitionModal"; // Import separate EmotionRecognitionModal component
-
+import EmotionRecognitionModal from "../components/EmotionRecognitionModal"; 
 const JournalsForm = () => {
   const [mood, setMood] = useState("");
   const [focus, setFocus] = useState("");
   const [productivity, setProductivity] = useState("");
   const [description, setDescription] = useState("");
   const [emotion, setEmotion] = useState("");
-  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false); // Separate state for emotion modal
+  const [isEmotionModalOpen, setIsEmotionModalOpen] = useState(false);
 
   const handleAddNewJournal = async (event) => {
     event.preventDefault();

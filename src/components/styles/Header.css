@@ -78,3 +78,9 @@
 .dropdown-item:hover {
   background-color: #c0bcbc;
 }
+
+@media (max-width: 800px) {
+  .header-title {
+    display: none;
+  }
+}

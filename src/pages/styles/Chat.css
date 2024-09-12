@@ -16,7 +16,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 .Chat-input {
@@ -86,4 +86,12 @@
 
 .Chat-sidebar-item:hover {
   background-color: #e0e0e0;
+}
+@media (max-width: 800px) {
+  .Chat-input input {
+    width: 80%;
+  }
+  .Chat {
+    height: 90vh;
+  }
 }

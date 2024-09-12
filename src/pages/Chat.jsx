@@ -153,7 +153,7 @@ function Chat() {
                   className="Chat-sidebar-item"
                   onClick={() => handleChatClick(chat.id)}
                 >
-                  Chat with {chatPartnerName || "Unknown"}
+                  {chatPartnerName || "Unknown"}
                 </div>
               );
             })
