@@ -145,3 +145,14 @@
   justify-content: center;
   margin-top: 1rem;
 }
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.feedback-img {
+  width: 20rem;
+  height: 20rem;
+}
