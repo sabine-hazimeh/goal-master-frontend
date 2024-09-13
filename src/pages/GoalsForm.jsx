@@ -217,6 +217,10 @@ function GoalsForm() {
     handleEmotionModalClose();
     navigate("/goals");
   };
+  const handleFClose = () => {
+    setIsFeedbackOpen(false);
+    navigate("/goals");
+  };
 
   return (
     <>
@@ -509,10 +513,25 @@ function GoalsForm() {
             </Modal>
           )}
         </div>
-        {isFeedbackOpen && (
+        {(selectedCategory === "finance" || selectedCategory === "health") && isFeedbackOpen && (
           <Modal
             isOpen={isFeedbackOpen}
             onClose={() => setIsFeedbackOpen(false)}
+          >
+            <div className="feedback-form">
+              <p>
+                Would you be interested in providing feedback through face
+                recognition to enhance our service?
+              </p>
+              <img src={face} className="feedback-img"></img>
+              <FilledButton text={"Feedback"} onClick={handleFeedbackSubmit} />
+            </div>
+          </Modal>
+        )}
+        {(selectedCategory === "education") && isFeedbackOpen && (
+          <Modal
+            isOpen={isFeedbackOpen}
+            onClose={handleFClose}
           >
             <div className="feedback-form">
               <p>
