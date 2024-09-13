@@ -340,8 +340,9 @@ function GoalsForm() {
                 className="goals-input"
                 onChange={handleInputChange}
               >
-                <option value="male">Female</option>
-                <option value="female">Male</option>
+                <option value="">Choose gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
               </select>
               <label className="goals-label">Height</label>
               <input
