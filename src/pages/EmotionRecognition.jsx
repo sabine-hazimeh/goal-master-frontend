@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
+import axios from "axios";
 import "./styles/EmotionRecognition.css";
 import FilledButton from "../components/FilledButton";
-const EmotionRecognition = ({ setEmotion, onClose }) => {
+
+const EmotionRecognition = ({ setEmotion, onClose, sendEmotion }) => {
   const videoRef = useRef(null);
   const [detectedEmotion, setDetectedEmotion] = useState("");
 
@@ -49,6 +51,29 @@ const EmotionRecognition = ({ setEmotion, onClose }) => {
   const handleSubmit = () => {
     setEmotion(detectedEmotion);
     onClose();
+
+    if (sendEmotion) {
+      axios
+        .post(
+          "http://localhost:8000/api/emotions",
+          {
+            emotion: detectedEmotion,
+            type: "detected",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          console.log("Emotion sent successfully:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error sending emotion:", error);
+        });
+    }
   };
 
   return (
