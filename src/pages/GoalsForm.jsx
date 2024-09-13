@@ -364,12 +364,14 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Age"
                 onChange={handleInputChange}
+                value={formData.age}
               />
               <label className="goals-label">Gender</label>
               <select
                 name="gender"
                 className="goals-input"
                 onChange={handleInputChange}
+
               >
                 <option value="">Choose gender</option>
                 <option value="female">Female</option>
@@ -383,6 +385,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Height"
                 onChange={handleInputChange}
+                value={formData.height}
               />
               <label className="goals-label">Current Weight</label>
               <input
@@ -392,6 +395,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Current Weight"
                 onChange={handleInputChange}
+                value={formData.current_weight}
               />
               <label className="goals-label">Desired Weight</label>
               <input
@@ -401,6 +405,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Desired Weight"
                 onChange={handleInputChange}
+                value={formData.desired_weight}
               />
               <label className="goals-label">Medical Conditions</label>
               <input
@@ -409,6 +414,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Medical Conditions"
                 onChange={handleInputChange}
+                value={formData.medical_conditions}
               />
               <label className="goals-label">Time Horizon</label>
               <input
@@ -416,6 +422,7 @@ function GoalsForm() {
                 name="time_horizon"
                 className="goals-input"
                 onChange={handleInputChange}
+                value={formData.time_horizon}
               />
               <div className="goals-button-container">
                 <FilledButton text="Submit" className="goals-form-button" />
@@ -459,6 +466,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Goal"
                 onChange={handleInputChange}
+                value={formData.goal}
               />
               <label className="goals-label">Current Knowledge</label>
               <select
@@ -479,6 +487,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Available Days"
                 onChange={handleInputChange}
+                value={formData.available_days}
               />
               <label className="goals-label">Available Hours</label>
               <input
@@ -487,6 +496,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Available Hours"
                 onChange={handleInputChange}
+                value={formData.available_hours}
               />
               <label className="goals-label">Time Horizon</label>
               <input
@@ -494,6 +504,7 @@ function GoalsForm() {
                 name="time_horizon"
                 className="goals-input"
                 onChange={handleInputChange}
+                value={formData.time_horizon}
               />
               <div className="goals-button-container">
                 <FilledButton text="Submit" className="goals-form-button" />
