@@ -3,7 +3,8 @@ import "./styles/JournalsForm.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import EmotionRecognitionModal from "../components/EmotionRecognitionModal"; 
-const JournalsForm = () => {
+
+const JournalsForm = ({ onAddJournal }) => {
   const [mood, setMood] = useState("");
   const [focus, setFocus] = useState("");
   const [productivity, setProductivity] = useState("");
@@ -37,6 +38,9 @@ const JournalsForm = () => {
           },
         }
       );
+
+      const newJournal = journalResponse.data.journal;
+      onAddJournal(newJournal); 
 
       toast.success("Journal added successfully");
       setMood("");

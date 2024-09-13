@@ -16,7 +16,12 @@ function Journals() {
   const [journals, setJournals] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const handleAddNewJournal = () => {
+
+  const handleAddNewJournal = (newJournal) => {
+    setJournals((prevJournals) => [newJournal, ...prevJournals]);
+  };
+
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
 
@@ -56,7 +61,7 @@ function Journals() {
       <Header />
       <div className="journals">
         <p className="journals-text">Did you write in your journal today?</p>
-        <button className="journals-button" onClick={handleAddNewJournal}>
+        <button className="journals-button" onClick={handleOpenModal}>
           Add New Journal
         </button>
 
@@ -114,7 +119,7 @@ function Journals() {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <JournalsForm />
+        <JournalsForm onAddJournal={handleAddNewJournal} />
       </Modal>
     </>
   );
