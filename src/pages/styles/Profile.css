@@ -29,7 +29,6 @@
 .filled-button,
 .empty-button {
   height: auto;
-  max-height: 3rem;
 }
 .profile-img-buttons {
   display: flex;

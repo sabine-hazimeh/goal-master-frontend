@@ -475,15 +475,17 @@ function GoalsForm() {
                     {course["Duration to complete (Approx.)"]} {"hours"} <br />
                     <strong>Level:</strong> {course["Level"]}
                     <br />
-                    <strong>URL: </strong>
-                    <a
-                      href={course["Course Url"]}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="course-link"
-                    >
-                      {course["Course Url"]}
-                    </a>
+                    <p>
+                      Check the course from{" "}
+                      <a
+                        href={course["Course Url"]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="course-link"
+                      >
+                        here
+                      </a>
+                    </p>
                     <div className="add-course-button-container">
                       <button
                         className="add-course-button"
@@ -514,13 +516,12 @@ function GoalsForm() {
           </Modal>
         )}
         {isEmotionModalOpen && (
-        <EmotionRecognitionModal
-          isOpen={isEmotionModalOpen}
-          onClose={handleEmotionModalClose}
-          setEmotion={setEmotion}
-        />
-      )}
-        
+          <EmotionRecognitionModal
+            isOpen={isEmotionModalOpen}
+            onClose={handleEmotionModalClose}
+            setEmotion={setEmotion}
+          />
+        )}
       </div>
     </>
   );
