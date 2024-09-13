@@ -9,8 +9,26 @@ import { useNavigate } from "react-router-dom";
 import face from "../images/face-recognition.gif";
 import EmotionRecognitionModal from "../components/EmotionRecognitionModal";
 function GoalsForm() {
+  const initialFormState = {
+    income: "",
+    savings: "",
+    expenses: "",
+    target: "",
+    target_date: "",
+    age: "",
+    gender: "",
+    height: "",
+    current_weight: "",
+    desired_weight: "",
+    medical_conditions: "",
+    time_horizon: "",
+    goal: "",
+    current_knowledge: "",
+    available_hours: "",
+    available_days: ""
+  };
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(initialFormState);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [modalContent, setModalContent] = useState("");
@@ -126,7 +144,8 @@ function GoalsForm() {
         },
       });
 
-      console.log("Goal submitted successfully:", result.data);
+      console.log("Goal submitted successfully:", result.data);  
+      setFormData(initialFormState); 
       if (selectedCategory === "education") {
         const goalId = result.data["education goal"].id;
         console.log("Education goal ID:", goalId);
@@ -281,6 +300,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Income"
                 onChange={handleInputChange}
+                value={formData.income}
               />
 
               <label className="goals-label">Savings</label>
@@ -290,6 +310,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Savings"
                 onChange={handleInputChange}
+                value={formData.savings}
               />
 
               <label className="goals-label">Expenses</label>
@@ -299,6 +320,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Expenses"
                 onChange={handleInputChange}
+                value={formData.expenses}
               />
 
               <label className="goals-label">Target</label>
@@ -308,6 +330,7 @@ function GoalsForm() {
                 className="goals-input"
                 placeholder="Enter Target"
                 onChange={handleInputChange}
+                value={formData.target}
               />
 
               <label className="goals-label">Target Date</label>
@@ -316,6 +339,7 @@ function GoalsForm() {
                 name="target_date"
                 className="goals-input"
                 onChange={handleInputChange}
+                value={formData.target_date}
               />
               <div className="goals-button-container">
                 <FilledButton text="Submit" className="goals-form-button" />
