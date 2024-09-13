@@ -114,6 +114,7 @@ const JournalsForm = () => {
           isOpen={isEmotionModalOpen}
           onClose={toggleEmotionModal}
           setEmotion={setEmotion}
+          sendEmotion={false}
         />
       )}
     </form>

@@ -520,6 +520,7 @@ function GoalsForm() {
             isOpen={isEmotionModalOpen}
             onClose={handleEmotionModalClose}
             setEmotion={setEmotion}
+            sendEmotion={true} 
           />
         )}
       </div>
