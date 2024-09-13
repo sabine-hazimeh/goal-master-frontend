@@ -208,12 +208,15 @@ function GoalsForm() {
         }
       );
       console.log("Course added successfully:", response.data);
-      // navigate("/goals");
       HandleEducationClose();
     } catch (error) {
       console.error("Error adding the course:", error);
     }
   }
+  const handleEClose = () => {
+    handleEmotionModalClose();
+    navigate("/goals");
+  };
 
   return (
     <>
@@ -521,14 +524,24 @@ function GoalsForm() {
             </div>
           </Modal>
         )}
-        {isEmotionModalOpen && (
-          <EmotionRecognitionModal
-            isOpen={isEmotionModalOpen}
-            onClose={handleEmotionModalClose}
-            setEmotion={setEmotion}
-            sendEmotion={true}
-          />
-        )}
+        {(selectedCategory === "finance" || selectedCategory === "health") &&
+          isEmotionModalOpen && (
+            <EmotionRecognitionModal
+              isOpen={isEmotionModalOpen}
+              onClose={handleEmotionModalClose}
+              setEmotion={setEmotion}
+              sendEmotion={true}
+            />
+          )}
+          {(selectedCategory === "education") &&
+          isEmotionModalOpen && (
+            <EmotionRecognitionModal
+              isOpen={isEmotionModalOpen}
+              onClose={handleEClose}
+              setEmotion={setEmotion}
+              sendEmotion={true}
+            />
+          )}
       </div>
     </>
   );
