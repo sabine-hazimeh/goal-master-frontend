@@ -38,6 +38,10 @@ function GoalsForm() {
     }
     setSelectedCategory(selectedCategory === name ? null : name);
   }
+  function HandleEducationClose() {
+    setIsModalOpen(false);
+    setIsFeedbackOpen(true);
+  }
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -204,7 +208,8 @@ function GoalsForm() {
         }
       );
       console.log("Course added successfully:", response.data);
-      navigate("/goals");
+      // navigate("/goals");
+      HandleEducationClose();
     } catch (error) {
       console.error("Error adding the course:", error);
     }
@@ -520,7 +525,7 @@ function GoalsForm() {
             isOpen={isEmotionModalOpen}
             onClose={handleEmotionModalClose}
             setEmotion={setEmotion}
-            sendEmotion={true} 
+            sendEmotion={true}
           />
         )}
       </div>
