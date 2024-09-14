@@ -18,7 +18,7 @@ function Journals() {
   const [loading, setLoading] = useState(true);
 
   const handleAddNewJournal = (newJournal) => {
-    setJournals((prevJournals) => [newJournal, ...prevJournals]);
+    setJournals((prevJournals) => [...prevJournals, newJournal]);
   };
 
   const handleOpenModal = () => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles/JournalsForm.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import EmotionRecognitionModal from "../components/EmotionRecognitionModal"; 
+import EmotionRecognitionModal from "../components/EmotionRecognitionModal";
 
 const JournalsForm = ({ onAddJournal }) => {
   const [mood, setMood] = useState("");
@@ -29,7 +29,7 @@ const JournalsForm = ({ onAddJournal }) => {
           productivity,
           focus,
           description,
-          emotion,
+          emotion, // Make sure emotion is sent in the payload
         },
         {
           headers: {
@@ -40,7 +40,11 @@ const JournalsForm = ({ onAddJournal }) => {
       );
 
       const newJournal = journalResponse.data.journal;
-      onAddJournal(newJournal); 
+
+      if (!newJournal.emotion) {
+        newJournal.emotion = { emotion };
+      }
+      onAddJournal(newJournal);
 
       toast.success("Journal added successfully");
       setMood("");
