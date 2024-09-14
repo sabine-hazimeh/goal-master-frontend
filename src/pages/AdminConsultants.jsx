@@ -137,15 +137,15 @@ function AdminConsultants() {
                     <b>Description: </b>
                     {consultant.description}
                   </p>
-                  <div className="button-wrapper">
-                    <button
-                      className="Consultant-button"
+                  <div className="text-link-wrapper">
+                    <p
+                      className="users-text-link"
                       onClick={() =>
                         navigate(`/update-consultant/${consultant.id}`)
                       }
                     >
                       Update
-                    </button>
+                    </p>
                   </div>
                 </div>
               </div>
