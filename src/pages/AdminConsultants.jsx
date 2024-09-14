@@ -23,7 +23,7 @@ function AdminConsultants() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/consultants`,
+          `http://localhost:8000/api/admin-consultants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
