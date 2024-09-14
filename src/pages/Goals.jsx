@@ -141,10 +141,17 @@ const Goals = () => {
                   {" "}
                   <strong>Level:</strong> {course.level}
                 </p>
-                <strong>URL: </strong>
-                <a href={course.url} target="_blank" rel="noopener noreferrer">
-                  {course.url}
-                </a>
+                <p>
+                  Check course details from{" "}
+                  <a
+                    href={course.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="course-link"
+                  >
+                    here
+                  </a>
+                </p>
               </div>
             ))}
           </div>
