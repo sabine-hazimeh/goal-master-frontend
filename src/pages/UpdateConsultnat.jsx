@@ -6,10 +6,11 @@ import FilledButton from "../components/FilledButton";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UpdateConsultant = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -72,6 +73,7 @@ const UpdateConsultant = () => {
       );
 
       toast.success("Consultant profile updated successfully!");
+      navigate("/admin-consultants");
     } catch (error) {
       toast.error("Error updating consultant profile.");
       console.error(
