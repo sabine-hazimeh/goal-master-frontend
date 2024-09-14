@@ -6,7 +6,7 @@ import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate } from "react-router-dom";
 function ConsultantsForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +15,8 @@ function ConsultantsForm() {
   const [experience, setExperience] = useState("");
   const [description, setDescription] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
-
+  const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -50,6 +51,7 @@ function ConsultantsForm() {
       setDescription("");
       setProfilePhoto(null);
       document.querySelector('input[type="file"]').value = null;
+      navigate("/admin-consultants");
     } catch (error) {
       toast.error("Error registering consultant.");
       console.error(
