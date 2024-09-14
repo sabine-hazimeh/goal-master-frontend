@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react"; 
 import "./styles/Chat.css";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
@@ -19,6 +19,12 @@ function Chat() {
   const user = useSelector((state) => state.user.user);
   const userId = user ? user.id : null;
   const navigate = useNavigate();
+
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     async function fetchChats() {
@@ -113,6 +119,10 @@ function Chat() {
     }
   }, [chatId]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const handleSendMessage = async () => {
     const token = localStorage.getItem("Token");
     try {
@@ -174,6 +184,7 @@ function Chat() {
                 {message.content}
               </p>
             ))}
+            <div ref={messagesEndRef} />
           </div>
           <div className="Chat-input">
             <input

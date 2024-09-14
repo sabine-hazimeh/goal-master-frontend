@@ -6,7 +6,7 @@
 .Chat {
   display: flex;
   flex-direction: column;
-  height: 72vh;
+  height: 87vh;
   width: 85%;
 }
 
@@ -16,7 +16,6 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
 
 .Chat-input {
@@ -89,7 +88,10 @@
 }
 @media (max-width: 800px) {
   .Chat-input input {
-    width: 80%;
+    width: 77%;
+  }
+  .Chat-input {
+    left:28%;
   }
   .Chat {
     height: 90vh;
