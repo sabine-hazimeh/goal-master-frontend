@@ -13,10 +13,25 @@ import {
 } from "recharts";
 
 const SentimentChart = () => {
-  
-  return (
-    <Header />
-  );
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchSentimentData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5002/api/sentiment");
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching sentiment data", error);
+      }
+    };
+
+    fetchSentimentData();
+    const intervalId = setInterval(fetchSentimentData, 60000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return <Header />;
 };
 
 export default SentimentChart;
