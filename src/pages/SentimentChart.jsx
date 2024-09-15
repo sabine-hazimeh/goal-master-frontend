@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../components/Header";
+import "./styles/SentimentChart.css";
 import {
   LineChart,
   Line,
@@ -31,7 +32,30 @@ const SentimentChart = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <div className="SentimentChart">
+        <ResponsiveContainer width="85%" height={400}>
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="date"
+              tickFormatter={(date) => new Date(date).toLocaleDateString()}
+            />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="average_sentiment"
+              stroke="#8884d8"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </>
+  );
 };
 
 export default SentimentChart;
