@@ -18,6 +18,7 @@ import Profile from "./pages/Profile";
 import UpdateConsultnat from "./pages/UpdateConsultnat";
 import Goals from "./pages/Goals";
 import EmotionRecognition from "./pages/EmotionRecognition";
+import SentimentChart from "./pages/SentimentChart";
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +41,7 @@ function App() {
           <Route path="/update-consultant/:id" element={<UpdateConsultnat />} />
           <Route path="/goals" element={<Goals />} />
           <Route path="/emotion-recognition" element={<EmotionRecognition />} />
+          <Route path="/sentiment-chart" element={<SentimentChart />} />
         </Route>
       </Routes>
     </BrowserRouter>

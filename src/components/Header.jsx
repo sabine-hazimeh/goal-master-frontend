@@ -68,21 +68,26 @@ const Header = () => {
           </Link>
         )}
         {isAdmin && (
-          <div className="header-links dropdown">
-            <span onClick={toggleDropdown} className="dropdown-toggle">
-              Consultants
-            </span>
-            {showDropdown && (
-              <div className="dropdown-menu">
-                <Link to="/consultants-form" className="dropdown-item">
-                  Add Consultant
-                </Link>
-                <Link to="/admin-consultants" className="dropdown-item">
-                  View Consultants
-                </Link>
-              </div>
-            )}
-          </div>
+          <>
+            <Link to="/sentiment-chart" className="header-links">
+              Feedback
+            </Link>
+            <div className="header-links dropdown">
+              <span onClick={toggleDropdown} className="dropdown-toggle">
+                Consultants
+              </span>
+              {showDropdown && (
+                <div className="dropdown-menu">
+                  <Link to="/consultants-form" className="dropdown-item">
+                    Add Consultant
+                  </Link>
+                  <Link to="/admin-consultants" className="dropdown-item">
+                    View Consultants
+                  </Link>
+                </div>
+              )}
+            </div>
+          </>
         )}
         {isAuthenticated ? (
           <Link onClick={handleLogout} className="header-links auth-link">
