@@ -92,3 +92,16 @@
   gap: 5rem;
   margin-top: 1rem;
 }
+@media (max-width: 800px) {
+  .intro-right {
+    display: none;
+  }
+  .intro-left {
+    width: 100%;
+  }
+  .face_scan .intro-title {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+}
