@@ -36,6 +36,8 @@ const SentimentChart = () => {
     <>
       <Header />
       <div className="SentimentChart">
+        <p className="sentiment-title">Sentiment Over Time</p>
+        <p>This chart represents the sentiment scores detected over time.</p>
         <ResponsiveContainer width="85%" height={400}>
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
