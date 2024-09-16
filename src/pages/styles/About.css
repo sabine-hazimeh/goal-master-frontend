@@ -52,3 +52,38 @@
   line-height: 35px;
   margin-bottom: 1rem;
 }
+@media (max-width: 800px) {
+  .upper-img {
+    width: 300px;
+    height: 300px;
+    align-self: center;
+  }
+  .upper-left {
+    width: 50%;
+    align-self: center;
+  }
+  .about-upper {
+    gap:2rem;
+    width: 90%;
+  }
+  .upper-right {
+    width: 50%;
+  }
+  .lower-left {
+    width: 50%;
+  }
+  .lower-img {
+    width: 300px;
+    height: 300px;
+  }
+  .lower-right {
+    width: 50%;
+  }
+  .upper-text {
+    font-size: 1.25rem;
+    line-height: 30px;
+  }
+  .upper-title {
+    font-size: 35px;
+  }
+}
