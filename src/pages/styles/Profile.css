@@ -86,3 +86,9 @@
 .confirm-label{
     margin-top: 2rem;
 }
+@media (max-width: 800px) {
+  .profile {
+    width: 85%;
+    margin-top: 5rem;
+  }
+}
