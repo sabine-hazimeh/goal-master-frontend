@@ -54,18 +54,26 @@ const Header = () => {
         <Link to="/journals" className="header-links">
           Journal
         </Link>
-        <Link to="/about" className="header-links">
-          About
-        </Link>
+
         {isUser && (
-          <Link to="/profile" className="header-links">
-            Profile
-          </Link>
+          <>
+            <Link to="/profile" className="header-links">
+              Profile
+            </Link>
+            <Link to="/about" className="header-links">
+              About
+            </Link>
+          </>
         )}
         {isConsultant && (
-          <Link to="/users" className="header-links">
-            Users
-          </Link>
+          <>
+            <Link to="/users" className="header-links">
+              Users
+            </Link>
+            <Link to="/about" className="header-links">
+              About
+            </Link>
+          </>
         )}
         {isAdmin && (
           <>
