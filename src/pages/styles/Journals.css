@@ -70,3 +70,8 @@
   width: 100%;
   justify-content: flex-end;
 }
+@media (max-width: 800px) {
+  .journals-button {
+    width: 30%;
+  }
+}
