@@ -103,5 +103,11 @@
     font-size: 30px;
     font-weight: bold;
   }
-  
+  .face_scan .intro-text {
+    font-size: 18px;
+    line-height: 30px;
+  }
+  .feature {
+    font-size: 15px;
+  }
 }
