@@ -86,4 +86,18 @@
   .upper-title {
     font-size: 35px;
   }
+  .about-lower{
+    width: 90%;
+  }
+  .lower-text{
+    font-size: 1rem;
+    line-height: 30px;
+  }
+  .lower-right {
+    align-items: center;
+  }
+  .lower-img {
+    width: 100%;
+    height: 70%;
+  }
 }
