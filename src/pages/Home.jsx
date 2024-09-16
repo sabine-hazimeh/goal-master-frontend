@@ -71,7 +71,7 @@ const Home = () => {
               in real-time. Our system can recognize these emotions with high
               accuracy, allowing us to better understand how you're feeling.
             </p>
-            <FilledButton text="Try it now!" onClick={openModal} />
+              <FilledButton text="Try it now!" onClick={openModal} />
           </div>
         </div>
         <div className="Features_container">

@@ -156,3 +156,17 @@
   width: 20rem;
   height: 20rem;
 }
+@media (max-width: 800px) {
+  .goals-form-image {
+    display: none;
+  }
+  .goals-form-left {
+    width: 30%;
+  }
+  .goals-form-right {
+    width: 70%;
+  }
+  .goals-form-container {
+    gap: 1rem;
+  }
+}
