@@ -25,7 +25,7 @@ function GoalsForm() {
     goal: "",
     current_knowledge: "",
     available_hours: "",
-    available_days: ""
+    available_days: "",
   };
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState(initialFormState);
@@ -117,12 +117,14 @@ function GoalsForm() {
         console.error("There was an error with the OpenAI request:", error);
         return;
       }
-      url = "http://localhost:8000/api/finance";
+      url =
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/finance";
     } else if (selectedCategory === "health") {
-      url = "http://localhost:8000/api/health";
+      url = "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/health";
       requestExerciseRecommendation();
     } else if (selectedCategory === "education") {
-      url = "http://localhost:8000/api/education";
+      url =
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/education";
       requestRecommendation();
     }
 
@@ -144,8 +146,8 @@ function GoalsForm() {
         },
       });
 
-      console.log("Goal submitted successfully:", result.data);  
-      setFormData(initialFormState); 
+      console.log("Goal submitted successfully:", result.data);
+      setFormData(initialFormState);
       if (selectedCategory === "education") {
         const goalId = result.data["education goal"].id;
         console.log("Education goal ID:", goalId);
@@ -218,7 +220,7 @@ function GoalsForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/coursera",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/coursera",
         courseData,
         {
           headers: {
@@ -371,7 +373,6 @@ function GoalsForm() {
                 name="gender"
                 className="goals-input"
                 onChange={handleInputChange}
-
               >
                 <option value="">Choose gender</option>
                 <option value="female">Female</option>
@@ -548,26 +549,27 @@ function GoalsForm() {
             </Modal>
           )}
         </div>
-        {(selectedCategory === "finance" || selectedCategory === "health") && isFeedbackOpen && (
-          <Modal
-            isOpen={isFeedbackOpen}
-            onClose={() => setIsFeedbackOpen(false)}
-          >
-            <div className="feedback-form">
-              <p>
-                Would you be interested in providing feedback through face
-                recognition to enhance our service?
-              </p>
-              <img src={face} className="feedback-img"></img>
-              <FilledButton text={"Feedback"} onClick={handleFeedbackSubmit} />
-            </div>
-          </Modal>
-        )}
-        {(selectedCategory === "education") && isFeedbackOpen && (
-          <Modal
-            isOpen={isFeedbackOpen}
-            onClose={handleFClose}
-          >
+        {(selectedCategory === "finance" || selectedCategory === "health") &&
+          isFeedbackOpen && (
+            <Modal
+              isOpen={isFeedbackOpen}
+              onClose={() => setIsFeedbackOpen(false)}
+            >
+              <div className="feedback-form">
+                <p>
+                  Would you be interested in providing feedback through face
+                  recognition to enhance our service?
+                </p>
+                <img src={face} className="feedback-img"></img>
+                <FilledButton
+                  text={"Feedback"}
+                  onClick={handleFeedbackSubmit}
+                />
+              </div>
+            </Modal>
+          )}
+        {selectedCategory === "education" && isFeedbackOpen && (
+          <Modal isOpen={isFeedbackOpen} onClose={handleFClose}>
             <div className="feedback-form">
               <p>
                 Would you be interested in providing feedback through face
@@ -587,15 +589,14 @@ function GoalsForm() {
               sendEmotion={true}
             />
           )}
-          {(selectedCategory === "education") &&
-          isEmotionModalOpen && (
-            <EmotionRecognitionModal
-              isOpen={isEmotionModalOpen}
-              onClose={handleEClose}
-              setEmotion={setEmotion}
-              sendEmotion={true}
-            />
-          )}
+        {selectedCategory === "education" && isEmotionModalOpen && (
+          <EmotionRecognitionModal
+            isOpen={isEmotionModalOpen}
+            onClose={handleEClose}
+            setEmotion={setEmotion}
+            sendEmotion={true}
+          />
+        )}
       </div>
     </>
   );

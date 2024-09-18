@@ -55,7 +55,7 @@ const EmotionRecognition = ({ setEmotion, onClose, sendEmotion }) => {
     if (sendEmotion) {
       axios
         .post(
-          "http://localhost:8000/api/emotions",
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/emotions",
           {
             emotion: detectedEmotion,
             type: "detected",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"; 
+import React, { useEffect, useState, useRef } from "react";
 import "./styles/Chat.css";
 import Header from "../components/Header";
 import { useParams } from "react-router-dom";
@@ -29,10 +29,9 @@ function Chat() {
   useEffect(() => {
     async function fetchChats() {
       const token = localStorage.getItem("Token");
-
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/user-chats",
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/user-chats",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -55,7 +54,7 @@ function Chat() {
 
       try {
         const chatResponse = await axios.get(
-          `http://localhost:8000/api/chats/${chatId}`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/chats/${chatId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -72,7 +71,7 @@ function Chat() {
         setReceiverId(determinedReceiverId);
 
         const messagesResponse = await axios.get(
-          `http://localhost:8000/api/messages/${chatId}`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/messages/${chatId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -127,7 +126,7 @@ function Chat() {
     const token = localStorage.getItem("Token");
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/message`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/message`,
         { content: newMessage, chat_id: chatId, receiver_id: receiverId },
         {
           headers: {

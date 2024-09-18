@@ -15,12 +15,15 @@ function Users() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get("http://localhost:8000/api/users", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/users",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         setUsers(response.data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -36,7 +39,7 @@ function Users() {
     const token = localStorage.getItem("Token");
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/chat`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/chat`,
         { consultant_id: userId },
         {
           headers: {
@@ -62,11 +65,7 @@ function Users() {
         {loading ? (
           <div className="no-journals-wrapper">
             <div className="no-journals">
-              <FontAwesomeIcon
-                icon={faSpinner}
-                spin
-                className="loading-icon"
-              />
+              <FontAwesomeIcon icon={faSpinner} spin className="loading-icon" />
               <p>Loading users...</p>
             </div>
           </div>
@@ -77,7 +76,7 @@ function Users() {
                 <img
                   src={
                     user.profile_photo
-                      ? `http://localhost:8000/storage/${user.profile_photo}`
+                      ? `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/storage/${user.profile_photo}`
                       : Default
                   }
                   className="Consultant-img"

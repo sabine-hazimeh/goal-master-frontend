@@ -18,11 +18,15 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [journals, setJournals] = useState([]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const navigate = useNavigate();
+  const handleAddNewJournal = (newJournal) => {
+    setJournals((prevJournals) => [...prevJournals, newJournal]);
+  };
 
   return (
     <>
@@ -71,7 +75,7 @@ const Home = () => {
               in real-time. Our system can recognize these emotions with high
               accuracy, allowing us to better understand how you're feeling.
             </p>
-              <FilledButton text="Try it now!" onClick={openModal} />
+            <FilledButton text="Try it now!" onClick={openModal} />
           </div>
         </div>
         <div className="Features_container">
@@ -104,7 +108,7 @@ const Home = () => {
       <Footer />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <JournalsForm />
+        <JournalsForm onAddJournal={handleAddNewJournal} />
       </Modal>
     </>
   );

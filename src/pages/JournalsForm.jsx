@@ -23,13 +23,13 @@ const JournalsForm = ({ onAddJournal }) => {
 
     try {
       const journalResponse = await axios.post(
-        "http://localhost:8000/api/journal",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/journal",
         {
           mood,
           productivity,
           focus,
           description,
-          emotion, // Make sure emotion is sent in the payload
+          emotion,
         },
         {
           headers: {
@@ -53,11 +53,9 @@ const JournalsForm = ({ onAddJournal }) => {
       setDescription("");
       setEmotion("");
     } catch (error) {
-      if (error.response && error.response.data) {
+      
         toast.error(`Failed to add journal: ${error.response.data.message}`);
-      } else {
-        toast.error("Failed to add journal");
-      }
+      
     }
   };
 

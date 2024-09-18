@@ -23,7 +23,7 @@ function AdminConsultants() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/admin-consultants`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/admin-consultants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ function AdminConsultants() {
     }
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/consultants/${id}`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,7 +110,7 @@ function AdminConsultants() {
                     <img
                       src={
                         consultant.profile_photo
-                          ? `http://localhost:8000/storage/${consultant.profile_photo}`
+                          ? `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/storage/${consultant.profile_photo}`
                           : Default
                       }
                       className="Consultant-img"

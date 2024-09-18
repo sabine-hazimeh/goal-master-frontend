@@ -21,17 +21,20 @@ const Profile = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
   const [profilePhotoFile, setProfilePhotoFile] = useState(null);
-  const fileInputRef = useRef(null); 
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const response = await axios.get("http://localhost:8000/api/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         setProfile(response.data);
         setProfilePhotoURL(response.data.profile_photo);
       } catch (err) {
@@ -83,12 +86,16 @@ const Profile = () => {
     }
 
     try {
-      await axios.post("http://localhost:8000/api/profile", updatedProfile, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/profile",
+        updatedProfile,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       toast.success("Profile updated successfully!");
       setError("");
     } catch (err) {
@@ -121,7 +128,7 @@ const Profile = () => {
           <img
             src={
               profilePhotoURL
-                ? `http://localhost:8000/storage/${profilePhotoURL}`
+                ? `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/storage/${profilePhotoURL}`
                 : Default
             }
             className="profile-img"
@@ -160,13 +167,13 @@ const Profile = () => {
             Change Password?
           </p>
           <div className="save-button-container">
-          <div className="save-button">
-            <FilledButton
-              text="Save Changes"
-              type="submit"
-              disabled={isButtonDisabled && !profilePhotoFile}
-            />
-          </div>
+            <div className="save-button">
+              <FilledButton
+                text="Save Changes"
+                type="submit"
+                disabled={isButtonDisabled && !profilePhotoFile}
+              />
+            </div>
           </div>
         </form>
       </div>
@@ -175,68 +182,72 @@ const Profile = () => {
         <div className="password-modal-content">
           <h2 className="password-modal-title">Change Password</h2>
           <div className="password-modal-form">
-          <label className="modal-label">New Password</label>
-          <input
-            type="password"
-            className="modal-input"
-            value={newPassword}
-            onChange={(e) => {
-              setNewPassword(e.target.value);
-              validatePassword(e.target.value);
-            }}
-            placeholder="Enter your new password"
-            required
-            onFocus={() => setPasswordFocused(true)}
-            onBlur={() => setPasswordFocused(false)}
-          />
-          {passwordFocused && (
-            <div className="password-validation">
-              <ul>
-                <li className={newPassword.length > 8 ? "valid" : "invalid"}>
-                  At least 8 characters long
-                </li>
-                <li
-                  className={
-                    /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
-                      ? "valid"
-                      : "invalid"
-                  }
-                >
-                  Contain a special character
-                </li>
-                <li className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}>
-                  Contain an uppercase letter
-                </li>
-              </ul>
-            </div>
-          )}
-          <label className="modal-label confirm-label">Confirm New Password</label>
-          <input
-            type="password"
-            className="modal-input "
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm your new password"
-            required
-            onFocus={() => setConfirmPasswordFocused(true)}
-            onBlur={() => setConfirmPasswordFocused(false)}
-          />
-          {confirmPasswordFocused && (
-            <div className="password-validation">
-              <ul>
-                <li className={passwordMatch ? "valid" : "invalid"}>
-                  Passwords match
-                </li>
-              </ul>
-            </div>
-          )}
-          {error && <p className="error-message">{error}</p>}
-          <div className="modal-save-button">
-            <FilledButton
-              text="Save Password"
-              onClick={closePasswordModal}
-              disabled={isButtonDisabled}
+            <label className="modal-label">New Password</label>
+            <input
+              type="password"
+              className="modal-input"
+              value={newPassword}
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+                validatePassword(e.target.value);
+              }}
+              placeholder="Enter your new password"
+              required
+              onFocus={() => setPasswordFocused(true)}
+              onBlur={() => setPasswordFocused(false)}
             />
+            {passwordFocused && (
+              <div className="password-validation">
+                <ul>
+                  <li className={newPassword.length > 8 ? "valid" : "invalid"}>
+                    At least 8 characters long
+                  </li>
+                  <li
+                    className={
+                      /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                        ? "valid"
+                        : "invalid"
+                    }
+                  >
+                    Contain a special character
+                  </li>
+                  <li
+                    className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}
+                  >
+                    Contain an uppercase letter
+                  </li>
+                </ul>
+              </div>
+            )}
+            <label className="modal-label confirm-label">
+              Confirm New Password
+            </label>
+            <input
+              type="password"
+              className="modal-input "
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your new password"
+              required
+              onFocus={() => setConfirmPasswordFocused(true)}
+              onBlur={() => setConfirmPasswordFocused(false)}
+            />
+            {confirmPasswordFocused && (
+              <div className="password-validation">
+                <ul>
+                  <li className={passwordMatch ? "valid" : "invalid"}>
+                    Passwords match
+                  </li>
+                </ul>
+              </div>
+            )}
+            {error && <p className="error-message">{error}</p>}
+            <div className="modal-save-button">
+              <FilledButton
+                text="Save Password"
+                onClick={closePasswordModal}
+                disabled={isButtonDisabled}
+              />
             </div>
           </div>
         </div>

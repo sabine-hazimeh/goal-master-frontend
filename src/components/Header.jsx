@@ -21,9 +21,12 @@ const Header = () => {
   const handleLogout = async () => {
     const token = localStorage.getItem("Token");
     try {
-      const response = await axios.get("http://localhost:8000/api/logout", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/logout",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       console.log("Logout response:", response.data);
       localStorage.removeItem("Token");
       setIsAuthenticated(false);

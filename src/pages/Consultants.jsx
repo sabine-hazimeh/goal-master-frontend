@@ -18,7 +18,7 @@ function Consultants() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/consultants`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ function Consultants() {
     const token = localStorage.getItem("Token");
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/chat`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/chat`,
         { consultant_id: consultantId },
         {
           headers: {

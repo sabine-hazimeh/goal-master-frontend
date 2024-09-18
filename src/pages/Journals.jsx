@@ -38,7 +38,7 @@ function Journals() {
       }
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/user-journals",
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/user-journals",
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -16,7 +16,7 @@ function ConsultantsForm() {
   const [description, setDescription] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -32,7 +32,7 @@ function ConsultantsForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register/consultant",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/register/consultant",
         formData,
         {
           headers: {

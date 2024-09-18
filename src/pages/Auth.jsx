@@ -31,10 +31,13 @@ const Auth = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/login",
+        {
+          email,
+          password,
+        }
+      );
       const { access_token, user } = response.data;
       localStorage.setItem("Token", access_token);
       dispatch(loginSuccess({ user, access_token }));
@@ -63,7 +66,7 @@ const Auth = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/register",
         {
           email,
           password,
