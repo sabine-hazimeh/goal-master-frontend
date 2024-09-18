@@ -6,10 +6,11 @@ import FilledButton from "../components/FilledButton";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UpdateConsultant = () => {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: "",
     email: "",
@@ -24,7 +25,7 @@ const UpdateConsultant = () => {
     async function fetchProfile() {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/consultants/${id}`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("Token")}`,
@@ -61,7 +62,7 @@ const UpdateConsultant = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/consultants/${id}`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants/${id}`,
         formData,
         {
           headers: {
@@ -72,6 +73,7 @@ const UpdateConsultant = () => {
       );
 
       toast.success("Consultant profile updated successfully!");
+      navigate("/admin-consultants");
     } catch (error) {
       toast.error("Error updating consultant profile.");
       console.error(
@@ -84,25 +86,25 @@ const UpdateConsultant = () => {
   return (
     <>
       <Header />
-      <div className="journals-form-container">
-        <div className="journals-left">
-          <img src={consultant} className="journals-img" alt="Consultant" />
+      <div className="consultants-form-container">
+        <div className="consultants-left">
+          <img src={consultant} className="consultants-img" alt="Consultant" />
         </div>
-        <div className="journals-right">
-          <form className="journals-form" onSubmit={handleSubmit}>
-            <h3 className="journals-title">Update Consultant Profile</h3>
-            <label className="journals-label">Name</label>
+        <div className="consultants-right">
+          <form className="consultants-form" onSubmit={handleSubmit}>
+            <h3 className="consultants-title">Update Consultant Profile</h3>
+            <label className="consultants-label">Name</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Name"
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
             />
 
-            <label className="journals-label">Email</label>
+            <label className="consultants-label">Email</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="email"
               placeholder="Enter Email"
               value={profile.email}
@@ -110,9 +112,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, email: e.target.value })
               }
             />
-            <label className="journals-label">Password</label>
+            <label className="consultants-label">Password</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="password"
               placeholder="Enter Password"
               value={profile.password}
@@ -120,9 +122,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, password: e.target.value })
               }
             />
-            <label className="journals-label">Phone Number</label>
+            <label className="consultants-label">Phone Number</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Phone Number"
               value={profile.phone_number}
@@ -130,9 +132,9 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, phone_number: e.target.value })
               }
             />
-            <label className="journals-label">Experience</label>
+            <label className="consultants-label">Experience</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="number"
               placeholder="Enter Experience"
               value={profile.experience}
@@ -140,17 +142,16 @@ const UpdateConsultant = () => {
                 setProfile({ ...profile, experience: e.target.value })
               }
             />
-            <label className="journals-label">Description</label>
+            <label className="consultants-label">Description</label>
             <textarea
-              className="journals-input"
+              className="consultants-input"
               placeholder="Enter Description"
               value={profile.description}
               onChange={(e) =>
                 setProfile({ ...profile, description: e.target.value })
               }
             />
-            <label className="journals-label">Profile Photo</label>
-            <label className="journals-label">Profile Photo</label>
+            <label className="consultants-label">Profile Photo</label>
             <input
               type="file"
               accept="image/*"
@@ -159,8 +160,8 @@ const UpdateConsultant = () => {
               }
             />
 
-            <div className="journals-button-container">
-              <FilledButton text="Submit" className="journals-button" />
+            <div className="consultants-button-container">
+              <FilledButton text="Submit" className="consultants-button" />
             </div>
           </form>
         </div>

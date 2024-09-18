@@ -6,7 +6,7 @@ import FilledButton from "../components/FilledButton";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate } from "react-router-dom";
 function ConsultantsForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,6 +15,7 @@ function ConsultantsForm() {
   const [experience, setExperience] = useState("");
   const [description, setDescription] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ function ConsultantsForm() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register/consultant",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/register/consultant",
         formData,
         {
           headers: {
@@ -50,6 +51,7 @@ function ConsultantsForm() {
       setDescription("");
       setProfilePhoto(null);
       document.querySelector('input[type="file"]').value = null;
+      navigate("/admin-consultants");
     } catch (error) {
       toast.error("Error registering consultant.");
       console.error(
@@ -62,67 +64,67 @@ function ConsultantsForm() {
   return (
     <>
       <Header />
-      <div className="journals-form-container">
-        <div className="journals-left">
-          <img src={consultant} className="journals-img" alt="Consultant" />
+      <div className="consultants-form-container">
+        <div className="consultants-left">
+          <img src={consultant} className="consultants-img" alt="Consultant" />
         </div>
-        <div className="journals-right">
-          <form className="journals-form" onSubmit={handleSubmit}>
-            <h3 className="journals-title">Add New Consultant</h3>
-            <label className="journals-label">Name</label>
+        <div className="consultants-right">
+          <form className="consultants-form" onSubmit={handleSubmit}>
+            <h3 className="consultants-title">Add New Consultant</h3>
+            <label className="consultants-label">Name</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <label className="journals-label">Email</label>
+            <label className="consultants-label">Email</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="email"
               placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label className="journals-label">Password</label>
+            <label className="consultants-label">Password</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="password"
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label className="journals-label">Phone Number</label>
+            <label className="consultants-label">Phone Number</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="text"
               placeholder="Enter Phone Number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <label className="journals-label">Experience</label>
+            <label className="consultants-label">Experience</label>
             <input
-              className="journals-input"
+              className="consultants-input"
               type="number"
               placeholder="Enter Experience"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
             />
-            <label className="journals-label">Description</label>
+            <label className="consultants-label">Description</label>
             <textarea
-              className="journals-input"
+              className="consultants-input"
               placeholder="Enter Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <label className="journals-label">Profile Photo</label>
+            <label className="consultants-label">Profile Photo</label>
             <input
               type="file"
               onChange={(e) => setProfilePhoto(e.target.files[0])}
             />
-            <div className="journals-button-container">
-              <FilledButton text="Submit" className="journals-button" />
+            <div className="consultants-button-container">
+              <FilledButton text="Submit" className="consultants-button" />
             </div>
           </form>
         </div>

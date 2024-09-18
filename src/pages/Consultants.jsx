@@ -18,7 +18,7 @@ function Consultants() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/consultants`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ function Consultants() {
             },
           }
         );
-        setConsultants(response.data[1]);
+        setConsultants(response.data.consultants);
       } catch (error) {
         console.error("Error fetching consultants:", error);
       }
@@ -39,7 +39,7 @@ function Consultants() {
     const token = localStorage.getItem("Token");
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/chat`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/chat`,
         { consultant_id: consultantId },
         {
           headers: {
@@ -74,20 +74,20 @@ function Consultants() {
               </div>
               <div className="Consultant-description">
                 <p>
-                  <b>Years of Experience: </b>
+                  <span className="text-bold">Years of Experience: </span>
                   {consultant.experience}
                 </p>
                 <p>
-                  <b>Description: </b>
+                  <span className="text-bold">Description: </span>
                   {consultant.description}
                 </p>
-                <div className="button-wrapper">
-                  <button
-                    className="Consultant-button"
+                <div className="text-link-wrapper">
+                  <p
+                    className="users-text-link"
                     onClick={() => handleChatNow(consultant.id)}
                   >
                     Chat now
-                  </button>
+                  </p>
                 </div>
               </div>
             </div>

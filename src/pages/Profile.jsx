@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Default from "../images/default-profile.jpeg";
 import FilledButton from "../components/FilledButton";
 import EmptyButton from "../components/EmptyButton";
+import Modal from "../components/Modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -20,17 +21,20 @@ const Profile = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [profilePhotoURL, setProfilePhotoURL] = useState(profile.profile_photo);
   const [profilePhotoFile, setProfilePhotoFile] = useState(null);
-  const fileInputRef = useRef(null); // Add a ref for the file input
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const response = await axios.get("http://localhost:8000/api/profile", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("Token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         setProfile(response.data);
         setProfilePhotoURL(response.data.profile_photo);
       } catch (err) {
@@ -54,6 +58,7 @@ const Profile = () => {
     const uppercaseValid = /[A-Z]/.test(password);
     setPasswordValid(lengthValid && specialCharValid && uppercaseValid);
   };
+
   const handleProfilePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -66,7 +71,6 @@ const Profile = () => {
     setProfilePhotoURL(null);
     setProfilePhotoFile(null);
   };
-
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -82,12 +86,16 @@ const Profile = () => {
     }
 
     try {
-      await axios.post("http://localhost:8000/api/profile", updatedProfile, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/profile",
+        updatedProfile,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       toast.success("Profile updated successfully!");
       setError("");
     } catch (err) {
@@ -96,10 +104,19 @@ const Profile = () => {
       console.error(err);
     }
   };
+
   const triggerFileInput = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); 
+      fileInputRef.current.click();
     }
+  };
+
+  const openPasswordModal = () => {
+    setShowPasswordFields(true);
+  };
+
+  const closePasswordModal = () => {
+    setShowPasswordFields(false);
   };
 
   return (
@@ -111,21 +128,18 @@ const Profile = () => {
           <img
             src={
               profilePhotoURL
-                ? `http://localhost:8000/storage/${profilePhotoURL}`
+                ? `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/storage/${profilePhotoURL}`
                 : Default
             }
             className="profile-img"
             alt="Profile"
           />
           <div className="profile-img-buttons">
-            <FilledButton
-              text="Change picture"
-              onClick={triggerFileInput} 
-            />
+            <FilledButton text="Change picture" onClick={triggerFileInput} />
             <input
               type="file"
-              ref={fileInputRef} 
-              style={{ display: "none" }} 
+              ref={fileInputRef}
+              style={{ display: "none" }}
               onChange={handleProfilePhotoChange}
             />
             <EmptyButton
@@ -149,84 +163,95 @@ const Profile = () => {
             value={profile.email}
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
-          <p onClick={() => setShowPasswordFields(!showPasswordFields)}>
-            {showPasswordFields ? "Cancel" : "Change Password?"}
+          <p onClick={openPasswordModal} className="change-password">
+            Change Password?
           </p>
-          {showPasswordFields && (
-            <>
-              <label>New Password</label>
-              <input
-                type="password"
-                className="profile-input"
-                value={newPassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                  validatePassword(e.target.value);
-                }}
-                placeholder="Enter your new password"
-                required
-                onFocus={() => setPasswordFocused(true)}
-                onBlur={() => setPasswordFocused(false)}
+          <div className="save-button-container">
+            <div className="save-button">
+              <FilledButton
+                text="Save Changes"
+                type="submit"
+                disabled={isButtonDisabled && !profilePhotoFile}
               />
-              {passwordFocused && (
-                <div className="password-validation">
-                  <ul>
-                    <li
-                      className={newPassword.length > 8 ? "valid" : "invalid"}
-                    >
-                      At least 8 characters long
-                    </li>
-                    <li
-                      className={
-                        /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
-                          ? "valid"
-                          : "invalid"
-                      }
-                    >
-                      Contain a special character
-                    </li>
-                    <li
-                      className={
-                        /[A-Z]/.test(newPassword) ? "valid" : "invalid"
-                      }
-                    >
-                      Contain an uppercase letter
-                    </li>
-                  </ul>
-                </div>
-              )}
-              <label>Confirm New Password</label>
-              <input
-                type="password"
-                className="profile-input"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm your new password"
-                required
-                onFocus={() => setConfirmPasswordFocused(true)}
-                onBlur={() => setConfirmPasswordFocused(false)}
-              />
-              {confirmPasswordFocused && (
-                <div className="password-validation">
-                  <ul>
-                    <li className={passwordMatch ? "valid" : "invalid"}>
-                      Passwords match
-                    </li>
-                  </ul>
-                </div>
-              )}
-              {error && <p className="error-message">{error}</p>}
-            </>
-          )}
-          <div className="save-button">
-            <FilledButton
-              text="Save Changes"
-              type="submit"
-              disabled={isButtonDisabled && !profilePhotoFile}
-            />
+            </div>
           </div>
         </form>
       </div>
+
+      <Modal isOpen={showPasswordFields} onClose={closePasswordModal}>
+        <div className="password-modal-content">
+          <h2 className="password-modal-title">Change Password</h2>
+          <div className="password-modal-form">
+            <label className="modal-label">New Password</label>
+            <input
+              type="password"
+              className="modal-input"
+              value={newPassword}
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+                validatePassword(e.target.value);
+              }}
+              placeholder="Enter your new password"
+              required
+              onFocus={() => setPasswordFocused(true)}
+              onBlur={() => setPasswordFocused(false)}
+            />
+            {passwordFocused && (
+              <div className="password-validation">
+                <ul>
+                  <li className={newPassword.length > 8 ? "valid" : "invalid"}>
+                    At least 8 characters long
+                  </li>
+                  <li
+                    className={
+                      /[!@#$%^&*(),.?":{}|<>]/.test(newPassword)
+                        ? "valid"
+                        : "invalid"
+                    }
+                  >
+                    Contain a special character
+                  </li>
+                  <li
+                    className={/[A-Z]/.test(newPassword) ? "valid" : "invalid"}
+                  >
+                    Contain an uppercase letter
+                  </li>
+                </ul>
+              </div>
+            )}
+            <label className="modal-label confirm-label">
+              Confirm New Password
+            </label>
+            <input
+              type="password"
+              className="modal-input "
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your new password"
+              required
+              onFocus={() => setConfirmPasswordFocused(true)}
+              onBlur={() => setConfirmPasswordFocused(false)}
+            />
+            {confirmPasswordFocused && (
+              <div className="password-validation">
+                <ul>
+                  <li className={passwordMatch ? "valid" : "invalid"}>
+                    Passwords match
+                  </li>
+                </ul>
+              </div>
+            )}
+            {error && <p className="error-message">{error}</p>}
+            <div className="modal-save-button">
+              <FilledButton
+                text="Save Password"
+                onClick={closePasswordModal}
+                disabled={isButtonDisabled}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

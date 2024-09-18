@@ -4,13 +4,15 @@ import "./styles/AdminConsultants.css";
 import axios from "axios";
 import Default from "../images/default-profile.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     async function fetchConsultants() {
       const token = localStorage.getItem("Token");
@@ -21,7 +23,7 @@ function AdminConsultants() {
       }
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/consultants`,
+          `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/admin-consultants`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -46,8 +48,6 @@ function AdminConsultants() {
     fetchConsultants();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
   async function deleteConsultant(id) {
     const token = localStorage.getItem("Token");
     if (!token) {
@@ -56,7 +56,7 @@ function AdminConsultants() {
     }
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/consultants/${id}`,
+        `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/consultants/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,10 +80,28 @@ function AdminConsultants() {
   }
 
   return (
-    <div>
+    <>
       <Header />
-      <div className="Consultants">
-        {consultants.length > 0 ? (
+      <div className={`Consultants ${consultants.length === 0 ? "empty" : ""}`}>
+        {loading ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="no-journals-icon"
+              />
+              <p>Loading consultants...</p>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>{error}</p>
+            </div>
+          </div>
+        ) : consultants.length > 0 ? (
           consultants.map((consultant) => (
             <div className="Consultant" key={consultant.id}>
               <div className="Consultant-info">
@@ -92,7 +110,7 @@ function AdminConsultants() {
                     <img
                       src={
                         consultant.profile_photo
-                          ? `http://localhost:8000/storage/${consultant.profile_photo}`
+                          ? `http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/storage/${consultant.profile_photo}`
                           : Default
                       }
                       className="Consultant-img"
@@ -104,7 +122,6 @@ function AdminConsultants() {
                     </div>
                   </div>
                   <div className="Consultant-options">
-                    <FontAwesomeIcon icon={faPenToSquare} />
                     <FontAwesomeIcon
                       icon={faTrash}
                       onClick={() => deleteConsultant(consultant.id)}
@@ -120,25 +137,30 @@ function AdminConsultants() {
                     <b>Description: </b>
                     {consultant.description}
                   </p>
-                  <div className="button-wrapper">
-                    <button
-                      className="Consultant-button"
+                  <div className="text-link-wrapper">
+                    <p
+                      className="users-text-link"
                       onClick={() =>
                         navigate(`/update-consultant/${consultant.id}`)
                       }
                     >
                       Update
-                    </button>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p>No consultants available.</p>
+          <div className="no-journals-wrapper">
+            <div className="no-journals">
+              <FontAwesomeIcon icon={faBan} className="no-journals-icon" />
+              <p>No Consultants found.</p>
+            </div>
+          </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

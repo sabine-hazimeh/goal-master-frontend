@@ -1,12 +1,13 @@
 import React from "react";
 import "./styles/Auth.css";
-import Header from "../components/Header";
 import woman from "../images/working-woman.png";
 import { useDispatch } from "react-redux";
 import { loginSuccess, loginFailure } from "../redux/usersSlice/slice";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Auth = () => {
   const [activeForm, setActiveForm] = React.useState("login");
@@ -23,6 +24,29 @@ const Auth = () => {
     React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/login",
+        {
+          email,
+          password,
+        }
+      );
+      const { access_token, user } = response.data;
+      localStorage.setItem("Token", access_token);
+      dispatch(loginSuccess({ user, access_token }));
+      navigate(from);
+    } catch (error) {
+      dispatch(loginFailure({ error: error.response.data.message }));
+      toast.error("Login failed. Please check your credentials.");
+    }
+  };
 
   const validatePassword = (password) => {
     const lengthValid = password.length > 8;
@@ -35,23 +59,6 @@ const Auth = () => {
     setPasswordMatch(password === confirmPassword);
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
-      });
-      const {access_token, user } = response.data;
-      console.log('User:', user);
-      localStorage.setItem("Token", access_token);
-      dispatch(loginSuccess({ user, access_token}));
-      navigate("/");
-    } catch (error) {
-      dispatch(loginFailure({ error: error.response.data.message }));
-    }
-  };
-
   const handleSignup = async (event) => {
     event.preventDefault();
     if (!passwordValid || !passwordMatch) {
@@ -59,7 +66,7 @@ const Auth = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/register",
+        "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/register",
         {
           email,
           password,
@@ -109,9 +116,15 @@ const Auth = () => {
 
   return (
     <>
-      <Header />
       <div className="Auth">
         <div className="Auth-left">
+          <div className="Auth-back">
+            <FontAwesomeIcon
+              icon={faArrowLeft}
+              className="Auth-icon"
+              onClick={() => navigate("/")}
+            />
+          </div>
           <img src={woman} className="Auth-img" alt="Working woman" />
         </div>
         <div className="Auth-right">
@@ -136,24 +149,30 @@ const Auth = () => {
             </div>
             {activeForm === "login" ? (
               <form className="Auth-inputs" onSubmit={handleLogin}>
-                <label className="Auth-label">Email</label>
-                <input
-                  className="Auth-input"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your Email here"
-                  required
-                />
-                <label className="Auth-label">Password</label>
-                <input
-                  className="Auth-input"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your Password here"
-                  required
-                />
+                <div className="login-inputs">
+                  <div>
+                    <label className="Auth-label">Email</label>
+                    <input
+                      className="Auth-input"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your Email here"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="Auth-label">Password</label>
+                    <input
+                      className="Auth-input"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your Password here"
+                      required
+                    />
+                  </div>
+                </div>
                 <div className="button-container">
                   <button className="Auth-submit">Log in</button>
                 </div>

@@ -7,3 +7,10 @@
     display: flex;
     justify-content: space-between;
 }
+.Consultants.empty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    margin: auto;
+}

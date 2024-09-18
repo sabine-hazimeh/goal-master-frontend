@@ -26,18 +26,69 @@
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
-.filled-button, .empty-button {
-    height: auto; 
-    max-height: 3rem; 
+.filled-button,
+.empty-button {
+  height: auto;
 }
-.profile-img-buttons{
-    display: flex;
-    align-items: center;
-    width: 60%;
-    gap: 1rem;
-}  
+.profile-img-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 1rem;
+}
+.save-button-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-self: flex-end;
+}
 .save-button{
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
+  width: 75%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.change-password {
+  cursor: pointer;
+}
+.password-modal-content {
+  display: flex;
+  flex-direction: column;
+}
+.modal-input {
+  border: none;
+  background-color: rgba(217, 217, 217, 0.44);
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 90%;
+  margin-top: 0.5rem;
+}
+.password-modal-title {
+  margin: 2rem auto;
+  color: #c41b40;
+}
+.modal-save-button{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.password-modal-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-label{
+    align-self: flex-start;
+    margin-left: 1.25rem;
+}
+.confirm-label{
+    margin-top: 2rem;
+}
+@media (max-width: 800px) {
+  .profile {
+    width: 85%;
+    margin-top: 5rem;
+  }
 }

@@ -1,111 +1,147 @@
-.Auth{
-    width: 80%;
-    margin: 1rem auto;
-    background-color: rgba(10, 69, 112, 0.6);
-    border-radius: 20px;
-    display: flex;
-    height: 100vh;
+.Auth {
+  width: 80%;
+  margin: 2rem auto;
+  background-color: rgba(10, 69, 112, 0.6);
+  border-radius: 20px;
+  display: flex;
+  height: 90vh;
+  position: relative;
 }
-.Auth-left{
-    width: 50%;
-    background: radial-gradient(circle at center, rgba(10, 69, 112, 0.6), rgba(255,255,255,0.7)); 
-    height: 100%;
-    padding: 30px 0;
-    border-radius: 20px 40px 40px 20px;
-    display: flex;
-    justify-content: center;
+.Auth-left {
+  width: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(10, 69, 112, 0.6),
+    rgba(255, 255, 255, 0.7)
+  );
+  padding: 30px 0;
+  border-radius: 20px 40px 40px 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
-.Auth-right{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.Auth-back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: flex-start;
 }
-.Auth-img{
-    width: 350px;
-    height: 500px;
+
+.Auth-icon {
+  font-size: 2rem;
+  color: #0a4570;
+  cursor: pointer;
+  margin-left: 1rem;
 }
-.Auth-form{
-    background-color: #f1f1f1;
-    width: 80%;
-    height: fit-content;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem 0;
+.Auth-right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.Auth-buttons{
-    display: flex;
-    justify-content: center;
-    width: 80%;
-   
+.Auth-img {
+  width: 350px;
+  height: 500px;
 }
-.Auth-button{
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid black;
-    width: 50%;
-    font-size: 24px;
+.Auth-form {
+  background-color: #f1f1f1;
+  width: 80%;
+  height: fit-content;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem 0;
 }
-.Auth-label{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.Auth-buttons {
+  display: flex;
+  justify-content: center;
+  width: 80%;
 }
-.Auth-inputs{
-    width: 80%;
+.Auth-button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  width: 50%;
+  font-size: 24px;
 }
-.Auth-input{
-    width:94%;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    /* margin-bottom: 1.5rem; */
+.Auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.Auth-inputs {
+  width: 80%;
+}
+.Auth-input {
+  width: 94%;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
 }
 .button-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-  }
-.Auth-submit{
-    margin-top: 3rem;
-    background-color: #0A4570;
-    color: white;
-    padding: 5px 0;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 50%;
-    font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.Auth-submit:hover{
-    background-color: rgba(10, 69, 112, 0.6);
+.Auth-submit {
+  margin-top: 3rem;
+  background-color: #0a4570;
+  color: white;
+  padding: 5px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 50%;
+  font-size: 1.25rem;
+}
+.Auth-submit:hover {
+  background-color: rgba(10, 69, 112, 0.6);
 }
 .Auth-button.active {
-    color: #0A4570;
-    border-bottom: 4px solid #0A4570;
-    font-weight: bold;
+  color: #0a4570;
+  border-bottom: 4px solid #0a4570;
+  font-weight: bold;
+}
+.password-validation {
+  margin-top: 10px;
+}
+
+.password-validation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.password-validation li {
+  color: red;
+}
+
+.password-validation .valid {
+  color: green;
+}
+
+.password-validation .invalid {
+  color: red;
+}
+.login-inputs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 2.5rem;
+}
+@media (max-width: 800px) {
+  .Auth-left {
+    background: none;
+    width: 5%;
   }
-  .password-validation {
-    margin-top: 10px;
+  .Auth-img{
+    display: none;
   }
-  
-  .password-validation ul {
-    list-style-type: none;
-    padding: 0;
+  .Auth-right{
+    width: 90%;
   }
-  
-  .password-validation li {
-    color: red;
-  }
-  
-  .password-validation .valid {
-    color: green;
-  }
-  
-  .password-validation .invalid {
-    color: red;
-  }
+}

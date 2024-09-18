@@ -1,49 +1,103 @@
-.about-upper{
-    display: flex;
+.about-us-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.about-upper {
+  display: flex;
+  width: 85%;
+  margin-top: 2.5rem;
+  margin-bottom: 7rem;
+}
+.upper-left {
+  width: 40%;
+}
+.upper-img {
+  width: 350px;
+  height: 350px;
+}
+.upper-right {
+  width: 60%;
+}
+.upper-title {
+  margin-top: 3rem;
+  font-size: 40px;
+  font-weight: bold;
+}
+.upper-text {
+  font-size: 20px;
+  line-height: 40px;
+}
+.about-lower {
+  display: flex;
+  width: 85%;
+  margin-bottom: 2rem;
+}
+.lower-left {
+  width: 60%;
+}
+.lower-img {
+  width: 400px;
+  height: 415px;
+}
+.lower-right {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.lower-text {
+  font-size: 20px;
+  line-height: 35px;
+  margin-bottom: 1rem;
+}
+@media (max-width: 800px) {
+  .upper-img {
+    width: 300px;
+    height: 300px;
+    align-self: center;
+  }
+  .upper-left {
+    width: 50%;
+    align-self: center;
+  }
+  .about-upper {
+    gap:2rem;
     width: 90%;
-    margin: auto;
-}
-.upper-left{
+  }
+  .upper-right {
     width: 50%;
-    
-}
-.upper-img{
-    width: 400px;
-    height: 400px;
-}
-.upper-right{
+  }
+  .lower-left {
     width: 50%;
-}
-.upper-title{
-    margin-top: 3rem;
-    font-size: 40px;
-    font-weight: bolder;
-}
-.upper-text{
-    font-size: 20px;
-    line-height: 50px;
-}
-.about-lower{
-    display: flex;
-    width: 90%;
-    margin: auto;
-}
-.lower-left{
-    margin-top: 3rem;
+  }
+  .lower-img {
+    width: 300px;
+    height: 300px;
+  }
+  .lower-right {
     width: 50%;
-}
-.lower-img{
-    width: 400px;
-    height: 400px;
-}
-.lower-right{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.lower-text{
-    font-size: 20px;
+  }
+  .upper-text {
+    font-size: 1.25rem;
     line-height: 30px;
-    margin-bottom: 1rem;
+  }
+  .upper-title {
+    font-size: 35px;
+  }
+  .about-lower{
+    width: 90%;
+  }
+  .lower-text{
+    font-size: 1rem;
+    line-height: 30px;
+  }
+  .lower-right {
+    align-items: center;
+  }
+  .lower-img {
+    width: 100%;
+    height: 70%;
+  }
 }
