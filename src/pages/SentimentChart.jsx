@@ -19,10 +19,23 @@ const SentimentChart = () => {
   useEffect(() => {
     const fetchSentimentData = async () => {
       try {
-        const response = await axios.get("http://localhost:5002/api/sentiment");
+        const token = localStorage.getItem("Token");
+
+        const response = await axios.get(
+          "http://ec2-13-38-78-41.eu-west-3.compute.amazonaws.com/api/sentiment",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         setData(response.data);
       } catch (error) {
-        console.error("Error fetching sentiment data", error);
+        console.error(
+          "Error fetching sentiment data",
+          error.response || error.message
+        );
       }
     };
 
