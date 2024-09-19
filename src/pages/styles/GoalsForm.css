@@ -156,6 +156,10 @@
   width: 20rem;
   height: 20rem;
 }
+.feedback-title{
+  color: #c41b40;
+  margin-bottom: 1rem;
+}
 @media (max-width: 800px) {
   .goals-form-image {
     display: none;

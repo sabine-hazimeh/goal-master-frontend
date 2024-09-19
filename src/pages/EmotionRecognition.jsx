@@ -3,7 +3,8 @@ import * as faceapi from "face-api.js";
 import axios from "axios";
 import "./styles/EmotionRecognition.css";
 import FilledButton from "../components/FilledButton";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const EmotionRecognition = ({ setEmotion, onClose, sendEmotion }) => {
   const videoRef = useRef(null);
   const [detectedEmotion, setDetectedEmotion] = useState("");
@@ -69,9 +70,11 @@ const EmotionRecognition = ({ setEmotion, onClose, sendEmotion }) => {
         )
         .then((response) => {
           console.log("Emotion sent successfully:", response.data);
+          toast.success("Thank you for helping us improve!");
         })
         .catch((error) => {
           console.error("Error sending emotion:", error);
+          toast.error("Failed to submit emotion. Please try again.");
         });
     }
   };

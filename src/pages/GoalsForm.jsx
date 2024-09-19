@@ -556,13 +556,14 @@ function GoalsForm() {
               onClose={() => setIsFeedbackOpen(false)}
             >
               <div className="feedback-form">
+                <h2 className="feedback-title">Help Us Improve</h2>
                 <p>
                   Would you be interested in providing feedback through face
                   recognition to enhance our service?
                 </p>
                 <img src={face} className="feedback-img"></img>
                 <FilledButton
-                  text={"Feedback"}
+                  text={"Confirm"}
                   onClick={handleFeedbackSubmit}
                 />
               </div>
@@ -571,12 +572,13 @@ function GoalsForm() {
         {selectedCategory === "education" && isFeedbackOpen && (
           <Modal isOpen={isFeedbackOpen} onClose={handleFClose}>
             <div className="feedback-form">
+            <h2 className="feedback-title">Help Us Improve</h2>
               <p>
                 Would you be interested in providing feedback through face
                 recognition to enhance our service?
               </p>
               <img src={face} className="feedback-img"></img>
-              <FilledButton text={"Feedback"} onClick={handleFeedbackSubmit} />
+              <FilledButton text={"Confirm"} onClick={handleFeedbackSubmit} />
             </div>
           </Modal>
         )}

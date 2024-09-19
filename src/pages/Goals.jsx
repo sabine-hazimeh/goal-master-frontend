@@ -5,7 +5,8 @@ import axios from "axios";
 import Modal from "../components/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Goals = () => {
   const [goals, setGoals] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,15 +46,18 @@ const Goals = () => {
             },
           }
         );
-
+  
         setGoals((prevGoals) =>
           prevGoals.filter((goal) => goal.id !== goal_id)
         );
+        toast.success("Goal deleted successfully!");
       } catch (error) {
         console.log(error);
+        toast.error("Failed to delete goal. Please try again.");
       }
     }
   };
+  
 
   const handleViewDetails = async (education_id) => {
     try {
@@ -131,6 +135,7 @@ const Goals = () => {
           </div>
         )}
       </div>
+      <ToastContainer /> 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {selectedGoal ? (
           <div>

@@ -6,7 +6,8 @@ import Default from "../images/default-profile.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faBan, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function AdminConsultants() {
   const [consultants, setConsultants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,8 +70,10 @@ function AdminConsultants() {
           prevConsultants.filter((consultant) => consultant.id !== id)
         );
         console.log("Consultant deleted successfully");
+        toast.success("Consultant deleted successfully!");
       } else {
         console.error("Unexpected data format:", response.data);
+        toast.error("Failed to delete consultant.");
         setError("Unexpected data format from server.");
       }
     } catch (error) {

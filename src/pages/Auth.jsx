@@ -212,7 +212,7 @@ const Auth = () => {
                   <div className="password-validation">
                     <ul>
                       <li className={password.length > 8 ? "valid" : "invalid"}>
-                        At least 8 characters long
+                        At least 8 characters
                       </li>
                       <li
                         className={
@@ -221,12 +221,12 @@ const Auth = () => {
                             : "invalid"
                         }
                       >
-                        Contain a special character
+                        special character
                       </li>
                       <li
                         className={/[A-Z]/.test(password) ? "valid" : "invalid"}
                       >
-                        Contain an uppercase letter
+                        uppercase letter
                       </li>
                     </ul>
                   </div>
